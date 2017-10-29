@@ -29,8 +29,8 @@ public:
     void setHoldingTorque(unsigned char ID, bool Set);
     void setGoalPosition(unsigned char ID, unsigned int pos);
     void setGoalVelocity(unsigned char ID, unsigned int vel);
-	  void setProfileAcceleration(unsigned char ID, unsigned int pac);
-	  void setProfileVelocity(unsigned char ID, unsigned int pvl);
+	void setProfileAcceleration(unsigned char ID, unsigned int pac);
+	void setProfileVelocity(unsigned char ID, unsigned int pvl);
     int  getPosition(unsigned char ID);
     int *getPositionN(void);
     float getPositionD(unsigned char ID);
