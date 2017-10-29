@@ -96,8 +96,8 @@ void loop(){
   int id1 = 2071; //Servo 1 goal position
   int id2 = 2048; //Servo 2 goal position
   int id3 = 2048; //Servo 3 goal position
-  //int id4 = 2548; //Servo 4 goal position
-  //int id5 = 1548; //Servo 5 goal position
+  int id4 = 2548; //Servo 4 goal position
+  int id5 = 1548; //Servo 5 goal position
 
  Dynamixel.setNGoalPositions(-1, id2, id3, -1, -1);  //Set goal position of all the servos
     
