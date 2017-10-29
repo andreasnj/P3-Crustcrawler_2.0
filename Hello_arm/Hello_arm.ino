@@ -69,7 +69,7 @@ void setup(){
   Dynamixel.getPositionD(0x05);
   
   //Get load on servos in maximum procent (The power required by the servo to hold its current position)
-  Dynamixel.getLoad(0x02);  
+  //Dynamixel.getLoad(0x02);  
   
   //Saving and printing positon from all servos
   data = Dynamixel.getPositionN(); 
@@ -81,7 +81,7 @@ void setup(){
 
 void loop(){
 
-  int id1 = 1; //Servo 1 goal position
+  int id1 = 2048; //Servo 1 goal position
   int id2 = 2048; //Servo 2 goal position
   int id3 = 2048; //Servo 3 goal position
   int id4 = 2548; //Servo 4 goal position gripper open
@@ -97,30 +97,6 @@ void loop(){
     id2P =  Dynamixel.getPosition(0x02);  //Servo 2 current position in steps
 
     // This if statement checks if servo 2 have reached goal position, before it starts the next move
-    if(id2==id2P){
-       Dynamixel.setNGoalPositions(id1, -1, -1, id4, id5);  //Set goal position of all the servos
-       i = 0; //just to end the while loop
-    }
-  }
-
-  delay(1000);
-
-  id1 = 2000; //Servo 1 goal position 1000 - about 90 degrees
-  id2 = 2000; //Servo 2 goal position
-  id3 = 1100; //Servo 3 goal position
-  id4 = 2548; //Servo 4 goal position
-  id5 = 1548; //Servo 5 goal position
-
- Dynamixel.setNGoalPositions(-1, id2, id3, -1, -1);  //Set goal position of all the servos
-    
-  i = 1;
-  id2P = -1;
-
-  // This while loop keeps putting servo 2's current potition into an integer
-  while(i > 0){
-    id2P =  Dynamixel.getPosition(0x02);  //Servo 2 current position in steps
-
-    // This if statement checks if servo 2 has reached goal position, before it starts the next move
     if(id2==id2P){
        Dynamixel.setNGoalPositions(id1, -1, -1, id4, id5);  //Set goal position of all the servos
        i = 0; //just to end the while loop
