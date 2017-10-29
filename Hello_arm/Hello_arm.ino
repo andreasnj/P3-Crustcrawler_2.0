@@ -13,7 +13,6 @@
 //                base code to start programming the CrustCrawler from. ;)                                                    //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include <Arduino.h>
 #include "Dynamixel_Serial.h"
 #include <SoftwareSerial.h>
 
@@ -29,7 +28,6 @@ SoftwareSerial mySerial(10, 11);    // RX, TX
 int *data;
 
 void setup(){
-
   Serial.flush();                                       // Clear the serial buffer of garbage data before running the code.
   mySerial.begin(SERVO_SET_Baudrate);                   // We now need to set Ardiuno to the new Baudrate speed 115200
   Serial.begin(57600);                                  // Start serial communication on baudrate 57600
@@ -45,7 +43,6 @@ void setup(){
 
   // Set the Profile acceleration.
   Dynamixel.setProfileAcceleration(0x01, 10);  //Set the Profile Acceleration for each servo. (max. is 32767)
-<<<<<<< HEAD
   Dynamixel.setProfileAcceleration(0x02, 10);  //Set the Profile Acceleration for each servo. (max. is 32767)
   Dynamixel.setProfileAcceleration(0x03, 10);  //Set the Profile Acceleration for each servo. (max. is 32767)
   Dynamixel.setProfileAcceleration(0x04, 300);  //Set the Profile Acceleration for each servo. (max. is 32767)
@@ -57,21 +54,7 @@ void setup(){
   Dynamixel.setProfileVelocity(0x03, 100);  //Set the Profile Velocity for each servo. (max. is 1023)
   Dynamixel.setProfileVelocity(0x04, 200);  //Set the Profile Velocity for each servo. (max. is 1023)
   Dynamixel.setProfileVelocity(0x05, 200);  //Set the Profile Velocity for each servo. (max. is 1023)
-=======
-  Dynamixel.setProfileAcceleration(0x02, 10);
-  Dynamixel.setProfileAcceleration(0x03, 10);
-  Dynamixel.setProfileAcceleration(0x04, 300);
-  Dynamixel.setProfileAcceleration(0x05, 300);
-
-  // Set the Profile velocity.
-  Dynamixel.setProfileVelocity(0x01, 100);  //Set the Profile Velocity for each servo. (max. is 1023)
-  Dynamixel.setProfileVelocity(0x02, 100);
-  Dynamixel.setProfileVelocity(0x03, 100);
-  Dynamixel.setProfileVelocity(0x04, 200);
-  Dynamixel.setProfileVelocity(0x05, 200);
-
->>>>>>> a3a25e32e785c27e46ee9bdbb69f293fb8ad6fec
-
+  
   //Get position for servos in steps
   Dynamixel.getPosition(0x01); 
   Dynamixel.getPosition(0x02);
@@ -99,16 +82,39 @@ void setup(){
 
 void loop(){
 
-  int id1 = 2071; //Servo 1 goal position
+  int id1 = 1; //Servo 1 goal position
   int id2 = 2048; //Servo 2 goal position
   int id3 = 2048; //Servo 3 goal position
-  int id4 = 2548; //Servo 4 goal position
-  int id5 = 1548; //Servo 5 goal position
+  int id4 = 2548; //Servo 4 goal position gripper open
+  int id5 = 1548; //Servo 5 goal position gripper open
 
  Dynamixel.setNGoalPositions(-1, id2, id3, -1, -1);  //Set goal position of all the servos
     
   int i = 1;
-  int id2P;
+  int id2P = -1;
+
+  // This while loop keeps putting servo 2's current potition into an integer
+  while(i > 0){
+    id2P =  Dynamixel.getPosition(0x02);  //Servo 2 current position in steps
+
+    // This if statement checks if servo 2 have reached goal position, before it starts the next move
+    if(id2==id2P){
+       Dynamixel.setNGoalPositions(id1, -1, -1, id4, id5);  //Set goal position of all the servos
+       i = 0; //just to end the while loop
+    }
+  }
+
+  delay(1000);
+
+  id1 = 2000; //Servo 1 goal position 1000 - about 90 degrees
+  id2 = 2000; //Servo 2 goal position
+  id3 = 1100; //Servo 3 goal position
+  id4 = 2548; //Servo 4 goal position
+  id5 = 1548; //Servo 5 goal position
+
+ Dynamixel.setNGoalPositions(-1, id2, id3, -1, -1);  //Set goal position of all the servos
+    
+  i = 1;
 
   // This while loop keeps putting servo 2's current potition into an integer
   while(i > 0){
