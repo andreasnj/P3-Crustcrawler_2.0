@@ -40,27 +40,22 @@ void setup(){
   Dynamixel.setHoldingTorque(0x01, true);               //Turn on hold torque on servo 1
   Dynamixel.setHoldingTorque(0x02, true);               //Turn on hold torque on servo 2
   Dynamixel.setHoldingTorque(0x03, true);               //Turn on hold torque on servo 3
-  //Dynamixel.setHoldingTorque(0x04, true);               //Turn on hold torque on servo 4
-  //Dynamixel.setHoldingTorque(0x05, true);               //Turn on hold torque on servo 5
+  Dynamixel.setHoldingTorque(0x04, true);               //Turn on hold torque on servo 4
+  Dynamixel.setHoldingTorque(0x05, true);               //Turn on hold torque on servo 5
 
   // Set the Profile acceleration.
   Dynamixel.setProfileAcceleration(0x01, 10);  //Set the Profile Acceleration for each servo. (max. is 32767)
   Dynamixel.setProfileAcceleration(0x02, 10);  //Set the Profile Acceleration for each servo. (max. is 32767)
   Dynamixel.setProfileAcceleration(0x03, 10);  //Set the Profile Acceleration for each servo. (max. is 32767)
-  /*
   Dynamixel.setProfileAcceleration(0x04, 300);  //Set the Profile Acceleration for each servo. (max. is 32767)
   Dynamixel.setProfileAcceleration(0x05, 300);  //Set the Profile Acceleration for each servo. (max. is 32767)
-  */
 
   // Set the Profile velocity.
   Dynamixel.setProfileVelocity(0x01, 100);  //Set the Profile Velocity for each servo. (max. is 1023)
   Dynamixel.setProfileVelocity(0x02, 100);  //Set the Profile Velocity for each servo. (max. is 1023)
   Dynamixel.setProfileVelocity(0x03, 100);  //Set the Profile Velocity for each servo. (max. is 1023)
-  /*
   Dynamixel.setProfileVelocity(0x04, 200);  //Set the Profile Velocity for each servo. (max. is 1023)
   Dynamixel.setProfileVelocity(0x05, 200);  //Set the Profile Velocity for each servo. (max. is 1023)
-  */
-
 
   /*
   //Get position for servos in steps
@@ -89,7 +84,6 @@ void setup(){
 
   */
 }
-
 
 void loop(){
 
