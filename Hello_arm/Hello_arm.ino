@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // How to run it: upload to arduino with the dynamixel_serial library installed in your arduino libraries folder.             //
 //                After upload, disconnect usb from arduino and add power to CrustCrawler and the arduino board.              //
-//                The program should start by it self. :)                                                                     //
+//                The program should start by it self. :)
 //                                                                                                                            //
 //                PIN Setup:  Green wire to PIN 10,                                                                           //
 //                            Yellow wire to PIN 11,                                                                          //
@@ -45,6 +45,7 @@ void setup(){
 
   // Set the Profile acceleration.
   Dynamixel.setProfileAcceleration(0x01, 10);  //Set the Profile Acceleration for each servo. (max. is 32767)
+<<<<<<< HEAD
   Dynamixel.setProfileAcceleration(0x02, 10);  //Set the Profile Acceleration for each servo. (max. is 32767)
   Dynamixel.setProfileAcceleration(0x03, 10);  //Set the Profile Acceleration for each servo. (max. is 32767)
   Dynamixel.setProfileAcceleration(0x04, 300);  //Set the Profile Acceleration for each servo. (max. is 32767)
@@ -56,8 +57,21 @@ void setup(){
   Dynamixel.setProfileVelocity(0x03, 100);  //Set the Profile Velocity for each servo. (max. is 1023)
   Dynamixel.setProfileVelocity(0x04, 200);  //Set the Profile Velocity for each servo. (max. is 1023)
   Dynamixel.setProfileVelocity(0x05, 200);  //Set the Profile Velocity for each servo. (max. is 1023)
+=======
+  Dynamixel.setProfileAcceleration(0x02, 10);
+  Dynamixel.setProfileAcceleration(0x03, 10);
+  Dynamixel.setProfileAcceleration(0x04, 300);
+  Dynamixel.setProfileAcceleration(0x05, 300);
 
-  /*
+  // Set the Profile velocity.
+  Dynamixel.setProfileVelocity(0x01, 100);  //Set the Profile Velocity for each servo. (max. is 1023)
+  Dynamixel.setProfileVelocity(0x02, 100);
+  Dynamixel.setProfileVelocity(0x03, 100);
+  Dynamixel.setProfileVelocity(0x04, 200);
+  Dynamixel.setProfileVelocity(0x05, 200);
+
+>>>>>>> a3a25e32e785c27e46ee9bdbb69f293fb8ad6fec
+
   //Get position for servos in steps
   Dynamixel.getPosition(0x01); 
   Dynamixel.getPosition(0x02);
@@ -81,8 +95,6 @@ void setup(){
   for(int i = 0; i < 5; i++){
     Serial.println(data[i]);
   }
-
-  */
 }
 
 void loop(){
