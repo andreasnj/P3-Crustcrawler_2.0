@@ -9,7 +9,6 @@
 
 SoftwareSerial mySerial(10, 11);    // RX, TX
 
-int *data;
 bool done = false;
 
 void setup(){
@@ -41,14 +40,7 @@ void setup(){
   Dynamixel.setProfileVelocity(0x05, 200);  //Set the Profile Velocity for each servo. (max. is 1023)
   
   //Get load on servos in maximum procent (The power required by the servo to hold its current position)
-  Dynamixel.getLoad(0x02);  
-  
-  //Saving and printing positon from all servos
-  data = Dynamixel.getPositionN(); 
-
-  for(int i = 0; i < 5; i++){
-    Serial.println(data[i]);
-  }
+  //Dynamixel.getLoad(0x02);  
 }
 
 void loop(){  
