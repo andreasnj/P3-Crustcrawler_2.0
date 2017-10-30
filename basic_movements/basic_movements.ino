@@ -44,7 +44,7 @@ void loop(){
   int id1 = 2048;
   int id2 = 2048;
   int id3 = 2048;
-  int id4 = 2548;
+  int id4 = 2548; //gripper - open
   int id5 = 1548;
 
   int pos1, pos2, pos3, pos4, pos5;
@@ -70,9 +70,9 @@ void loop(){
         id1 = 2048;
         id2 = 1000;
         id3 = 2048;
-        id4 = 2117;
-        id5 = 1974;};
-      break;}};
+        id4 = 2117; //grupper - closed
+        id5 = 1974;
+        break;}}};
 
   Dynamixel.setNGoalPositions(id1, id2, id3, -1, -1);
   while(!done){
@@ -82,8 +82,7 @@ void loop(){
     if (((id2 >= pos2-11) && (id2 <= pos2+11)) && ((id3 >= pos3-11) && (id3 <= pos3+11)) && ((id1 >= pos1-11) && (id1 <= pos1+11))){
       Dynamixel.setProfileVelocity(0x01, 0);  //Set the Profile Velocity for each servo. (max. is 1023)
       Dynamixel.setProfileVelocity(0x02, 0);  //Set the Profile Velocity for each servo. (max. is 1023)
-      Dynamixel.setProfileVelocity(0x03, 0);  //Set the Profile Velocity for each servo. (max. is 1023)
-      delay(500);      
+      Dynamixel.setProfileVelocity(0x03, 0);  //Set the Profile Velocity for each servo. (max. is 1023)      
       Dynamixel.setNGoalPositions(-1, -1, -1, id4, id5);
       Dynamixel.setProfileVelocity(0x01, 100);  //Set the Profile Velocity for each servo. (max. is 1023)
       Dynamixel.setProfileVelocity(0x02, 100);  //Set the Profile Velocity for each servo. (max. is 1023)
@@ -98,8 +97,7 @@ void loop(){
         id3 = 1000;
         id4 = 2548;
         id5 = 1548;
-        };
-      break;}};
+        break;}}};
 
   Dynamixel.setNGoalPositions(id1, id2, id3, -1, -1);
   while(!done){
@@ -120,10 +118,9 @@ void loop(){
 
       if (((id4 >= pos4-3) && (id4 <= pos4+2)) || ((id5 >= pos5-3) && (id5 <= pos5+2))){
         //id1 = 3048;
-        //id2 = 1000;
-        //id3 = 2048;
+        //id2 = 2048;
+        //id3 = 1000;
         //id4 = 2548;
         //id5 = 1548;
-        };
-      break;}};
+        break;}}};
 }
