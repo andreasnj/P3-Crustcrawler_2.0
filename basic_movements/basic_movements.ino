@@ -91,13 +91,14 @@ void loop(){
       pos4 =  Dynamixel.getPosition(0x04); 
       pos5 =  Dynamixel.getPosition(0x05); 
 
-      if (((id4 >= pos4-3) && (id4 <= pos4+2)) || ((id5 >= pos5-3) && (id5 <= pos5+2))){
+      //if (((id4 >= pos4-3) && (id4 <= pos4+2)) || ((id5 >= pos5-3) && (id5 <= pos5+2))){
         id1 = 3048;
         id2 = 2048;
         id3 = 1000;
         id4 = 2548;
         id5 = 1548;
-        break;}}};
+    //}
+        break;}};
 
   Dynamixel.setNGoalPositions(id1, id2, id3, -1, -1);
   while(!done){
@@ -122,5 +123,6 @@ void loop(){
         //id3 = 1000;
         //id4 = 2548;
         //id5 = 1548;
-        break;}}};
+      }
+        break;}};
 }
