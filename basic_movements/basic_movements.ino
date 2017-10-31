@@ -58,7 +58,7 @@ void loop(){
       Dynamixel.setProfileVelocity(0x01, 0);  //Set the Profile Velocity for each servo. (max. is 1023)
       Dynamixel.setProfileVelocity(0x02, 0);  //Set the Profile Velocity for each servo. (max. is 1023)
       Dynamixel.setProfileVelocity(0x03, 0);  //Set the Profile Velocity for each servo. (max. is 1023)      
-      Dynamixel.setNGoalPositions(-1, -1, -1, id4, id5);
+      Dynamixel.gripper('o');
       Dynamixel.setProfileVelocity(0x01, 100);  //Set the Profile Velocity for each servo. (max. is 1023)
       Dynamixel.setProfileVelocity(0x02, 100);  //Set the Profile Velocity for each servo. (max. is 1023)
       Dynamixel.setProfileVelocity(0x03, 100);  //Set the Profile Velocity for each servo. (max. is 1023)
@@ -83,7 +83,7 @@ void loop(){
       Dynamixel.setProfileVelocity(0x01, 0);  //Set the Profile Velocity for each servo. (max. is 1023)
       Dynamixel.setProfileVelocity(0x02, 0);  //Set the Profile Velocity for each servo. (max. is 1023)
       Dynamixel.setProfileVelocity(0x03, 0);  //Set the Profile Velocity for each servo. (max. is 1023)      
-      Dynamixel.setNGoalPositions(-1, -1, -1, id4, id5);
+      Dynamixel.gripper('c');
       Dynamixel.setProfileVelocity(0x01, 100);  //Set the Profile Velocity for each servo. (max. is 1023)
       Dynamixel.setProfileVelocity(0x02, 100);  //Set the Profile Velocity for each servo. (max. is 1023)
       Dynamixel.setProfileVelocity(0x03, 100);  //Set the Profile Velocity for each servo. (max. is 1023)
@@ -109,7 +109,7 @@ void loop(){
       Dynamixel.setProfileVelocity(0x01, 0);  //Set the Profile Velocity for each servo. (max. is 1023)
       Dynamixel.setProfileVelocity(0x02, 0);  //Set the Profile Velocity for each servo. (max. is 1023)
       Dynamixel.setProfileVelocity(0x03, 0);  //Set the Profile Velocity for each servo. (max. is 1023)      
-      Dynamixel.setNGoalPositions(-1, -1, -1, id4, id5);
+      Dynamixel.gripper('o');
       Dynamixel.setProfileVelocity(0x01, 100);  //Set the Profile Velocity for each servo. (max. is 1023)
       Dynamixel.setProfileVelocity(0x02, 100);  //Set the Profile Velocity for each servo. (max. is 1023)
       Dynamixel.setProfileVelocity(0x03, 100);  //Set the Profile Velocity for each servo. (max. is 1023)

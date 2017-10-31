@@ -307,6 +307,15 @@ void DynamixelClass::syncRN(unsigned short addr, int n){
     readReturnPacket(); //Read return package
 }
 
+void DynamixelClass::gripper(char op){
+    if (op = 'o'){
+        setNGoalPositions(-1, -1, -1, 2548, 1548);
+    }
+    else if (op = 'c'){
+        setNGoalPositions(-1, -1, -1, 2117, 1974);
+    }
+    else {Serial.println("Command for the gripper is non-existant");}
+}
 
 unsigned int DynamixelClass::writeN(unsigned char ID, unsigned short addr, unsigned char *arr, int n){
 
