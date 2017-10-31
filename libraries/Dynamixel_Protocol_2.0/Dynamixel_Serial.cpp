@@ -20,7 +20,6 @@ Version 2.2
 
 #include "Dynamixel_Serial.h"
 
-
 //##############################################################################
 //############################ Public Methods ##################################
 //##############################################################################
@@ -307,6 +306,17 @@ void DynamixelClass::syncRN(unsigned short addr, int n){
     readReturnPacket(); //Read return package
 }
 
+void DynamixelClass::gripper(char op){
+    if (op == 'o'){
+        setNGoalPositions(-1, -1, -1, 2548, 1548);
+        Serial.println("The gripper has been opened.");
+    }
+    else if (op == 'c'){
+        Serial.println("The gripper has been closed.");
+        setNGoalPositions(-1, -1, -1, 2117, 1974);
+    }
+    {Serial.println("Command for the gripper is non-existant!");}
+}
 
 unsigned int DynamixelClass::writeN(unsigned char ID, unsigned short addr, unsigned char *arr, int n){
 

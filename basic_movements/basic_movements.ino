@@ -9,7 +9,6 @@
 
 SoftwareSerial mySerial(10, 11);    // RX, TX
 
-int *data;
 bool done = false;
 
 void setup(){
@@ -39,23 +38,13 @@ void setup(){
   Dynamixel.setProfileVelocity(0x03, 100);  //Set the Profile Velocity for each servo. (max. is 1023)
   Dynamixel.setProfileVelocity(0x04, 200);  //Set the Profile Velocity for each servo. (max. is 1023)
   Dynamixel.setProfileVelocity(0x05, 200);  //Set the Profile Velocity for each servo. (max. is 1023)
-  
-  //Get load on servos in maximum procent (The power required by the servo to hold its current position)
-  Dynamixel.getLoad(0x02);  
-  
-  //Saving and printing positon from all servos
-  data = Dynamixel.getPositionN(); 
-
-  for(int i = 0; i < 5; i++){
-    Serial.println(data[i]);
-  }
 }
 
 void loop(){  
   int id1 = 2048;
   int id2 = 2048;
   int id3 = 2048;
-  int id4 = 2548;
+  int id4 = 2548; //gripper - open
   int id5 = 1548;
 
   int pos1, pos2, pos3, pos4, pos5;
@@ -64,46 +53,76 @@ void loop(){
   while(!done){
     pos1 =  Dynamixel.getPosition(0x01);
     pos2 =  Dynamixel.getPosition(0x02);
-    pos3 =  Dynamixel.getPosition(0x03);  
-    delay(1000);
-    if ((id2 == pos2) || (id3 == pos3) || (id1 == pos1)){
-      Dynamixel.setNGoalPositions(-1, -1, -1, id4, id5);
-      break;}};
+    pos3 =  Dynamixel.getPosition(0x03); 
+    if (((id2 >= pos2-11) && (id2 <= pos2+11)) && ((id3 >= pos3-11) && (id3 <= pos3+11)) && ((id1 >= pos1-11) && (id1 <= pos1+11))){
+      Dynamixel.setProfileVelocity(0x01, 0);  //Set the Profile Velocity for each servo. (max. is 1023)
+      Dynamixel.setProfileVelocity(0x02, 0);  //Set the Profile Velocity for each servo. (max. is 1023)
+      Dynamixel.setProfileVelocity(0x03, 0);  //Set the Profile Velocity for each servo. (max. is 1023)      
+      Dynamixel.gripper('o');
+      Dynamixel.setProfileVelocity(0x01, 100);  //Set the Profile Velocity for each servo. (max. is 1023)
+      Dynamixel.setProfileVelocity(0x02, 100);  //Set the Profile Velocity for each servo. (max. is 1023)
+      Dynamixel.setProfileVelocity(0x03, 100);  //Set the Profile Velocity for each servo. (max. is 1023)
+      
+      pos4 =  Dynamixel.getPosition(0x04); 
+      pos5 =  Dynamixel.getPosition(0x05); 
 
-  pos4 =  Dynamixel.getPosition(0x04); 
-  pos5 =  Dynamixel.getPosition(0x05); 
+      if (((id4 >= pos4-3) && (id4 <= pos4+2)) || ((id5 >= pos5-3) && (id5 <= pos5+2))){
+        id1 = 2048;
+        id2 = 1000;
+        id3 = 2048;
+        id4 = 2117; //grupper - closed
+        id5 = 1974;
+        break;}}};
 
-  if ((id4 == pos4) || (id5 == pos5)){
-    id1 = 2048;
-    id2 = 1000;
-    id3 = 2048;
-    id4 = 2117;
-    id5 = 1974;}
-
-  Dynamixel.setNGoalPositions(-1, id2, id3, -1, -1);
+  Dynamixel.setNGoalPositions(id1, id2, id3, -1, -1);
   while(!done){
     pos1 =  Dynamixel.getPosition(0x01);
     pos2 =  Dynamixel.getPosition(0x02);
-    pos3 =  Dynamixel.getPosition(0x03);  
-    delay(1000);
-    if ((id2 == pos2) || (id3 == pos3) || (id1 == pos1)){
-      Dynamixel.setNGoalPositions(id1, -1, -1, id4, id5);
-      break;}}
-}
+    pos3 =  Dynamixel.getPosition(0x03); 
+    if (((id2 >= pos2-11) && (id2 <= pos2+11)) && ((id3 >= pos3-11) && (id3 <= pos3+11)) && ((id1 >= pos1-11) && (id1 <= pos1+11))){
+      Dynamixel.setProfileVelocity(0x01, 0);  //Set the Profile Velocity for each servo. (max. is 1023)
+      Dynamixel.setProfileVelocity(0x02, 0);  //Set the Profile Velocity for each servo. (max. is 1023)
+      Dynamixel.setProfileVelocity(0x03, 0);  //Set the Profile Velocity for each servo. (max. is 1023)      
+      Dynamixel.gripper('c');
+      Dynamixel.setProfileVelocity(0x01, 100);  //Set the Profile Velocity for each servo. (max. is 1023)
+      Dynamixel.setProfileVelocity(0x02, 100);  //Set the Profile Velocity for each servo. (max. is 1023)
+      Dynamixel.setProfileVelocity(0x03, 100);  //Set the Profile Velocity for each servo. (max. is 1023)
+      
+      pos4 =  Dynamixel.getPosition(0x04); 
+      pos5 =  Dynamixel.getPosition(0x05); 
 
-  /*while(!done){
+      //if (((id4 >= pos4-3) && (id4 <= pos4+2)) || ((id5 >= pos5-3) && (id5 <= pos5+2))){
+        id1 = 3048;
+        id2 = 2048;
+        id3 = 1000;
+        id4 = 2548;
+        id5 = 1548;
+    //}
+        break;}};
+
   Dynamixel.setNGoalPositions(id1, id2, id3, -1, -1);
-  pos1 =  Dynamixel.getPosition(0x01);
-  pos2 =  Dynamixel.getPosition(0x02);
-  pos3 =  Dynamixel.getPosition(0x03);  
-  if ((id1 == pos1) && (id2 == pos2) && (id3 == pos3)){
-    done = true;}}
-  
-  done = false;
-
   while(!done){
-  Dynamixel.setNGoalPositions(-1, -1, -1, id4, id5);
-  pos4 =  Dynamixel.getPosition(0x04);
-  pos5 =  Dynamixel.getPosition(0x05);
-  if ((id4 == pos4) && (id5 == pos5)){
-    done = true;}}*/
+    pos1 =  Dynamixel.getPosition(0x01);
+    pos2 =  Dynamixel.getPosition(0x02);
+    pos3 =  Dynamixel.getPosition(0x03); 
+    if (((id2 >= pos2-11) && (id2 <= pos2+11)) && ((id3 >= pos3-11) && (id3 <= pos3+11)) && ((id1 >= pos1-11) && (id1 <= pos1+11))){
+      Dynamixel.setProfileVelocity(0x01, 0);  //Set the Profile Velocity for each servo. (max. is 1023)
+      Dynamixel.setProfileVelocity(0x02, 0);  //Set the Profile Velocity for each servo. (max. is 1023)
+      Dynamixel.setProfileVelocity(0x03, 0);  //Set the Profile Velocity for each servo. (max. is 1023)      
+      Dynamixel.gripper('o');
+      Dynamixel.setProfileVelocity(0x01, 100);  //Set the Profile Velocity for each servo. (max. is 1023)
+      Dynamixel.setProfileVelocity(0x02, 100);  //Set the Profile Velocity for each servo. (max. is 1023)
+      Dynamixel.setProfileVelocity(0x03, 100);  //Set the Profile Velocity for each servo. (max. is 1023)
+      
+      pos4 =  Dynamixel.getPosition(0x04); 
+      pos5 =  Dynamixel.getPosition(0x05); 
+
+      if (((id4 >= pos4-3) && (id4 <= pos4+2)) || ((id5 >= pos5-3) && (id5 <= pos5+2))){
+        //id1 = 3048;
+        //id2 = 2048;
+        //id3 = 1000;
+        //id4 = 2548;
+        //id5 = 1548;
+      }
+        break;}};
+}

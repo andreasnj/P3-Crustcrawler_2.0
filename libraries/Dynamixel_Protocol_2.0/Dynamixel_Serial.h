@@ -44,6 +44,8 @@ public:
     unsigned int syncWN(unsigned short addr, unsigned char*arr, int n, int dataN);
     void syncRN(unsigned short addr, int n);
 
+    void gripper(char op);
+
     Stream *_serial;
 
 private:
