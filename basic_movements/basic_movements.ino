@@ -25,9 +25,11 @@ void performMovement(int goal1, int goal2, int goal3, char forGripper){
     Dynamixel.setProfileVelocity(0x02, 0);  //Set the Profile Velocity for each servo. (max. is 1023)
     Dynamixel.setProfileVelocity(0x03, 0);  //Set the Profile Velocity for each servo. (max. is 1023)      
     Dynamixel.gripper(forGripper);
+    delay(500);
     Dynamixel.setProfileVelocity(0x01, 100);  //Set the Profile Velocity for each servo. (max. is 1023)
     Dynamixel.setProfileVelocity(0x02, 100);  //Set the Profile Velocity for each servo. (max. is 1023)
     Dynamixel.setProfileVelocity(0x03, 100);  //Set the Profile Velocity for each servo. (max. is 1023)
+    delay(1000);
 }
 
 void setup(){
@@ -147,7 +149,7 @@ void loop(){
       //}
         break;}};*/
 
-  performMovement(2048, 2048, 2048, OPEN);
-  delay(1000);
-  performMovement(2048, 2048, 2048, CLOSE);  
+  performMovement(0, -1, -1, -1);
+  //performMovement(2048, -1, -1, -1);  
+  //performMovement(3048, -1, -1, -1);
 }
