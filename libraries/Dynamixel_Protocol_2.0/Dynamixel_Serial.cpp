@@ -312,10 +312,10 @@ void DynamixelClass::gripper(char op){
         Serial.println("The gripper has been opened.");
     }
     else if (op == 'c'){
-        Serial.println("The gripper has been closed.");
         setNGoalPositions(-1, -1, -1, 2117, 1974);
+        Serial.println("The gripper has been closed.");
     }
-    {Serial.println("Command for the gripper is non-existant!");}
+    else {Serial.println("Command for the gripper is non-existant!");}
 }
 
 unsigned int DynamixelClass::writeN(unsigned char ID, unsigned short addr, unsigned char *arr, int n){

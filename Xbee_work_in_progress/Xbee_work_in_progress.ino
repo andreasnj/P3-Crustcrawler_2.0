@@ -93,9 +93,6 @@ int checksumPkg(char *package){
   }
 }
   
-
-
-
 void loop() {
   delay(5000);
 }
