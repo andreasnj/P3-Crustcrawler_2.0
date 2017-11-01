@@ -97,10 +97,11 @@ void loop(){
     id2P =  Dynamixel.getPosition(0x02);  //Servo 2 current position in steps
 
     // This if statement checks if servo 2 have reached goal position, before it starts the next move
-    if(id2==id2P){
+    //if(id2==id2P){
+    delay(2000);
        Dynamixel.setNGoalPositions(id1, -1, -1, id4, id5);  //Set goal position of all the servos
        i = 0; //just to end the while loop
-    }
+    //}
   }
 }
 

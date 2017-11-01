@@ -94,7 +94,9 @@ void loop(){
       //}
         break;}};*/
 
-  Dynamixel.performMovement(0, -1, -1, -1);
-  //performMovement(2048, -1, -1, -1);  
-  //performMovement(3048, -1, -1, -1);
+  Dynamixel.performMovement(2000, 2048, 2048, CLOSE);
+  Dynamixel.performMovement(3048, 2048, 2048, OPEN);  
+  Dynamixel.performMovement(2048, 2048, 2048, CLOSE);
+
+  //Dynamixel.setNGoalPositions(-1, -1, -1, -1, -1);
 }
