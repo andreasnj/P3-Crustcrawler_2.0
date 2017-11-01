@@ -318,6 +318,26 @@ void DynamixelClass::gripper(char op){
     else {Serial.println("Command for the gripper is non-existant!");}
 }
 
+void DynamixelClass::performMovement(int goal1, int goal2, int goal3, char forGripper){
+    int pos1 = 0;
+    int pos2 = 0;
+    int pos3 = 0;
+
+    Dynamixel.setNGoalPositions(goal1, goal2, goal3, -1, -1);
+    while(!((goal2 >= pos2-11) && (goal2 <= pos2+11)) && ((goal3 >= pos3-11) && (goal3 <= pos3+11)) && ((goal1 >= pos1-11) && (goal1 <= pos1+11))){ //error for +- 1 degree due to an inaccuracy of the motors
+        pos1 =  Dynamixel.getPosition(0x01);
+        pos2 =  Dynamixel.getPosition(0x02);
+        pos3 =  Dynamixel.getPosition(0x03);
+      }
+    Dynamixel.setProfileVelocity(0x01, 0);  //Set the Profile Velocity for each servo. (max. is 1023)
+    Dynamixel.setProfileVelocity(0x02, 0);  //Set the Profile Velocity for each servo. (max. is 1023)
+    Dynamixel.setProfileVelocity(0x03, 0);  //Set the Profile Velocity for each servo. (max. is 1023)
+    Dynamixel.gripper(forGripper);
+    Dynamixel.setProfileVelocity(0x01, 100);  //Set the Profile Velocity for each servo. (max. is 1023)
+    Dynamixel.setProfileVelocity(0x02, 100);  //Set the Profile Velocity for each servo. (max. is 1023)
+    Dynamixel.setProfileVelocity(0x03, 100);  //Set the Profile Velocity for each servo. (max. is 1023)
+}
+
 unsigned int DynamixelClass::writeN(unsigned char ID, unsigned short addr, unsigned char *arr, int n){
 
     n += 5;
@@ -452,7 +472,6 @@ void DynamixelClass::clearRXbuffer(void){
     while (_serial->read() != -1);  // Clear RX buffer;
 
 }
-
 
 unsigned short DynamixelClass::update_crc(unsigned char *data_blk_ptr, unsigned short data_blk_size)
 {
