@@ -48,6 +48,7 @@ public:
 
     void performMovement(int goal1, int goal2, int goal3, char forGripper);
     void movetoPreset(int goal[3], char forGripper);
+    void changePreset(int goal[3], int newgoal[3]);
     Stream *_serial;
 
 private:
