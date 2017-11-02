@@ -3,6 +3,8 @@
 
 #define xBee_Baudrate 115200
 
+SoftwareSerial mySerial(10,11);
+
 /*
    Format for XBEE packets
     0 0x7e  - start ch

@@ -42,8 +42,13 @@
 class xBeeClass {
 public:
     //constructor
-    xBeeClass(): {} //not sure what should go here
-    void begin();
+    //xBeeClass();
+
+    void begin(long);
+    void begin(HardwareSerial&, long);
+    void begin(Stream&);
+
+    Stream *_serial;
 
 private:
     void readPacket();
