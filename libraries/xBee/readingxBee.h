@@ -43,6 +43,7 @@ class xBeeClass {
 public:
     //constructor
     xBeeClass(): {} //not sure what should go here
+    void begin();
 
 private:
     void readPacket();
@@ -54,5 +55,3 @@ private:
 extern xBeeClass xBee;
 
 #endif
-
-}

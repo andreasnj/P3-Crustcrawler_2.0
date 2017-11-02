@@ -1,3 +1,8 @@
+#include "readingxBee.h"
+#include <SoftwareSerial.h>
+
+#define xBee_Baudrate 115200
+
 /*
    Format for XBEE packets
     0 0x7e  - start ch
@@ -34,14 +39,18 @@
    The checksum is all bytes added together excl the first three. The sum including(!) the checksum shall give 0xff
    Strategy sum all bytes excluding first three. The checksum will be 0xff - sum
 */
+
 char testPkg[24] = {0x7e, 0x00, 0x14, 0x83, 0x56, 0x78, 0x43, 0x00, 0x01, 0x3e,
                     0xe0, 0x00, 0x40, 0x02, 0x9b, 0x02, 0x1a, 0x02, 0x05, 0x00,
                     0x00, 0x00, 0x05, 0x47};  // from datasheet
 
 char hexTable[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
 
-
 void setup() {
+  Serial.flush();
+  mySerial.begin(xBee_Baudrate);
+  Serial.begin(xBee_Baudrate);
+  xBee.begin(mySerial);
   Serial.begin(115200);
   while (! Serial) // wait until serial port is up and running
   { }
