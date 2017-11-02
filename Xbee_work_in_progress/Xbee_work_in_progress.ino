@@ -53,7 +53,6 @@ void setup() {
   mySerial.begin(xBee_Baudrate);
   Serial.begin(xBee_Baudrate);
   xBee.begin(mySerial);
-  Serial.begin(115200);
   while (! Serial) // wait until serial port is up and running
   { }
 
