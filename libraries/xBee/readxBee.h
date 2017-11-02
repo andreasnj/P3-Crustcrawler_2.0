@@ -1,5 +1,5 @@
-#ifndef readingxBee_h
-#define readingxBee_h
+#ifndef readxBee_h
+#define readxBee_h
 
 #if (ARDUINO >= 100)
 #include <Arduino.h>

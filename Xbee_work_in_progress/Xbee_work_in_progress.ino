@@ -1,4 +1,4 @@
-#include "readingxBee.h"
+#include "readxBee.h"
 #include <SoftwareSerial.h>
 
 #define xBee_Baudrate 115200
@@ -67,6 +67,7 @@ char chksum(char *pk, int lgt)
   return s;
 }
 
+/*
 void getPkg(char *package){
   int counter = 0;
   char temp;
@@ -89,20 +90,8 @@ void getPkg(char *package){
     }while(counter < 24);
   
   }
+*/
 
-int checksumPkg(char *package){
-  char sum;
-  for(int i = 3; i < 24; i++){
-    sum = sum + package[i];
-  }
-  if(sum == 0x47){ //Check with the checksum of the package
-    return 0; // ok, good package
-  }
-  else{
-    return -1; // error
-  }
-}
-  
 void loop() {
   delay(5000);
 }
