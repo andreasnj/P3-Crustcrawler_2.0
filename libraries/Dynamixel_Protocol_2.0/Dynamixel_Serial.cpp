@@ -306,6 +306,7 @@ void DynamixelClass::syncRN(unsigned short addr, int n){
     readReturnPacket(); //Read return package
 }
 
+//We added some functions to the library
 void DynamixelClass::gripper(char op){
     if (op == 'o'){
         setNGoalPositions(-1, -1, -1, 2548, 1548);
@@ -315,7 +316,7 @@ void DynamixelClass::gripper(char op){
         setNGoalPositions(-1, -1, -1, 2117, 1974);
         Serial.println("The gripper has been closed.");
     }
-    else {Serial.println("Invalid gripper command");}
+    else {Serial.println("Invalid gripper command!");}
 }
 
 void DynamixelClass::performMovement(int goal1, int goal2, int goal3, char forGripper){
@@ -332,21 +333,32 @@ void DynamixelClass::performMovement(int goal1, int goal2, int goal3, char forGr
     Dynamixel.setProfileVelocity(0x01, 0);  //Set the Profile Velocity for each servo. (max. is 1023)
     Dynamixel.setProfileVelocity(0x02, 0);
     Dynamixel.setProfileVelocity(0x03, 0);
-    Dynamixel.gripper(forGripper);
-    delay(1000);
+    
+    if(forGripper == 'o' || forGripper == 'c'){
+      delay(500);
+      Dynamixel.gripper(forGripper);      
+    }
+
     Dynamixel.setProfileVelocity(0x01, 100);  //Set the Profile Velocity for each servo. (max. is 1023)
     Dynamixel.setProfileVelocity(0x02, 100);
     Dynamixel.setProfileVelocity(0x03, 100);
 }
 
-void DynamixelClass::movetoPreset(int goal[3], char forGripper){ //0-no action; 1-close; 2-open
+void DynamixelClass::movetoPreset(int goal[3], char forGripper){
     Dynamixel.setNGoalPositions(goal[0], goal[1], goal[2], -1, -1);
-    if(forGripper == o || forGripper == c){
+    if(forGripper == 'o' || forGripper == 'c'){
       delay(500);
       Dynamixel.gripper(forGripper);
     }
-
 }
+
+void DynamixelClass::changePreset(int goal[3], int newgoal[3]){
+    for(i = 0; i < 3; i++){
+      goal[i] = newgoal[i];
+    }
+}
+
+//Back to the other guys' code
 unsigned int DynamixelClass::writeN(unsigned char ID, unsigned short addr, unsigned char *arr, int n){
 
     n += 5;
