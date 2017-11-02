@@ -44,6 +44,7 @@ public:
     //constructor
     //xBeeClass();
 
+    //to initialize Serial communication
     void begin(long);
     void begin(HardwareSerial&, long);
     void begin(Stream&);
