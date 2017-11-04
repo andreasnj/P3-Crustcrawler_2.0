@@ -29,50 +29,58 @@ void xBeeClass::begin(Stream &serial){
     _serial = &serial;  // Set a reference to a specified Stream object (Hard or Soft Serial)
 }
 
-
 //##############################################################################
 //########################## Private Methods ###################################
 //##############################################################################
 
 void xBeeClass::printReturn(){
-
 }
 
-void readPacket(char *package){
+void xBeeClass::readPacket(char *pk){//Populates a char array with a packet from the serial buffer.
   int counter = 0;
   char temp;
     do{
       if(Serial.available()){
-        temp = Serial.read(); // reads the first element in serial buffer
-          if(temp == 0x7e){
-            package[counter] = temp;
+        temp = Serial.read();        //Reads the first element in serial buffer
+          if(temp == 0x7e){          //Looking for the start delimiter
+            pk[counter] = temp;
             counter++;
             }
       }
     }while(counter == 0);
     do{
-      if(Serial.available()){
+      if(Serial.available()){        //Reads the rest of the package
         temp = Serial.read();
-        package[counter] = temp;
+        pk[counter] = temp;
         counter++;
       }
       
     }while(counter < 24);
-  
-  }
+}
 
 
-int checkPacket(char *package){
+int xBeeClass::checkPacket(char *pk){//Generates checksum and compares with the one in the package
   char sum;
-  for(int i = 3; i < 24; i++){
-    sum = sum + package[i];
+  for(int i = 3; i < 23; i++){       //Generate sum from index 3-to-22
+    sum = sum + pk[i];
   }
-  if(sum == 0x47){ //Check with the checksum of the package
-    return 0; // ok, good package
+  if(sum == 0x47){                   //Check with the checksum of the package
+    return 1;                        //ok, good package
   }
   else{
-    return -1; // error
+    return 0;                       //error
   }
 }
+
+
+/*
+char xBeeClass::genChecksum(char *pk, int length){//Generates checksum
+  char s = 0;
+  for (int i = 0; i < length; i++)
+    s += *(pk + i);
+  return s;
+}
+*/
+
 
 xBeeClass xBee;

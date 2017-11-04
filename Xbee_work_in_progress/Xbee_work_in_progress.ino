@@ -42,7 +42,7 @@ SoftwareSerial mySerial(10,11);
    Strategy sum all bytes excluding first three. The checksum will be 0xff - sum
 */
 
-char testPkg[24] = {0x7e, 0x00, 0x14, 0x83, 0x56, 0x78, 0x43, 0x00, 0x01, 0x3e,
+char testPk[24] = {0x7e, 0x00, 0x14, 0x83, 0x56, 0x78, 0x43, 0x00, 0x01, 0x3e,
                     0xe0, 0x00, 0x40, 0x02, 0x9b, 0x02, 0x1a, 0x02, 0x05, 0x00,
                     0x00, 0x00, 0x05, 0x47};  // from datasheet
 
@@ -53,56 +53,23 @@ void setup() {
   mySerial.begin(xBee_Baudrate);
   Serial.begin(xBee_Baudrate);
   xBee.begin(mySerial);
+  char tempPk[24] = {};                //Initializes array (See if it works only doing it in setup???)
   while (! Serial) // wait until serial port is up and running
   { }
+
 
   delay(500); // just to be sure
 }
 
-char chksum(char *pk, int lgt)
-{
-  char s = 0;
-  for (int i = 0; i < lgt; i++)
-    s += *(pk + i);
-  return s;
-}
-
-void getPkg(char *package){
-  int counter = 0;
-  char temp;
-    do{
-      if(Serial.available()){
-        temp = Serial.read(); // reads the first element in serial buffer
-          if(temp == 0x7e){
-            package[counter] = temp;
-            counter++;
-            }
-      }
-    }while(counter == 0);
-    do{
-      if(Serial.available()){
-        temp = Serial.read();
-        package[counter] = temp;
-        counter++;
-      }
-      
-    }while(counter < 24);
-  
-  }
-
-int checksumPkg(char *package){
-  char sum;
-  for(int i = 3; i < 24; i++){
-    sum = sum + package[i];
-  }
-  if(sum == 0x47){ //Check with the checksum of the package
-    return 0; // ok, good package
-  }
-  else{
-    return -1; // error
-  }
-}
-  
 void loop() {
-  delay(5000);
+delay(3000);
+
+//Ready for new package
+readPacket(tempPk);
+
+if(checkPacket(testPk)){
+  //Do stuff
+  Serial.println('The package passed checksum');
+}
+
 }
