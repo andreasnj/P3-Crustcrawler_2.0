@@ -48,8 +48,6 @@ char testPk[24] = {0x7e, 0x00, 0x14, 0x83, 0x56, 0x78, 0x43, 0x00, 0x01, 0x3e,
 
 char hexTable[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
 
-char tempPk[24] = {};                //Initializes array (See if it works only doing it in setup???)
-
 void setup() {
   Serial.begin(9600);
   Serial.flush();
@@ -61,6 +59,7 @@ void setup() {
 }
 
 void loop() {
+  char tempPk[24] = {};                //Initializes array (See if it works only doing it in setup???)
   delay(500);
 //Ready for new package
   xBee.readPacket(tempPk);
