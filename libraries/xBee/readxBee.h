@@ -41,7 +41,7 @@
 
 class xBeeClass {
 public:
-    //xBeeClass(); //constructor
+    xBeeClass(); //constructor
 
     //to initialize Serial communication
     void begin(long);
@@ -55,7 +55,7 @@ private:
     void printReturn();
     void checkPacket();
 
-    unsigned char packet_array[24];
+    unsigned char pk[24]; //Packet array
 };
 
 extern xBeeClass xBee;

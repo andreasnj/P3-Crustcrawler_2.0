@@ -53,8 +53,8 @@ void setup() {
   mySerial.begin(xBee_Baudrate);
   Serial.begin(xBee_Baudrate);
   xBee.begin(mySerial);
-  char tempPk[24] = {};                //Initializes array (See if it works only doing it in setup???)
-  while (! Serial) // wait until serial port is up and running
+//  char tempPk[24] = {};              //Initializes array (See if it works only doing it in setup???)
+  while (! Serial)                   // wait until serial port is up and running
   { }
 
 
@@ -64,12 +64,17 @@ void setup() {
 void loop() {
 delay(3000);
 
-//Ready for new package
-readPacket(tempPk);
 
 if(checkPacket(testPk)){
   //Do stuff
-  Serial.println('The package passed checksum');
+  Serial.println('The test package passed checksum -> checkPacket() works!!'); //Needs testing
+
+//Ready for new package
+readPacket(tempPk);
+
+
+
+
 }
 
 }

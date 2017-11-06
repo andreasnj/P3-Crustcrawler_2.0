@@ -61,10 +61,10 @@ void xBeeClass::readPacket(char *pk){//Populates a char array with a packet from
 
 int xBeeClass::checkPacket(char *pk){//Generates checksum and compares with the one in the package
   char sum;
-  for(int i = 3; i < 23; i++){       //Generate sum from index 3-to-22
+  for(int i = 3; i < 23; i++){       //Generate sum from index 3-to-22 (until, not incl. the checksum itself)
     sum = sum + pk[i];
   }
-  if(sum == 0x47){                   //Check with the checksum of the package
+  if(sum == pk[23]){                   //Check with the checksum of the package
     return 1;                        //ok, good package
   }
   else{
@@ -81,6 +81,5 @@ char xBeeClass::genChecksum(char *pk, int length){//Generates checksum
   return s;
 }
 */
-
 
 xBeeClass xBee;
