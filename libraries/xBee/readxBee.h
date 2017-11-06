@@ -51,9 +51,9 @@ public:
     Stream *_serial;
 
 private:
-    void readPacket();
-    void printReturn();
-    void checkPacket();
+    void readPacket(char *pk);
+    void printReturn(char *pk);
+    void checkPacket(char *pk);
 
     unsigned char pk[24]; //Packet array
 };

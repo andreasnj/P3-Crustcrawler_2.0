@@ -68,7 +68,7 @@ void loop() {
   if(checkPacket(testPk)){
   //Do stuff
     Serial.println('The package passed checksum');
-  Serial.println('The test package passed checksum -> checkPacket() works!!'); //Needs testing
+    Serial.println('The test package passed checksum -> checkPacket() works!!'); //Needs testing
 }
 
 }
