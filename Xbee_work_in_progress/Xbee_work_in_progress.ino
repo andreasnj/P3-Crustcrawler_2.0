@@ -51,9 +51,9 @@ char hexTable[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', '
 char tempPk[24] = {};                //Initializes array (See if it works only doing it in setup???)
 
 void setup() {
+  Serial.begin(9600);
   Serial.flush();
   mySerial.begin(xBee_Baudrate);
-  Serial.begin(xBee_Baudrate);
   xBee.begin(mySerial);
   while (! Serial){                 // wait until serial port is up and running
   delay(500); // just to be sure
