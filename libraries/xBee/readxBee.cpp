@@ -42,7 +42,7 @@ void xBeeClass::readPacket(char *pk){//Populates a char array with a packet from
     do{
       if(Serial.available()){
         temp = Serial.read();        //Reads the first element in serial buffer
-          if(temp == 0x7e){          //Looking for the start delimiter
+          if(temp == START){          //Looking for the start delimiter
             pk[counter] = temp;
             counter++;
             }
