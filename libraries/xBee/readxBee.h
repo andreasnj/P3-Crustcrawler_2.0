@@ -53,8 +53,17 @@ public:
     void readPacket(char *pk);
     void printReturn(char *pk);
     bool checkPacket(char *pk);
+    void decodePacket(char *pk);
 
+
+    //Global variables
     unsigned char pk[24]; //Packet array
+    int emg1;
+    int emg2;
+    int accZ;
+    int accY;
+    int accX;
+
 };
 
 extern xBeeClass xBee;
