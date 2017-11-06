@@ -36,26 +36,25 @@ void xBeeClass::printReturn(char *pk){
 
 void xBeeClass::readPacket(char *pk){//Populates a char array with a packet from the serial buffer.
   int counter = 0;
-  int stopper = 0;
   char temp;
-    /*do{
-      //if(Serial.available()){
+    do{
+      if(Serial.available() > 0){
         temp = Serial.read();        //Reads the first element in serial buffer
-          if(temp == START){          //Looking for the start delimiter
+          if(temp == 0x7e){          //Looking for the start delimiter
             pk[counter] = temp;
             counter++;
             }
-          else {stopper++;}
-      //}
-    }while(counter == 0 || stopper < 10);
+      }
+      else {break;};
+    }while(counter == 0);
     do{
-      //if(Serial.available()){        //Reads the rest of the package
+      if(Serial.available()){        //Reads the rest of the package
         temp = Serial.read();
         pk[counter] = temp;
         counter++;
-      //}
-      
-    }while(counter < 24);*/
+      }
+      else {break;};
+    }while(counter < 24);
 }
 
 
@@ -64,7 +63,6 @@ bool xBeeClass::checkPacket(char *pk){//Generates checksum and compares with the
   for(int i = 3; i < 23; i++){       //Generate sum from index 3-to-22 (until, not incl. the checksum itself)
     sum = sum + pk[i];
   }
-
   if((0xff - sum) == pk[23]){        //Check with the checksum of the package
     return true;                        //ok, good package
   }
