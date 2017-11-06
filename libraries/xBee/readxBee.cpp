@@ -40,17 +40,17 @@ void xBeeClass::readPacket(char *pk){//Populates a char array with a packet from
   int counter = 0;
   int stopper = 0;
   char temp;
-    /*do{
-      //if(Serial.available()){
+    do{
+      if(Serial.available() > 0){
         temp = Serial.read();        //Reads the first element in serial buffer
           if(temp == START){          //Looking for the start delimiter
             pk[counter] = temp;
             counter++;
             }
-          else {stopper++;}
-      //}
-    }while(counter == 0 || stopper < 10);
-    do{
+        else {stopper++;}
+      }
+    }while(counter == 0 && stopper < 2);
+    /*do{
       //if(Serial.available()){        //Reads the rest of the package
         temp = Serial.read();
         pk[counter] = temp;
@@ -66,13 +66,8 @@ bool xBeeClass::checkPacket(char *pk){//Generates checksum and compares with the
   for(int i = 3; i < 23; i++){       //Generate sum from index 3-to-22 (until, not incl. the checksum itself)
     sum = sum + pk[i];
   }
-<<<<<<< HEAD
-  
-=======
->>>>>>> 5eaa63b4a9bc72f2ab9d0980bcd44fc2f9f5b0f3
   if((0xff - sum) == pk[23]){        //Check with the checksum of the package
-
-    return true;                        //ok, good package
+        return true;                        //ok, good package
   }
   else{
     return false;                       //error
