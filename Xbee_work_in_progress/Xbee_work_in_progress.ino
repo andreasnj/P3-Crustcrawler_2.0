@@ -50,6 +50,8 @@ char hexTable[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', '
 
 char tempPk[24] = {};                //Initializes array (See if it works only doing it in setup???)
 
+char sum = 0x0f;
+
 void setup() {
   Serial.begin(9600);
   Serial.flush();
@@ -67,10 +69,9 @@ void loop() {
   if(xBee.checkPacket(testPk)){
   //Do stuff
     Serial.println("The test package passed checksum -> checkPacket() works!!"); //Needs testing
-    }else {Serial.println("Does not work");};
+    }
+    else {Serial.println("Does not work");};
 
-  Serial.println(hexTable[0]);
-    
     delay (2000);
-  Serial.println(testPk[22], HEX);
+
 }
