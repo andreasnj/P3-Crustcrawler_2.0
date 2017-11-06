@@ -72,10 +72,6 @@ void loop() {
     }
     else {Serial.println("Does not work");};
 
-    Serial.println(sum, HEX);
-    sum = sum + 0xff;
-    Serial.println(sum, HEX);
-    
     delay (2000);
 
 }
