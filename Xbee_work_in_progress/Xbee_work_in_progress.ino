@@ -62,7 +62,7 @@ void setup() {
 
 void loop() {
   //Ready for new package
-  //xBee.readPacket(tempPk);
+  xBee.readPacket(tempPk);
 
   if(xBee.checkPacket(testPk)){
   //Do stuff
