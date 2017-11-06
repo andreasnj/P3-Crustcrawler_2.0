@@ -65,7 +65,7 @@ bool xBeeClass::checkPacket(char *pk){//Generates checksum and compares with the
   for(int i = 3; i < 23; i++){       //Generate sum from index 3-to-22 (until, not incl. the checksum itself)
     sum = sum + pk[i];
   }
-  if(sum == pk[23]){                   //Check with the checksum of the package
+  if((0xff - sum) == pk[23]){                   //Check with the checksum of the package
     return 1;                        //ok, good package
   }
   else{
