@@ -56,16 +56,16 @@ void xBeeClass::readPacket(char *pk){//Populates a char array with a packet from
       }
       
     }while(counter < 24);
-  xBee.checkPacket(*pk);
 }
 
 
 bool xBeeClass::checkPacket(char *pk){//Generates checksum and compares with the one in the package
-  char sum = 0;
+  char sum;
   for(int i = 3; i < 23; i++){       //Generate sum from index 3-to-22 (until, not incl. the checksum itself)
     sum = sum + pk[i];
   }
   if((0xff - sum) == pk[23]){        //Check with the checksum of the package
+
     return true;                        //ok, good package
   }
   else{
