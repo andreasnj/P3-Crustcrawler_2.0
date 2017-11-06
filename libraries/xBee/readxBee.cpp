@@ -67,11 +67,19 @@ bool xBeeClass::checkPacket(char *pk){//Generates checksum and compares with the
     sum = sum + pk[i];
   }
   if((0xff - sum) == pk[23]){        //Check with the checksum of the package
-        return true;                        //ok, good package
+    return true;                        //ok, good package
   }
   else{
     return false;                       //error
   }
+}
+
+void xBeeClass::decodePacket(char*pk){//Converts chars from the packet into int
+  emg1 = (int)((pk[19] << 8) | pk[20]);
+  emg2 = (int)((pk[21] << 8) | pk[22]);
+  accZ = (int)((pk[13] << 8) | pk[14]);
+  accY = (int)((pk[15] << 8) | pk[16]);
+  accX = (int)((pk[17] << 8) | pk[18]);
 }
 
 
