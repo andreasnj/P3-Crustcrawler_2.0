@@ -60,7 +60,7 @@ void xBeeClass::readPacket(char *pk){//Populates a char array with a packet from
 
 
 int xBeeClass::checkPacket(char *pk){//Generates checksum and compares with the one in the package
-  char sum;
+  char sum = 0;
   for(int i = 3; i < 23; i++){       //Generate sum from index 3-to-22 (until, not incl. the checksum itself)
     sum = sum + pk[i];
   }
