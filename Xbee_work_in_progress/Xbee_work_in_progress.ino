@@ -65,7 +65,7 @@ void loop() {
 //Ready for new package
   xBee.readPacket(tempPk);
 
-  if(checkPacket(testPk)){
+  if(xBee.checkPacket(testPk)){
   //Do stuff
     Serial.println('The package passed checksum');
     Serial.println('The test package passed checksum -> checkPacket() works!!'); //Needs testing
