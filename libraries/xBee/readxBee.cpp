@@ -56,6 +56,7 @@ void xBeeClass::readPacket(char *pk){//Populates a char array with a packet from
       }
       
     }while(counter < 24);
+  xBee.checkPacket(*pk);
 }
 
 
