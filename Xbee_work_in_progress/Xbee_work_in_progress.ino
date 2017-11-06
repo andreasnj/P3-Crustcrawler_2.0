@@ -62,7 +62,7 @@ void loop() {
   char tempPk[24] = {};                //Initializes array (See if it works only doing it in setup???)
   delay(500);
   //Ready for new package
-  xBee.readPacket(tempPk);
+  //xBee.readPacket(tempPk);
 
   if(xBee.checkPacket(testPk)){
   //Do stuff
@@ -70,5 +70,7 @@ void loop() {
     Serial.println("The test package passed checksum -> checkPacket() works!!"); //Needs testing
 }
   else {Serial.println("Does not work");};
+
+  Serial.println(testPk[22], HEX);
 
 }
