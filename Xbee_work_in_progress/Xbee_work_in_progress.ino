@@ -48,12 +48,13 @@ char testPk[24] = {0x7e, 0x00, 0x14, 0x83, 0x56, 0x78, 0x43, 0x00, 0x01, 0x3e,
 
 char hexTable[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
 
+char tempPk[24] = {};                //Initializes array (See if it works only doing it in setup???)
+
 void setup() {
   Serial.flush();
   mySerial.begin(xBee_Baudrate);
   Serial.begin(xBee_Baudrate);
   xBee.begin(mySerial);
-  char tempPk[24] = {};                //Initializes array (See if it works only doing it in setup???)
   while (! Serial) // wait until serial port is up and running
   { }
 
@@ -62,14 +63,14 @@ void setup() {
 }
 
 void loop() {
-delay(3000);
+  delay(3000);
 
 //Ready for new package
-readPacket(tempPk);
+  xBee.readPacket(tempPk);
 
-if(checkPacket(testPk)){
+  if(checkPacket(testPk)){
   //Do stuff
-  Serial.println('The package passed checksum');
+    Serial.println('The package passed checksum');
 }
 
 }
