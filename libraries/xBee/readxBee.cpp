@@ -38,24 +38,26 @@ void xBeeClass::printReturn(char *pk){
 
 void xBeeClass::readPacket(char *pk){//Populates a char array with a packet from the serial buffer.
   int counter = 0;
+  int stopper = 0;
   char temp;
-    do{
-      if(Serial.available()){
+    /*do{
+      //if(Serial.available()){
         temp = Serial.read();        //Reads the first element in serial buffer
           if(temp == START){          //Looking for the start delimiter
             pk[counter] = temp;
             counter++;
             }
-      }
-    }while(counter == 0);
+          else {stopper++;}
+      //}
+    }while(counter == 0 || stopper < 10);
     do{
-      if(Serial.available()){        //Reads the rest of the package
+      //if(Serial.available()){        //Reads the rest of the package
         temp = Serial.read();
         pk[counter] = temp;
         counter++;
-      }
+      //}
       
-    }while(counter < 24);
+    }while(counter < 24);*/
 }
 
 
