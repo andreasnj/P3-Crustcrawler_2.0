@@ -49,7 +49,7 @@ public:
     void begin(Stream&);
 
     Stream *_serial;
-    //Used to be private from here down
+    //Used to be private members from here down
     void readPacket(char *pk);
     void printReturn(char *pk);
     bool checkPacket(char *pk);
