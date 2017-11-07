@@ -49,20 +49,12 @@ public:
     void begin(Stream&);
 
     Stream *_serial;
-<<<<<<< HEAD
-    //Used to be private members from here down
-=======
 
-    void decodePacket(char *pk, int i);
-    float averageArr(int *arr);
-
-    //Used to be private from here down
->>>>>>> 22a70389119a2e1ac98d498edee9302d7ebd8b63
     void readPacket(char *pk);
     void printReturn(char *pk);
     bool checkPacket(char *pk);
     void decodePacket(char *pk);
-
+    float averageArr(int *pk, int length);
 
     //Global variables
     unsigned char pk[24]; //Packet array

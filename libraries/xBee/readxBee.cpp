@@ -37,7 +37,7 @@ void xBeeClass::readPacket(char *pk){//Populates a char array with a packet from
   int counter = 0;
   char temp;
     do{
-      if(Serial.available() > 0){
+      if(Serial.available()){
         temp = Serial.read();        //Reads the first element in serial buffer
           if(temp == 0x7e){          //Looking for the start delimiter
             pk[counter] = temp;
@@ -47,7 +47,7 @@ void xBeeClass::readPacket(char *pk){//Populates a char array with a packet from
       else {break;};
     }while(counter == 0);
     do{
-      if(Serial.available() > 0){        //Reads the rest of the package
+      if(Serial.available()){        //Reads the rest of the package
         temp = Serial.read();
         pk[counter] = temp;
         counter++;
@@ -70,7 +70,7 @@ bool xBeeClass::checkPacket(char *pk){//Generates checksum and compares with the
 }
 
 void xBeeClass::decodePacket(char *pk, int i){//Convert chars from packet into int, store in arrays, average
-<<<<<<< HEAD
+
   emg1arr[i] = (int)((pk[19] << 8) | pk[20]);
   emg2arr[i] = (int)((pk[21] << 8) | pk[22]);
   accZarr[i] = (int)((pk[13] << 8) | pk[14]);
@@ -79,16 +79,7 @@ void xBeeClass::decodePacket(char *pk, int i){//Convert chars from packet into i
 
   emg1 = xBee.averageArr(emg1arr);
   emg2 = xBee.averageArr(emg2arr);
-=======
-  emg1arr[i] = emg1 = (int)((pk[19] << 8) | pk[20]);
-  emg2arr[i] = emg2 = (int)((pk[21] << 8) | pk[22]);
-  accZarr[i] = accZ = (int)((pk[13] << 8) | pk[14]);
-  accYarr[i] = accY = (int)((pk[15] << 8) | pk[16]);
-  accXarr[i] = accX = (int)((pk[17] << 8) | pk[18]);
 
-  emg1 =
-
->>>>>>> 22a70389119a2e1ac98d498edee9302d7ebd8b63
 }
 
 float xBeeClass::averageArr(int *arr, int length){
