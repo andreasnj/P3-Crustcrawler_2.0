@@ -50,7 +50,7 @@ void xBeeClass::readPacket(char *pk){//Populates a char array with a packet from
       else {break;};
     }while(counter == 0);
     do{
-      if(Serial.available()){        //Reads the rest of the package
+      if(Serial.available() > 0){        //Reads the rest of the package
         temp = Serial.read();
         pk[counter] = temp;
         counter++;
