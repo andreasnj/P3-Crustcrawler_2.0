@@ -11,7 +11,7 @@
 #define START                       0x7E
 #define LENGTH_H                    0x00
 #define LENGTH_L                    0x14
-#define API_FRAME_ID                0x83
+/*#define API_FRAME_ID                0x83
 #define SENERS_ADDRESS_H            0x56
 #define SENDERS_ADDRESS_L           0x78
 #define RSI                         0x43
