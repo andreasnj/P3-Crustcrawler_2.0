@@ -37,7 +37,7 @@
 #define EMGCH2_H                    0x00
 #define EMGCH2_L                    0x05
 
-#define CHECKSUM                    0x47
+#define CHECKSUM                    0x47*/
 
 class xBeeClass {
 public:
@@ -49,7 +49,15 @@ public:
     void begin(Stream&);
 
     Stream *_serial;
+<<<<<<< HEAD
     //Used to be private members from here down
+=======
+
+    void decodePacket(char *pk, int i);
+    float averageArr(int *arr);
+
+    //Used to be private from here down
+>>>>>>> 22a70389119a2e1ac98d498edee9302d7ebd8b63
     void readPacket(char *pk);
     void printReturn(char *pk);
     bool checkPacket(char *pk);
