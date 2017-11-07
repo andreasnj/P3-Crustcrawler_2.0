@@ -78,7 +78,7 @@ void xBeeClass::decodePacket(char *pk, int i){//Convert chars from packet into i
   accYarr[i] = accY = (int)((pk[15] << 8) | pk[16]);
   accXarr[i] = accX = (int)((pk[17] << 8) | pk[18]);
 
-  emg1 = 
+  emg1 =
 
 }
 
