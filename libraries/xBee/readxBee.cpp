@@ -70,7 +70,6 @@ bool xBeeClass::checkPacket(char *pk){//Generates checksum and compares with the
 }
 
 void xBeeClass::decodePacket(char *pk, int i){//Convert chars from packet into int, store in arrays, average
-<<<<<<< HEAD
   emg1arr[i] = (int)((pk[19] << 8) | pk[20]);
   emg2arr[i] = (int)((pk[21] << 8) | pk[22]);
   accZarr[i] = (int)((pk[13] << 8) | pk[14]);
@@ -79,7 +78,7 @@ void xBeeClass::decodePacket(char *pk, int i){//Convert chars from packet into i
 
   emg1 = xBee.averageArr(emg1arr);
   emg2 = xBee.averageArr(emg2arr);
-=======
+
   emg1arr[i] = emg1 = (int)((pk[19] << 8) | pk[20]);
   emg2arr[i] = emg2 = (int)((pk[21] << 8) | pk[22]);
   accZarr[i] = accZ = (int)((pk[13] << 8) | pk[14]);
@@ -87,8 +86,6 @@ void xBeeClass::decodePacket(char *pk, int i){//Convert chars from packet into i
   accXarr[i] = accX = (int)((pk[17] << 8) | pk[18]);
 
   emg1 =
-
->>>>>>> 22a70389119a2e1ac98d498edee9302d7ebd8b63
 }
 
 float xBeeClass::averageArr(int *arr, int length){
