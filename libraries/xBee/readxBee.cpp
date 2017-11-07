@@ -29,9 +29,7 @@ void xBeeClass::begin(Stream &serial){
     _serial = &serial;  // Set a reference to a specified Stream object (Hard or Soft Serial)
 }
 
-//##############################################################################
-//########################## Private Methods ###################################
-//##############################################################################
+
 
 void xBeeClass::printReturn(char *pk){
 }
@@ -73,22 +71,25 @@ bool xBeeClass::checkPacket(char *pk){//Generates checksum and compares with the
   }
 }
 
-void xBeeClass::decodePacket(char*pk){//Converts chars from the packet into int
-  emg1 = (int)((pk[19] << 8) | pk[20]);
-  emg2 = (int)((pk[21] << 8) | pk[22]);
-  accZ = (int)((pk[13] << 8) | pk[14]);
-  accY = (int)((pk[15] << 8) | pk[16]);
-  accX = (int)((pk[17] << 8) | pk[18]);
+void xBeeClass::decodePacket(char *pk, int i){//Convert chars from packet into int, store in arrays, average
+  emg1arr[i] = emg1 = (int)((pk[19] << 8) | pk[20]);
+  emg2arr[i] = emg2 = (int)((pk[21] << 8) | pk[22]);
+  accZarr[i] = accZ = (int)((pk[13] << 8) | pk[14]);
+  accYarr[i] = accY = (int)((pk[15] << 8) | pk[16]);
+  accXarr[i] = accX = (int)((pk[17] << 8) | pk[18]);
+
+  emg1 = 
+
+}
+
+float xBeeClass::averageArr(int *arr){
+  for()
 }
 
 
-/*
-char xBeeClass::genChecksum(char *pk, int length){//Generates checksum
-  char s = 0;
-  for (int i = 0; i < length; i++)
-    s += *(pk + i);
-  return s;
-}
-*/
+
+//##############################################################################
+//########################## Private Methods ###################################
+//##############################################################################
 
 xBeeClass xBee;

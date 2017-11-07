@@ -49,7 +49,7 @@ public:
     void begin(Stream&);
 
     Stream *_serial;
-
+    //Used to be private from here down
     void readPacket(char *pk);
     void printReturn(char *pk);
     bool checkPacket(char *pk);
@@ -63,6 +63,12 @@ public:
     int accZ;
     int accY;
     int accX;
+
+    int emg1arr[10] = {};
+    int emg2arr[10] = {};
+    int accZarr[10] = {};
+    int accYarr[10] = {};
+    int accXarr[10] = {};
 
 };
 
