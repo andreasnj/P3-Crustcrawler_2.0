@@ -53,8 +53,8 @@ public:
     void readPacket(char *pk);
     void printReturn(char *pk);
     bool checkPacket(char *pk);
-    void decodePacket(char *pk);
-    float averageArr(int *pk, int length);
+    void decodePacket(char *pk, int i);
+    float averageArr(int *pk);
 
     //Global variables
     unsigned char pk[24]; //Packet array

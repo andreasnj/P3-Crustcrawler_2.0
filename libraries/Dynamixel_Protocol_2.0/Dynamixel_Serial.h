@@ -1,4 +1,4 @@
--#ifndef Dynamixel_Serial_h
+#ifndef Dynamixel_Serial_h
 #define Dynamixel_Serial_h
 
 #if (ARDUINO >= 100)
