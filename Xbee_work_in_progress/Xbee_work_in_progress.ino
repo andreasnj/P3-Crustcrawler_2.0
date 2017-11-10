@@ -56,15 +56,15 @@ void setup() {
   mySerial.begin(xBee_Baudrate);
   xBee.begin(mySerial);
   while (! Serial){                 // wait until serial port is up and running
-  delay(500); // just to be sure
   }
+  delay(500); // just to be sure
 }
 
 void loop() {
   //Ready for new package
   xBee.readPacket(tempPk);
 
-  if(xBee.checkPacket(testPk)){
+  if(xBee.checkPacket(tempPk)){
   //Do stuff
     Serial.println("The test package passed checksum"); //Needs testing
     }

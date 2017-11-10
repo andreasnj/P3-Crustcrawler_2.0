@@ -6,13 +6,19 @@
 #define SERVO_ControlPin 0x02       // Control pin of buffer chip, NOTE: this does not matter becasue we are not using a half to full contorl buffer.
 #define SERVO_BAUDRATE 57600    // Baud rate speed which the Dynamixel will be set too (57600)
 #define LED13 0x0D
-#define CW_LIMIT_ANGLE 0x001        // lowest clockwise angle is 1, as when set to 0 it set servo to wheel mode
-#define CCW_LIMIT_ANGLE 0xFFF       // Highest anit-clockwise angle is 0XFFF, as when set to 0 it set servo to wheel mode
+//#define CW_LIMIT_ANGLE 0x001        // lowest clockwise angle is 1, as when set to 0 it set servo to wheel mode
+//#define CCW_LIMIT_ANGLE 0xFFF       // Highest anit-clockwise angle is 0XFFF, as when set to 0 it set servo to wheel mode
 #define OPEN 'o'
 #define CLOSE 'c'
 
 SoftwareSerial mySerial(19,18);
 SoftwareSerial mySerial2(17,16);
+
+char testPk[24] = {0x7e, 0x00, 0x14, 0x83, 0x56, 0x78, 0x43, 0x00, 0x01, 0x3e,
+                    0xe0, 0x00, 0x40, 0x02, 0x9b, 0x02, 0x1a, 0x02, 0x05, 0x00,
+                    0x00, 0x00, 0x05, 0x47};  // from datasheet
+
+char tempPk[24] = {};
 
 void performMovement(int goal1, int goal2, int goal3, char forGripper){
   int pos1 = 0;
@@ -75,6 +81,15 @@ void setup() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  //Ready for new package
+  xBee.readPacket(tempPk);
+
+  if(xBee.checkPacket(tempPk)){
+  //Do stuff
+    Serial.println("The test package passed checksum"); //Needs testing
+    }
+    else{Serial.println("Does not work");};
+
+    delay (2000);
 
 }
