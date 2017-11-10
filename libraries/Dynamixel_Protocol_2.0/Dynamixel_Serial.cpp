@@ -351,7 +351,7 @@ void DynamixelClass::movetoPreset(int goal[3], char forGripper){//Move to a pred
 }
 
 void DynamixelClass::changePreset(int goal[3], int newgoal[3]){//Maybe a redundant function
-    for(i = 0; i < 3; i++){
+    for(int i = 0; i < 3; i++){
       goal[i] = newgoal[i];
     }
 }
