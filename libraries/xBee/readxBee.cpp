@@ -79,6 +79,9 @@ void xBeeClass::decodePacket(char *pk, int i){//Convert chars from packet into i
 
   emg1 = xBee.averageArr(emg1arr);
   emg2 = xBee.averageArr(emg2arr);
+  accZ = xBee.averageArr(accZarr);
+  accY = xBee.averageArr(accYarr);
+  accX = xBee.averageArr(accXarr);
 
 }
 
