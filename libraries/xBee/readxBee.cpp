@@ -82,15 +82,14 @@ void xBeeClass::decodePacket(char *pk, int i){//Convert chars from packet into i
   accZ = xBee.averageArr(accZarr);
   accY = xBee.averageArr(accYarr);
   accX = xBee.averageArr(accXarr);
-
 }
 
-float xBeeClass::averageArr(int *arr, int length){
+float xBeeClass::averageArr(int *arr){
   int s = 0;
-  for(i = 0; i < length; i++){
+  for(i = 0; i < 10; i++){
     s += arr[i];
   }
-  float avg = s/length;
+  float avg = s/10;
   return(avg);
 }
 
