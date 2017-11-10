@@ -1,4 +1,4 @@
--#include "Dynamixel_Serial.h"
+#include "Dynamixel_Serial.h"
 #include <SoftwareSerial.h>
 
 #define SERVO_ControlPin 0x02       // Control pin of buffer chip, NOTE: this does not matter becasue we are not using a half to full contorl buffer.
