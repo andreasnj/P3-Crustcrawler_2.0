@@ -309,12 +309,10 @@ void DynamixelClass::syncRN(unsigned short addr, int n){
 //We added some functions to the library
 void DynamixelClass::gripper(char op){
     if (op == 'o'){
-        setNGoalPositions(-1, -1, -1, 2548, 1548);
-        Serial.println("The gripper has been opened.");
+        setNGoalPositions(-1, -1, -1, 2548, 1548); //Open griper
     }
     else if (op == 'c'){
-        setNGoalPositions(-1, -1, -1, 2117, 1974);
-        Serial.println("The gripper has been closed.");
+        setNGoalPositions(-1, -1, -1, 2117, 1974);//Close gripper
     }
     else {Serial.println("Invalid gripper command!");}
 }
@@ -330,7 +328,7 @@ void DynamixelClass::performMovement(int goal1, int goal2, int goal3, char forGr
         pos2 =  Dynamixel.getPosition(0x02);
         pos3 =  Dynamixel.getPosition(0x03);
       }
-    Dynamixel.setProfileVelocity(0x01, 0);  //Set the Profile Velocity for each servo. (max. is 1023)
+    Dynamixel.setProfileVelocity(0x01, 0);  //Set the Profile Velocity for each servo. This is to prevent it spazzing out
     Dynamixel.setProfileVelocity(0x02, 0);
     Dynamixel.setProfileVelocity(0x03, 0);
     
@@ -339,12 +337,12 @@ void DynamixelClass::performMovement(int goal1, int goal2, int goal3, char forGr
       Dynamixel.gripper(forGripper);      
     }
 
-    Dynamixel.setProfileVelocity(0x01, 100);  //Set the Profile Velocity for each servo. (max. is 1023)
+    Dynamixel.setProfileVelocity(0x01, 100);  //Set the Profile Velocity for each servo. Resume normal operation
     Dynamixel.setProfileVelocity(0x02, 100);
     Dynamixel.setProfileVelocity(0x03, 100);
 }
 
-void DynamixelClass::movetoPreset(int goal[3], char forGripper){
+void DynamixelClass::movetoPreset(int goal[3], char forGripper){//Move to a predefined set of coordinates
     Dynamixel.setNGoalPositions(goal[0], goal[1], goal[2], -1, -1);
     if(forGripper == 'o' || forGripper == 'c'){
       delay(500);
@@ -352,7 +350,7 @@ void DynamixelClass::movetoPreset(int goal[3], char forGripper){
     }
 }
 
-void DynamixelClass::changePreset(int goal[3], int newgoal[3]){
+void DynamixelClass::changePreset(int goal[3], int newgoal[3]){//Maybe a redundant function
     for(i = 0; i < 3; i++){
       goal[i] = newgoal[i];
     }
