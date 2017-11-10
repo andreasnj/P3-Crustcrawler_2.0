@@ -1,7 +1,6 @@
 #include "readxBee.h"
 
 void xBeeClass::begin(long baud){
-
 #if defined(__AVR_ATmega32U4__) || defined(__MK20DX128__) || defined(__AVR_ATmega2560__)
     Serial1.begin(baud);  // Set up Serial for Leonardo and Mega
     _serial = &Serial1;
@@ -9,7 +8,6 @@ void xBeeClass::begin(long baud){
     Serial.begin(baud);   // Set up Serial for all others (Uno, etc)
     _serial = &Serial;
 #endif
-
 }
 
 //##############################################################################
@@ -21,14 +19,11 @@ void xBeeClass::begin(HardwareSerial &HWserial, long baud){
 
     HWserial.begin(baud); // Set up Serial for a specified Serial object
     _serial = &HWserial;
-
 }
 
 void xBeeClass::begin(Stream &serial){
     _serial = &serial;  // Set a reference to a specified Stream object (Hard or Soft Serial)
 }
-
-
 
 void xBeeClass::printReturn(char *pk){
 }
@@ -51,9 +46,8 @@ void xBeeClass::readPacket(char *pk){//Populates a char array with a packet from
         temp = Serial.read();
         pk[counter] = temp;
         counter++;
-      }
-      else {break;};
-    }while(counter < 24);
+        }
+      }while(counter < 24);
 }
 
 bool xBeeClass::checkPacket(char *pk){//Generates checksum and compares with the one in the package
