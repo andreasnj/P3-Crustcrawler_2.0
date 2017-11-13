@@ -42,9 +42,9 @@ void loop()
   }*/
   //if (XBee.available())
   //{ // If data comes in from XBee, send it out to serial monitor
-    Serial.println(mySerial.read());
-    mySerial.flush();
-    delay(1000);
+    //Serial.println(mySerial.read());
+    //mySerial.flush();
+    //delay(1000);
   //}*/
    //Ready for new package
   xBee.readPacket(tempPk);
