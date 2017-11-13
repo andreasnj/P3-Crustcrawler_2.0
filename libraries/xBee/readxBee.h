@@ -47,11 +47,12 @@ public:
     void begin(long);
     void begin(HardwareSerial&, long);
     void begin(Stream&);
+    void printReturn(char *pk){
 
     Stream *_serial;
 
     void readPacket(int *pk);
-    bool checkPacket(int *pk);
+    bool checkPacket(char *pk);
     void decodePacket(char *pk, int i);
     float averageArr(int *pk);
 
