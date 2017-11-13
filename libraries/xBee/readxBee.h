@@ -47,6 +47,7 @@ public:
     void begin(long);
     void begin(HardwareSerial&, long);
     void begin(Stream&);
+    void printReturn(char *pk){
 
     Stream *_serial;
 
