@@ -44,11 +44,11 @@ SoftwareSerial mySerial(19,18);
 
 char testPk[24] = {0x7e, 0x00, 0x14, 0x83, 0x56, 0x78, 0x43, 0x00, 0x01, 0x3e,
                     0xe0, 0x00, 0x40, 0x02, 0x9b, 0x02, 0x1a, 0x02, 0x05, 0x00,
-                    0x00, 0x00, 0x05, 0x67};  // from datasheet
+                    0x00, 0x00, 0x05, 0x77};  // from datasheet
 
 char hexTable[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
 
-char tempPk[24] = {};                //Initializes array (See if it works only doing it in setup???)
+int tempPk[24] = {};                //Initializes array (See if it works only doing it in setup???)
 
 void setup() {
   Serial.begin(9600);
