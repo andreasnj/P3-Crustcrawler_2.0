@@ -1,6 +1,6 @@
 #include <SoftwareSerial.h>
 
-SoftwareSerial mySerial(3, 2); // RX, TX
+SoftwareSerial mySerial(2, 3); // RX, TX
 
 int temp;
 
@@ -8,7 +8,7 @@ void setup() {
   // put your setup code here, to run once:
   mySerial.begin(115200);
   Serial.begin(115200);
-
+  Serial.println("reset was performed");
 }
 
 void loop() {
