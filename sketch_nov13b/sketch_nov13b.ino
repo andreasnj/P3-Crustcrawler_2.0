@@ -10,14 +10,16 @@ void setup() {
   Serial.begin(115200);
   Serial.flush();
   Serial.println("reset was performed");
+  delay(100);
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
   if (mySerial.available() > 0){
     temp = mySerial.read();
-    Serial.println(temp, HEX);
+    //Serial.println(temp, HEX);
+    //Serial.println(mySerial.read());
 }
-/*else {Serial.println("*");
-      delay(100);}*/
+else {Serial.println("*");
+      delay(100);}
 }

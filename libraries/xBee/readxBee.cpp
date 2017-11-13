@@ -27,7 +27,7 @@ void xBeeClass::begin(Stream &serial){
 void xBeeClass::printReturn(char *pk){
 }
 
-void xBeeClass::readPacket(int *pk){//Populates a char array with a packet from the serial buffer.
+void xBeeClass::readPacket(char *pk){//Populates a char array with a packet from the serial buffer.
   int counter = 0;
   int temp;
     do{
@@ -49,7 +49,7 @@ void xBeeClass::readPacket(int *pk){//Populates a char array with a packet from 
       }while(counter < 24);
 }
 
-bool xBeeClass::checkPacket(int *pk){//Generates checksum and compares with the one in the package
+bool xBeeClass::checkPacket(char *pk){//Generates checksum and compares with the one in the package
   int sum = 0;
 
   for(int i = 3; i < 23; i++){       //Generate sum from index 3-to-22 (until, not incl. the checksum itself)
