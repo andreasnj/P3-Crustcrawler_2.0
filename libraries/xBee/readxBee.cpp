@@ -14,7 +14,6 @@ void xBeeClass::begin(long baud){
 //############################ Public Methods ##################################
 //##############################################################################
 
-
 void xBeeClass::begin(HardwareSerial &HWserial, long baud){
 
     HWserial.begin(baud); // Set up Serial for a specified Serial object
@@ -28,9 +27,9 @@ void xBeeClass::begin(Stream &serial){
 void xBeeClass::printReturn(char *pk){
 }
 
-void xBeeClass::readPacket(char *pk){//Populates a char array with a packet from the serial buffer.
+void xBeeClass::readPacket(int *pk){//Populates a char array with a packet from the serial buffer.
   int counter = 0;
-  char temp;
+  int temp;
     do{
       if(Serial.available()){
         temp = Serial.read();        //Reads the first element in serial buffer
@@ -50,15 +49,13 @@ void xBeeClass::readPacket(char *pk){//Populates a char array with a packet from
       }while(counter < 24);
 }
 
-bool xBeeClass::checkPacket(char *pk){//Generates checksum and compares with the one in the package
-  char sum = 0;
+bool xBeeClass::checkPacket(int *pk){//Generates checksum and compares with the one in the package
+  int sum = 0;
 
   for(int i = 3; i < 23; i++){       //Generate sum from index 3-to-22 (until, not incl. the checksum itself)
     sum += pk[i];
   }
-  if(0x15 + 15 == 0x2a){
-    return true;
-  }
+  
   if((0xff - sum) == pk[23]){        //Check with the checksum of the package
     return true;                     //ok, good package
   }
