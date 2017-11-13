@@ -50,9 +50,8 @@ public:
 
     Stream *_serial;
 
-    void readPacket(char *pk);
-    void printReturn(char *pk);
-    bool checkPacket(char *pk);
+    void readPacket(int *pk);
+    bool checkPacket(int *pk);
     void decodePacket(char *pk, int i);
     float averageArr(int *pk);
 
