@@ -24,9 +24,6 @@ void xBeeClass::begin(Stream &serial){
     _serial = &serial;  // Set a reference to a specified Stream object (Hard or Soft Serial)
 }
 
-void xBeeClass::printReturn(char *pk){
-}
-
 void xBeeClass::readPacket(int *pk){//Populates a char array with a packet from the serial buffer.
   int counter = 0;
   int temp;
