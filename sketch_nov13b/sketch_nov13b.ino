@@ -2,12 +2,13 @@
 
 SoftwareSerial mySerial(2, 3); // RX, TX
 
-int temp;
+int temp = 0;
 
 void setup() {
   // put your setup code here, to run once:
   mySerial.begin(115200);
   Serial.begin(115200);
+  Serial.flush();
   Serial.println("reset was performed");
 }
 
