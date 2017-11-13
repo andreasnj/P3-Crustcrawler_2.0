@@ -11,7 +11,7 @@
 
 SoftwareSerial mySerial(10, 11);    // RX, TX
 
-/*void performMovement(int goal1, int goal2, int goal3, char forGripper){
+void performMovement(int goal1, int goal2, int goal3, char forGripper){
   int pos1 = 0;
   int pos2 = 0;
   int pos3 = 0;
@@ -34,7 +34,7 @@ SoftwareSerial mySerial(10, 11);    // RX, TX
     Dynamixel.setProfileVelocity(0x02, 100);  //Set the Profile Velocity for each servo. (max. is 1023)
     Dynamixel.setProfileVelocity(0x03, 100);  //Set the Profile Velocity for each servo. (max. is 1023)
     delay(1000);
-}*/
+}
 
 void setup(){
   Serial.flush();                                       // Clear the serial buffer of garbage data before running the code.
