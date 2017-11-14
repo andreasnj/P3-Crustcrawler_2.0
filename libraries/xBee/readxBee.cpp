@@ -24,12 +24,12 @@ void xBeeClass::begin(Stream &serial){
     _serial = &serial;  // Set a reference to a specified Stream object (Hard or Soft Serial)
 }
 
-void xBeeClass::readPacket(int *pk){//Populates a char array with a packet from the serial buffer.
+void xBeeClass::readPacket(int *pk){//Populates a char array with a packet from the serial buffer. USE ON SERIAL1
   int counter = 0;
   int temp;
     do{
-      if(Serial.available()){
-        temp = Serial.read();        //Reads the first element in serial buffer
+      if(Serial1.available()){
+        temp = Serial1.read();        //Reads the first element in serial buffer
           if(temp == 0x7e){          //Looking for the start delimiter
             pk[counter] = temp;
             counter++;
@@ -38,8 +38,8 @@ void xBeeClass::readPacket(int *pk){//Populates a char array with a packet from 
       else {break;};
     }while(counter == 0);
     do{
-      if(Serial.available()){        //Reads the rest of the package
-        temp = Serial.read();
+      if(Serial1.available()){        //Reads the rest of the package
+        temp = Serial1.read();
         pk[counter] = temp;
         counter++;
         }
