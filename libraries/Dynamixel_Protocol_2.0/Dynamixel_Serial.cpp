@@ -34,20 +34,17 @@ void DynamixelClass::begin(long baud){
     Serial.begin(baud);   // Set up Serial for all others (Uno, etc)
     _serial = &Serial;
 #endif
-
 }
 
 void DynamixelClass::begin(HardwareSerial &HWserial, long baud){
 
     HWserial.begin(baud); // Set up Serial for a specified Serial object
     _serial = &HWserial;
-
 }
 
 void DynamixelClass::begin(Stream &serial){
 
     _serial = &serial;  // Set a reference to a specified Stream object (Hard or Soft Serial)
-
 }
 
 void DynamixelClass::end(){
@@ -57,7 +54,6 @@ void DynamixelClass::end(){
 #else
     Serial.end();
 #endif
-
 }
 
 //Setters
@@ -65,7 +61,6 @@ void DynamixelClass::setDirectionPin(unsigned char D_Pin){
 
     Direction_Pin = D_Pin;
     pinMode(Direction_Pin,OUTPUT);
-
 }
 
 void DynamixelClass::setHoldingTorque(unsigned char ID, bool Set) {
@@ -152,7 +147,6 @@ void DynamixelClass::setGoalVelocity(unsigned char ID, unsigned int vel){
   };
 
   writeN(ID, 0x68, arr, 4);
-
 }
 
 //Getters
@@ -172,7 +166,6 @@ void DynamixelClass::getParameters(void){
       j += 3;
     }
   }
-
 }
 
 int DynamixelClass::getPosition(unsigned char ID){
@@ -278,7 +271,6 @@ unsigned int DynamixelClass::syncWN(unsigned short addr, unsigned char*arr, int 
     transmitInstructionPacket(n);
 
     return 0;
-
 }
 
 void DynamixelClass::syncRN(unsigned short addr, int n){

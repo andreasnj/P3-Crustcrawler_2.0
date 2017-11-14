@@ -10,12 +10,8 @@ void setup() {
 }
 
 void loop(){
-    if (0 < Serial1.available()){
+    if (0 < Serial1.available()){//Read xBee signal and print
       temp = Serial1.read();
       Serial.println(temp, HEX);
     }
-//    else {
-//Serial.println("*");
-//        delay(500);
-//        }
 }
