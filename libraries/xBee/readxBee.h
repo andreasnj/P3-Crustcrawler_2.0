@@ -47,7 +47,7 @@ public:
     void begin(long);
     void begin(HardwareSerial&, long);
     void begin(Stream&);
-    void printReturn(char *pk){
+    void printReturn(char *pk);
 
     Stream *_serial;
 
@@ -69,7 +69,6 @@ public:
     int accZarr[10] = {};
     int accYarr[10] = {};
     int accXarr[10] = {};
-
 };
 
 extern xBeeClass xBee;

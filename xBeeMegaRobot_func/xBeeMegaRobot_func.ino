@@ -14,8 +14,9 @@ char testPk[24] = {0x7e, 0x00, 0x14, 0x83, 0x56, 0x78, 0x43, 0x00, 0x01, 0x3e,
                     0xe0, 0x00, 0x40, 0x02, 0x9b, 0x02, 0x1a, 0x02, 0x05, 0x00,
                     0x00, 0x00, 0x05, 0x47};  // from datasheet
 
-char tempPk[24] = {};
+int tempPk[24] = {};
 
+/*void performMovement(int goal1, int goal2, int goal3, char forGripper){
   Dynamixel.setNGoalPositions(goal1, goal2, goal3, -1, -1);
   while(!((goal2 >= pos2-11) && (goal2 <= pos2+11)) && ((goal3 >= pos3-11) && (goal3 <= pos3+11)) && ((goal1 >= pos1-11) && (goal1 <= pos1+11))){ //error for +- 1 degree due to an inaccuracy of the motors
     pos1 =  Dynamixel.getPosition(0x01);
@@ -32,18 +33,18 @@ char tempPk[24] = {};
     Dynamixel.setProfileVelocity(0x02, 100);
     Dynamixel.setProfileVelocity(0x03, 100);
     delay(1000);
-}
+}*/
 
 void setup() {
-  Serial.flush();
-  Serial1.flush();
-  Serial2.flush();
   Serial2.begin(SERVO_BAUDRATE);
   Serial1.begin(xBee_Baudrate);
   Serial.begin(SERVO_BAUDRATE);
   Dynamixel.begin(Serial2);
   Dynamixel.setDirectionPin(SERVO_ControlPin);
   xBee.begin(Serial1);
+  Serial.flush();
+  Serial1.flush();
+  Serial2.flush();
   while(! (Serial1 || Serial2)){ }
   delay(500);
 
@@ -73,7 +74,7 @@ void loop() {
   //Ready for new package
   xBee.readPacket(tempPk);
 
-  if(xBee.checkPacket(tempPk)){
+  if(xBee.checkPacket(testPk)){ //the variable as of now MUST BE AN ARRAY OF CHAR with a dimension of 24 elements
   //Do stuff
     Serial.println("The test package passed checksum"); //Needs testing
     }
