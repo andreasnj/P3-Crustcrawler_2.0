@@ -22,7 +22,7 @@ char charPk[24] = {};
   while(!((goal2 >= pos2-11) && (goal2 <= pos2+11)) && ((goal3 >= pos3-11) && (goal3 <= pos3+11)) && ((goal1 >= pos1-11) && (goal1 <= pos1+11))){ //error for +- 1 degree due to an inaccuracy of the motors
     pos1 =  Dynamixel.getPosition(0x01);
     pos2 =  Dynamixel.getPosition(0x02);
-    pos3 =  Dynamixel.getPosition(0x03); 
+    pos3 =  Dynamixel.getPosition(0x03);
   }
 
     Dynamixel.setProfileVelocity(0x01, 0);  //Set the Profile Velocity for each servo. (max. is 1023)
@@ -72,16 +72,31 @@ void setup() {
   Dynamixel.setProfileVelocity(0x05, 200);
 }
 
-void loop() {
-  xBee.readPacket(tempPk); //Trying reading and checking with int packages
-  for(int i = 0; i < 24; i++){
-    Serial.println(tempPk[i], HEX);
-  }
-  if(xBee.checkPacket(tempPk)){
-    Serial.println("INT package passed checksum");
-  }else{Serial.println("INT package did not pass");};
+int pass = 0;
+int fail = 0;
+float rate;
 
-  xBee.readPacket(charPk); //Trying reading and checking with char packages
+void loop() {
+  for(int i = 0; i < 50; i++){
+  xBee.readPacket(tempPk); //Trying reading, printing and checking with int packages
+  for(int i = 0; i < 24; i++){
+    Serial.print(tempPk[i], HEX);
+    Serial.print(" ");
+  }
+  
+  if(xBee.checkPacket(tempPk)){
+    Serial.println("| INT -- PASS |");
+    pass++;
+    }else{Serial.println("| INT -- FAIL |");
+      fail++;};
+  }
+  Serial.println(pass);
+  Serial.println(fail);
+  rate = (float)pass/(pass+fail);
+  Serial.println(rate);
+    
+
+/*  xBee.readPacket(charPk); //Trying reading, printing and checking with char packages
   for(int i = 0; i < 24; i++){
     Serial.println(charPk[i], HEX);
   }
@@ -89,14 +104,13 @@ void loop() {
     Serial.println("CHAR package passed checksum");
     }else{Serial.println("CHAR package did not pass");};
 
-  for(int i = 0; i < 24; i++){
+  for(int i = 0; i < 24; i++){ //Printing and checking premade test-package
     Serial.println(testPk[i], HEX);
   }
   if(xBee.checkPacket(testPk)){
     Serial.println("TEST package passed checksum");
-    }else{Serial.println("TEST package did not pass");};
-  
-    
+    }else{Serial.println("TEST package did not pass");};*/
+
 //Trying to make all entries of the package the same size
 /*  xBee.reducePacket(charPk);
   Serial.println("Reduced package:");
@@ -107,5 +121,5 @@ void loop() {
     Serial.println("REDUCED CHAR package passed checksum");
     }else{Serial.println("REDUCED CHAR package did not pass");};*/
     
-  delay(20000);
+  delay(5000);
 }

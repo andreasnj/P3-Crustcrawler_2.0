@@ -89,14 +89,16 @@ bool xBeeClass::checkPacket(char *pk){ //Generates checksum and compares with th
   }
 }
 
-bool xBeeClass::checkPacket(int *pk){ //Generates checksum and compares with the one in the package. INT VERSION
+bool xBeeClass::checkPacket(int *pk){//Generates checksum and compares with the one in the package. INT VERSION
   int sum = 0;
 
   for(int i = 3; i < 23; i++){       //Generate sum from index 3-to-22 (until, not incl. the checksum itself)
     sum += pk[i];
   }
 
-  if((0xff - sum) == pk[23]){        //Check with the checksum of the package
+  sum = sum % 256;
+
+  if((255 - sum) == pk[23]){         //Check with the checksum of the package
     return true;                     //ok, good package
   }
   else{
