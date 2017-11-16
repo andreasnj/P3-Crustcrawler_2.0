@@ -11,6 +11,12 @@
 #define OPEN 'o'
 #define CLOSE 'c'
 
+//                PIN Setup:  Green wire to PIN 10,                                                                           //
+//                            Yellow wire to PIN 11,                                                                          //
+//                            Black wire to ground,                                                                           //
+//                            Red wire to 5v,                                                                                 //
+//                            Blue wire to PIN2                                                                               //
+
 SoftwareSerial mySerial(10, 11);    // RX, TX
 
 void setup() {
@@ -35,11 +41,11 @@ void setup() {
   Dynamixel.setProfileAcceleration(0x05, 300);
 
   //Set profile velocity
-  Dynamixel.setProfileVelocity(0x01, 100);              //Set profile vel for each servo 
+  Dynamixel.setProfileVelocity(0x01, 100);              //Set profile vel for each servo
   Dynamixel.setProfileVelocity(0x02, 100);
   Dynamixel.setProfileVelocity(0x03, 100);
   Dynamixel.setProfileVelocity(0x04, 200);
-  Dynamixel.setProfileVelocity(0x05, 200);  
+  Dynamixel.setProfileVelocity(0x05, 200);
  }
 
 void loop() {
@@ -57,7 +63,7 @@ void loop() {
   delay(2000);
 
 
-  Dynamixel.performMovement(1600, 2800, 3200, OPEN);      //Move to sponge. 
+  Dynamixel.performMovement(1600, 2800, 3200, OPEN);      //Move to sponge.
   Dynamixel.gripper(CLOSE);                               //Grab
   Dynamixel.performMovement(2148, 1850, 3250, CLOSE);     //Detour
   Dynamixel.performMovement(2650, 2800, 3200, CLOSE);     //Move to destination
