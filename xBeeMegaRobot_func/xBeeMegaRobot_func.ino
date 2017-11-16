@@ -15,6 +15,7 @@ char testPk[24] = {0x7e, 0x00, 0x14, 0x83, 0x56, 0x78, 0x43, 0x00, 0x01, 0x3e,
                     0x00, 0x00, 0x05, 0x47};  // from datasheet
 
 int tempPk[24] = {};
+char charPk[24] = {};
 
 /*void performMovement(int goal1, int goal2, int goal3, char forGripper){
   Dynamixel.setNGoalPositions(goal1, goal2, goal3, -1, -1);
@@ -45,7 +46,8 @@ void setup() {
   Serial.flush();
   Serial1.flush();
   Serial2.flush();
-  while(! (Serial1 || Serial2)){ }
+  while(! Serial1){ }
+  Serial.println("reset");
   delay(500);
 
    // Turn on hold on the servos:
@@ -71,14 +73,30 @@ void setup() {
 }
 
 void loop() {
-  //Ready for new package
-  xBee.readPacket(tempPk);
+  /*xBee.readPacket(tempPk); //Trying reading and checking with int packages
+  for(int i = 0; i < 24; i++){
+    Serial.println(tempPk[i], HEX);
+  }
+  if(xBee.checkPacket(tempPk)){
+    Serial.println("INT package passed checksum");
+  }else{Serial.println("INT package did not pass");};*/
 
-  if(xBee.checkPacket(testPk)){ //the variable as of now MUST BE AN ARRAY OF CHAR with a dimension of 24 elements
-  //Do stuff
-    Serial.println("The test package passed checksum"); //Needs testing
-    }
-    else{Serial.println("Does not work");};
+  xBee.readPacket(charPk); //Trying reading and checking with char packages
+  for(int i = 0; i < 24; i++){
+    Serial.println(charPk[i], HEX);
+  }
+  if(xBee.checkPacket(charPk)){
+    Serial.println("CHAR package passed checksum");
+    }else{Serial.println("CHAR package did not pass");};
 
-    delay (2000);
+  xBee.reducePacket(charPk);
+  Serial.println("Reduced package:");
+  for(int i = 0; i < 24; i++){
+    Serial.println(charPk[i], HEX);
+  }
+  if(xBee.checkPacket(charPk)){
+    Serial.println("REDUCED CHAR package passed checksum");
+    }else{Serial.println("REDUCED CHAR package did not pass");};
+    
+  delay(50000000);
 }

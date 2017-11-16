@@ -52,7 +52,10 @@ public:
     Stream *_serial;
 
     void readPacket(int *pk);
+    void readPacket(char *pk);
     bool checkPacket(char *pk);
+    bool checkPacket(int *pk);
+    void reducePacket(char *pk);
     void decodePacket(char *pk, int i);
     float averageArr(int *pk);
 
