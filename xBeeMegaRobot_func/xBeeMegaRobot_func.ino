@@ -78,19 +78,19 @@ float rate;
 
 void loop() {
   for(int i = 0; i < 50; i++){
-  xBee.readPacket(tempPk); //Trying reading, printing and checking with int packages
+  xBee.readPacket(tempPk);
   for(int i = 0; i < 24; i++){
-    Serial.print(tempPk[i], HEX);
+    Serial.print(tempPk[i], HEX);  // Printing the read package
     Serial.print(" ");
   }
   
-  if(xBee.checkPacket(tempPk)){
+  if(xBee.checkPacket(tempPk)){ //Check and print if the package passed
     Serial.println("| INT -- PASS |");
     pass++;
     }else{Serial.println("| INT -- FAIL |");
       fail++;};
   }
-  Serial.println(pass);
+  Serial.println(pass); //Print the pass and fail coutns and rate
   Serial.println(fail);
   rate = (float)pass/(pass+fail);
   Serial.println(rate);
