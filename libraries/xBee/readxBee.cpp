@@ -70,7 +70,7 @@ void xBeeClass::readPacket(char *pk){//Populates a CHAR array with a packet from
 
 void xBeeClass::reducePacket(char *pk){
   for(int i = 0; i < 24; i++){
-    pk[i] = pk[i]%255;
+    pk[i] = pk[i]%0x100;
   }
 }
 

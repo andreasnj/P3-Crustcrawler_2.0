@@ -98,5 +98,5 @@ void loop() {
     Serial.println("REDUCED CHAR package passed checksum");
     }else{Serial.println("REDUCED CHAR package did not pass");};
     
-  delay(50000000);
+  delay(10000);
 }
