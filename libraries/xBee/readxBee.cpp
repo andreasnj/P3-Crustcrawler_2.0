@@ -46,7 +46,7 @@ void xBeeClass::readPacket(int *pk){//Populates an INT array with a packet from 
       }while(counter < 24);
 }
 
-void xBeeClass::readPacket(char *pk){//Populates a CHAR array with a packet from the serial buffer. USE ON SERIAL1
+void xBeeClass::readPacket(char *pk){ //Populates a CHAR array with a packet from the serial buffer. USE ON SERIAL1
   int counter = 0;
   char temp;
     do{
@@ -74,13 +74,13 @@ void xBeeClass::reducePacket(char *pk){
   }
 }
 
-bool xBeeClass::checkPacket(char *pk){//Generates checksum and compares with the one in the package
+bool xBeeClass::checkPacket(char *pk){ //Generates checksum and compares with the one in the package
   char sum = 0;
 
   for(int i = 3; i < 23; i++){       //Generate sum from index 3-to-22 (until, not incl. the checksum itself)
     sum += pk[i];
   }
-  
+
   if((0xff - sum) == pk[23]){        //Check with the checksum of the package
     return true;                     //ok, good package
   }
@@ -89,13 +89,13 @@ bool xBeeClass::checkPacket(char *pk){//Generates checksum and compares with the
   }
 }
 
-bool xBeeClass::checkPacket(int *pk){//Generates checksum and compares with the one in the package. INT VERSION
+bool xBeeClass::checkPacket(int *pk){ //Generates checksum and compares with the one in the package. INT VERSION
   int sum = 0;
 
   for(int i = 3; i < 23; i++){       //Generate sum from index 3-to-22 (until, not incl. the checksum itself)
     sum += pk[i];
   }
-  
+
   if((0xff - sum) == pk[23]){        //Check with the checksum of the package
     return true;                     //ok, good package
   }
@@ -104,7 +104,7 @@ bool xBeeClass::checkPacket(int *pk){//Generates checksum and compares with the 
   }
 }
 
-void xBeeClass::decodePacket(char *pk, int i){//Convert chars from packet to int, store in arrays, call average func
+void xBeeClass::decodePacket(char *pk, int i){ //Convert chars from packet to int, store in arrays, call average func
   accZarr[i] = (int)((pk[13] << 8) | pk[14]);
   accYarr[i] = (int)((pk[15] << 8) | pk[16]);
   accXarr[i] = (int)((pk[17] << 8) | pk[18]);
