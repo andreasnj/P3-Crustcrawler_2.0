@@ -89,9 +89,6 @@ void loop() {
     Serial.println("CHAR package passed checksum");
     }else{Serial.println("CHAR package did not pass");};
 
-  for(int i = 0; i < 24; i++){
-    Serial.println(testPk[i], HEX);
-  }
   if(xBee.checkPacket(testPk)){
     Serial.println("TEST package passed checksum");
     }else{Serial.println("TEST package did not pass");};
@@ -107,5 +104,5 @@ void loop() {
     Serial.println("REDUCED CHAR package passed checksum");
     }else{Serial.println("REDUCED CHAR package did not pass");};*/
     
-  delay(20000);
+  delay(10000);
 }

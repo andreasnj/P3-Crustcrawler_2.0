@@ -17,7 +17,6 @@
 
 
 #include "Dynamixel_Serial.h"
-#include <SoftwareSerial.h>
 
 #define SERVO_ControlPin 0x02       // Control pin of buffer chip, NOTE: this does not matter becasue we are not using a half to full contorl buffer.
 #define SERVO_SET_Baudrate 57600    // Baud rate speed which the Dynamixel will be set too (57600)
@@ -27,17 +26,18 @@
 #define OPEN 'o'
 #define CLOSE 'c'
 
-SoftwareSerial mySerial(10, 11);    // RX, TX
+//SoftwareSerial mySerial(10, 11);    // RX, TX
 
 void setup() {
   Serial.flush();                                       // Clear the serial buffer of garbage data before running the code.
-  mySerial.begin(SERVO_SET_Baudrate);                   // We now need to set Ardiuno to the new Baudrate speed 115200
+  Serial1.flush();
+  Serial1.begin(SERVO_SET_Baudrate);                    // We now need to set Ardiuno to the new Baudrate speed 115200
   Serial.begin(SERVO_SET_Baudrate);                                  // Start serial communication on baudrate 57600
-  Dynamixel.begin(mySerial);                            // Calling mySerial function which sets 10 pin as the 2nd RX serial pin, and sets pin 11 as the 2nd TX serial pin
+  Dynamixel.begin(Serial1);                             // Calling mySerial function which sets 10 pin as the 2nd RX serial pin, and sets pin 11 as the 2nd TX serial pin
   Dynamixel.setDirectionPin(SERVO_ControlPin);          // Optional. Set direction control pin which controls if the program writes or reads
 
   //Turn on hold for the servos, so they stay in place
-  Dynamixel.setHoldingTorque(0x01, true);               //Set on hold turque for each servo
+  Dynamixel.setHoldingTorque(0x01, true);               //Set on hold torque for each servo
   Dynamixel.setHoldingTorque(0x02, true);
   Dynamixel.setHoldingTorque(0x03, true);
   Dynamixel.setHoldingTorque(0x04, true);
@@ -55,7 +55,8 @@ void setup() {
   Dynamixel.setProfileVelocity(0x02, 100);
   Dynamixel.setProfileVelocity(0x03, 100);
   Dynamixel.setProfileVelocity(0x04, 200);
-  Dynamixel.setProfileVelocity(0x05, 200);  
+  Dynamixel.setProfileVelocity(0x05, 200);
+  Serial.println("reset");
  }
 
 void loop() {
@@ -80,3 +81,5 @@ void loop() {
   delay(500);
   Dynamixel.gripper(OPEN);                                //Release
   delay(500);
+
+}
