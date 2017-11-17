@@ -93,7 +93,7 @@ void loop() {
   Serial.println(pass); //Print the pass and fail coutns and rate
   Serial.println(fail);
   rate = (float)pass/(pass+fail);
-  Serial.println(rate);
+  Serial.println(rate*100);
     
 
 /*  xBee.readPacket(charPk); //Trying reading, printing and checking with char packages
