@@ -1,4 +1,4 @@
--//This program should be run to set the servos to some standard initial positions. Works with the Uno
+/*This program should be run to set the servos to some standard initial positions. Works with the Uno*/
 
 #include "Dynamixel_Serial.h"
 #include <SoftwareSerial.h>
@@ -70,3 +70,4 @@ void loop() {
   delay(500);
   Dynamixel.gripper(OPEN);                                //Release
   delay(500);
+}

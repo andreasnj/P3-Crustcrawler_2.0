@@ -3,7 +3,7 @@
 
 #define xBee_Baudrate 115200
 #define SERVO_ControlPin 0x02       // Control pin of buffer chip, NOTE: this does not matter becasue we are not using a half to full contorl buffer.
-#define SERVO_BAUDRATE 57600    // Baud rate speed which the Dynamixel will be set too (57600)
+#define SERVO_BAUDRATE 115200    // Baud rate speed which the Dynamixel will be set too (57600)
 #define LED13 0x0D
 //#define CW_LIMIT_ANGLE 0x001        // lowest clockwise angle is 1, as when set to 0 it set servo to wheel mode
 //#define CCW_LIMIT_ANGLE 0xFFF       // Highest anit-clockwise angle is 0XFFF, as when set to 0 it set servo to wheel mode
@@ -85,7 +85,7 @@ void loop() {
   for(int i = 0; i < 50; i++){
   xBee.readPacket(tempPk);
   for(int i = 0; i < 24; i++){
-    Serial.print(tempPk[i], HEX);  // Printing the read package
+    Serial.print(tempPk[i], DEC);  // Printing the read package
     Serial.print(" ");
   }
   
@@ -95,7 +95,7 @@ void loop() {
     }else{Serial.println("| INT -- FAIL |");
       fail++;};
   }
-  Serial.println(pass); //Print the pass and fail coutns and rate
+/*  Serial.println(pass); //Print the pass and fail coutns and rate
   Serial.println(fail);
   rate = (float)pass/(pass+fail);
   Serial.println(rate*100);
@@ -116,15 +116,13 @@ void loop() {
     Serial.println("TEST package passed checksum");
     }else{Serial.println("TEST package did not pass");};*/
 
-//Trying to make all entries of the package the same size
-/*  xBee.reducePacket(charPk);
+/* //Trying to make all entries of the package the same size
+  xBee.reducePacket(charPk);
   Serial.println("Reduced package:");
   for(int i = 0; i < 24; i++){
     Serial.println(charPk[i], HEX);
   }
   if(xBee.checkPacket(charPk)){
     Serial.println("REDUCED CHAR package passed checksum");
-    }else{Serial.println("REDUCED CHAR package did not pass");};*/
-    
-  delay(5000);
+    }else{Serial.println("REDUCED CHAR package did not pass");}; */
 }
