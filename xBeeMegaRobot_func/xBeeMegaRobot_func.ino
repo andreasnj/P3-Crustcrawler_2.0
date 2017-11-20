@@ -10,12 +10,15 @@
 #define OPEN 'o'
 #define CLOSE 'c'
 
+/*
 char testPk[24] = {0x7e, 0x00, 0x14, 0x83, 0x56, 0x78, 0x43, 0x00, 0x01, 0x3e,
                     0xe0, 0x00, 0x40, 0x02, 0x9b, 0x02, 0x1a, 0x02, 0x05, 0x00,
                     0x00, 0x00, 0x05, 0x47};  // from datasheet
 
 int tempPk[24] = {};
 char charPk[24] = {};
+*/
+
 
 /*void performMovement(int goal1, int goal2, int goal3, char forGripper){
   Dynamixel.setNGoalPositions(goal1, goal2, goal3, -1, -1);
@@ -35,6 +38,8 @@ char charPk[24] = {};
     Dynamixel.setProfileVelocity(0x03, 100);
     delay(1000);
 }*/
+
+int tempPk[24] = {};
 
 void setup() {
   Serial2.begin(SERVO_BAUDRATE);
