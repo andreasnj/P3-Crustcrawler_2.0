@@ -112,14 +112,12 @@ void loop() {
     }else{Serial.println("TEST package did not pass");};*/
 
 //Trying to make all entries of the package the same size
-/*  xBee.reducePacket(charPk);
+  xBee.reducePacket(charPk);
   Serial.println("Reduced package:");
   for(int i = 0; i < 24; i++){
     Serial.println(charPk[i], HEX);
   }
   if(xBee.checkPacket(charPk)){
     Serial.println("REDUCED CHAR package passed checksum");
-    }else{Serial.println("REDUCED CHAR package did not pass");};*/
-    
-  delay(5000);
+    }else{Serial.println("REDUCED CHAR package did not pass");};
 }
