@@ -101,7 +101,7 @@ void loop() {
 
   if(xBee.checkPacket(tempPk)){ //Check and print if the package passed
     Serial.println("| INT -- PASS |");
-    pass++;
+      pass++;
     }else{Serial.println("| INT -- FAIL |");
       fail++;};
   }
