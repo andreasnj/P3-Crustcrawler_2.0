@@ -106,6 +106,14 @@ bool xBeeClass::checkPacket(int *pk){//Generates checksum and compares with the 
   }
 }
 
+void xBeeClass::decodePacket(int *pk){ //Convert chars from packet to int, store in arrays, call average func
+  acccZ = (int)((pk[13] << 8) | pk[14]);
+  acccY = (int)((pk[15] << 8) | pk[16]);
+  acccX = (int)((pk[17] << 8) | pk[18]);
+  emg1 = (int)((pk[19] << 8) | pk[20]);
+  emg2 = (int)((pk[21] << 8) | pk[22]);
+}
+
 void xBeeClass::decodePacket(char *pk, int i){ //Convert chars from packet to int, store in arrays, call average func
   accZarr[i] = (int)((pk[13] << 8) | pk[14]);
   accYarr[i] = (int)((pk[15] << 8) | pk[16]);
