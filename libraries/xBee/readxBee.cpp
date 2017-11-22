@@ -46,6 +46,7 @@ void xBeeClass::readPacket(int *pk){//Populates an INT array with a packet from 
       }while(counter < 24);
 }
 
+/*
 void xBeeClass::readPacket(char *pk){ //Populates a CHAR array with a packet from the serial buffer. USE ON SERIAL1
   int counter = 0;
   char temp;
@@ -88,6 +89,7 @@ bool xBeeClass::checkPacket(char *pk){ //Generates checksum and compares with th
     return false;                    //error
   }
 }
+*/
 
 bool xBeeClass::checkPacket(int *pk){//Generates checksum and compares with the one in the package. INT VERSION
   int sum = 0;
@@ -114,6 +116,7 @@ void xBeeClass::decodePacket(int *pk){ //Convert chars from packet to int, store
   emg2 = (int)((pk[21] << 8) | pk[22]);
 }
 
+/*
 void xBeeClass::decodePacket(char *pk, int i){ //Convert chars from packet to int, store in arrays, call average func
   accZarr[i] = (int)((pk[13] << 8) | pk[14]);
   accYarr[i] = (int)((pk[15] << 8) | pk[16]);
@@ -127,6 +130,7 @@ void xBeeClass::decodePacket(char *pk, int i){ //Convert chars from packet to in
   emg1 = xBee.averageArr(emg1arr);
   emg2 = xBee.averageArr(emg2arr);
 }
+*/
 
 float xBeeClass::averageArr(int *arr){
   int s = 0;
