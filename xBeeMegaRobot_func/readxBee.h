@@ -57,6 +57,7 @@ public:
     bool checkPacket(int *pk);
     void reducePacket(char *pk);
     void decodePacket(char *pk, int i);
+    void decodePacket(int *pk);
     float averageArr(int *pk);
 
     //Global variables
