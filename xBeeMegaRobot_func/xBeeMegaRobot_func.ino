@@ -84,19 +84,20 @@ void setup() {
 int pass = 0;
 int fail = 0;
 float rate;
-int accZ;
-int accY;
-int accX;
+
 
 void loop() {
   for(int i = 0; i < 50; i++){
   xBee.readPacket(tempPk);
   xBee.decodePacket(tempPk);
   //for(int i = 13; i < 23; i++){
-  Serial.print("Z = ");
+  Serial.print(" Z = ");
   Serial.print(accZ);
    // Serial.print(tempPk[i], DEC);  // Printing the read package
-  Serial.print(" ");
+  Serial.print(" Y = ");
+  Serial.print(accY);
+  Serial.print(" X = ");
+  Serial.print(accX);
   //}
 
   if(xBee.checkPacket(tempPk)){ //Check and print if the package passed

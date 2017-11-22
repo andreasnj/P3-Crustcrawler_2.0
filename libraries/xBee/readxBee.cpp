@@ -106,15 +106,33 @@ bool xBeeClass::checkPacket(int *pk){//Generates checksum and compares with the 
   }
 }
 
-void xBeeClass::decodePacket(int *pk){ //Convert chars from packet to int, store in arrays, call average func
+/*void xBeeClass::decodePacket(int *pk){ //Convert chars from packet to int, store in arrays, call average func
   accZ = (int)((pk[13] << 8) | pk[14]);
   accY = (int)((pk[15] << 8) | pk[16]);
   accX = (int)((pk[17] << 8) | pk[18]);
   emg1 = (int)((pk[19] << 8) | pk[20]);
   emg2 = (int)((pk[21] << 8) | pk[22]);
-}
+}*/
+reader();
 
-void xBeeClass::decodePacket(char *pk, int i){ //Convert chars from packet to int, store in arrays, call average func
+int reader(){
+  if(Serial1.available() >= 24){
+    if(Serial1.read() == 0x7E){
+    for (int i = 0; i < 22 ; i++){
+      byte rec = Serial1.read();
+
+      store[i] = rec;
+
+    for(int a = 0; a < 22; a++) {
+
+      accZ = store[17] + (store[16]*256);
+      accY = store[13] + (store[12]*256);
+      accX = store[15] + (store[14]*256);
+      emg1 = store[11] + (store[10]*256);
+      emg2 = store[19] + (store[18]*256);
+    }
+
+/*void xBeeClass::decodePacket(char *pk, int i){ //Convert chars from packet to int, store in arrays, call average func
   accZarr[i] = (int)((pk[13] << 8) | pk[14]);
   accYarr[i] = (int)((pk[15] << 8) | pk[16]);
   accXarr[i] = (int)((pk[17] << 8) | pk[18]);
@@ -126,16 +144,16 @@ void xBeeClass::decodePacket(char *pk, int i){ //Convert chars from packet to in
   accX = xBee.averageArr(accXarr);
   emg1 = xBee.averageArr(emg1arr);
   emg2 = xBee.averageArr(emg2arr);
-}
+}*/
 
-float xBeeClass::averageArr(int *arr){
+/*float xBeeClass::averageArr(int *arr){
   int s = 0;
   for(int i = 0; i < 10; i++){
     s += arr[i];
   }
   float avg = s/10;
   return(avg);
-}
+}*/
 
 //##############################################################################
 //########################## Private Methods ###################################
