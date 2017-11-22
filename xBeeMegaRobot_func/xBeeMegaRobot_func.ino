@@ -41,9 +41,9 @@ char charPk[24] = {};
 
 int tempPk[24] = {};
 
-int acccX;
-int acccY;
-int acccZ;
+int accX;
+int accY;
+int accZ;
 
 void setup() {
   Serial2.begin(SERVO_BAUDRATE);
@@ -87,18 +87,18 @@ float rate;
 int accZ;
 int accY;
 int accX;
-    
+
 void loop() {
   for(int i = 0; i < 50; i++){
   xBee.readPacket(tempPk);
   xBee.decodePacket(tempPk);
   //for(int i = 13; i < 23; i++){
   Serial.print("Z = ");
-  Serial.print(acccZ);
+  Serial.print(accZ);
    // Serial.print(tempPk[i], DEC);  // Printing the read package
   Serial.print(" ");
   //}
-  
+
   if(xBee.checkPacket(tempPk)){ //Check and print if the package passed
     Serial.println("| INT -- PASS |");
     pass++;
@@ -109,7 +109,7 @@ void loop() {
   Serial.println(fail);
   rate = (float)pass/(pass+fail);
   Serial.println(rate*100);
-    
+
 
 /*  xBee.readPacket(charPk); //Trying reading, printing and checking with char packages
   for(int i = 0; i < 24; i++){
