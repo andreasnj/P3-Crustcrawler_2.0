@@ -46,6 +46,7 @@ void xBeeClass::readPacket(int *pk){//Populates an INT array with a packet from 
       }while(counter < 24);
 }
 
+/*
 void xBeeClass::readPacket(char *pk){ //Populates a CHAR array with a packet from the serial buffer. USE ON SERIAL1
   int counter = 0;
   char temp;
@@ -88,6 +89,7 @@ bool xBeeClass::checkPacket(char *pk){ //Generates checksum and compares with th
     return false;                    //error
   }
 }
+*/
 
 bool xBeeClass::checkPacket(int *pk){//Generates checksum and compares with the one in the package. INT VERSION
   int sum = 0;
@@ -125,6 +127,7 @@ int reader(){
 
     for(int a = 0; a < 22; a++) {
 
+<<<<<<< HEAD
       accZ = store[17] + (store[16]*256);
       accY = store[13] + (store[12]*256);
       accX = store[15] + (store[14]*256);
@@ -133,6 +136,10 @@ int reader(){
     }
 
 /*void xBeeClass::decodePacket(char *pk, int i){ //Convert chars from packet to int, store in arrays, call average func
+=======
+/*
+void xBeeClass::decodePacket(char *pk, int i){ //Convert chars from packet to int, store in arrays, call average func
+>>>>>>> 39361b59b176762ed67b809f341999b4aee212a1
   accZarr[i] = (int)((pk[13] << 8) | pk[14]);
   accYarr[i] = (int)((pk[15] << 8) | pk[16]);
   accXarr[i] = (int)((pk[17] << 8) | pk[18]);
@@ -144,7 +151,12 @@ int reader(){
   accX = xBee.averageArr(accXarr);
   emg1 = xBee.averageArr(emg1arr);
   emg2 = xBee.averageArr(emg2arr);
+<<<<<<< HEAD
 }*/
+=======
+}
+*/
+>>>>>>> 39361b59b176762ed67b809f341999b4aee212a1
 
 /*float xBeeClass::averageArr(int *arr){
   int s = 0;

@@ -52,16 +52,16 @@ public:
     Stream *_serial;
 
     void readPacket(int *pk);
-    void readPacket(char *pk);
-    bool checkPacket(char *pk);
+//    void readPacket(char *pk);
+//    bool checkPacket(char *pk);
     bool checkPacket(int *pk);
-    void reducePacket(char *pk);
+//    void reducePacket(char *pk);
     void decodePacket(int *pk);
-    void decodePacket(char *pk, int i);
+//    void decodePacket(char *pk, int i);
     float averageArr(int *pk);
 
     //Global variables
-    unsigned char pk[24]; //Packet array
+    unsigned int pk[24]; //Packet array
     int emg1;
     int emg2;
     int accZ;
