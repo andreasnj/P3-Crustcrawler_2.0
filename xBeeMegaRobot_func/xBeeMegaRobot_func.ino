@@ -5,12 +5,12 @@
 #define SERVO_ControlPin 0x02       // Control pin of buffer chip, NOTE: this does not matter becasue we are not using a half to full contorl buffer.
 #define SERVO_BAUDRATE 115200    // Baud rate speed which the Dynamixel will be set too (57600)
 #define LED13 0x0D
-//#define CW_LIMIT_ANGLE 0x001        // lowest clockwise angle is 1, as when set to 0 it set servo to wheel mode
-//#define CCW_LIMIT_ANGLE 0xFFF       // Highest anit-clockwise angle is 0XFFF, as when set to 0 it set servo to wheel mode
+#define CW_LIMIT_ANGLE 0x001        // lowest clockwise angle is 1, as when set to 0 it set servo to wheel mode
+#define CCW_LIMIT_ANGLE 0xFFF       // Highest anit-clockwise angle is 0XFFF, as when set to 0 it set servo to wheel mode
 #define OPEN 'o'
 #define CLOSE 'c'
 
-/*void performMovement(int goal1, int goal2, int goal3, char forGripper){
+void performMovement(int goal1, int goal2, int goal3, char forGripper){
   Dynamixel.setNGoalPositions(goal1, goal2, goal3, -1, -1);
   while(!((goal2 >= pos2-11) && (goal2 <= pos2+11)) && ((goal3 >= pos3-11) && (goal3 <= pos3+11)) && ((goal1 >= pos1-11) && (goal1 <= pos1+11))){ //error for +- 1 degree due to an inaccuracy of the motors
     pos1 =  Dynamixel.getPosition(0x01);
@@ -27,7 +27,7 @@
     Dynamixel.setProfileVelocity(0x02, 100);
     Dynamixel.setProfileVelocity(0x03, 100);
     delay(1000);
-}*/
+}
 
 void setup(){
   Serial2.begin(SERVO_BAUDRATE);
@@ -62,7 +62,7 @@ void loop() {
   Serial.print(" y = "); Serial.print(y);
   Serial.print(" z = "); Serial.print(z);
   Serial.print(" emg1 = "); Serial.print(emg1);
-  Serial.print(" emg2 = "); Serial.print(emg2);  
+  Serial.print(" emg2 = "); Serial.print(emg2);
   /*
   for(int i = 13; i <= 22; i++){
     Serial.print(tempPk[i], DEC);  // Printing the read package
@@ -71,9 +71,7 @@ void loop() {
 
   if(xBee.checkPacket(tempPk)){ //Check and print if the package passed
     Serial.println("| INT -- PASS |");
-    //pass++;
     }else{Serial.println("| INT -- FAIL |");
-    //fail++;};
   }
 /*  Serial.println(pass); //Print the pass and fail coutns and rate
   Serial.println(fail);

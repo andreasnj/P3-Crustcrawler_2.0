@@ -1,20 +1,4 @@
-//This program should be run to set the servos to some standard initial positions. Works with the Mega
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// How to run it: upload to arduino with the dynamixel_serial library installed in your arduino libraries folder.             //
-//                After upload, disconnect usb from arduino and add power to CrustCrawler and the arduino board.              //
-//                The program should start by it self. :)
-//                                                                                                                            //
-//                PIN Setup:  Green wire to PIN 10,                                                                           //
-//                            Yellow wire to PIN 11,                                                                          //
-//                            Black wire to ground,                                                                           //
-//                            Red wire to 5v,                                                                                 //
-//                            Blue wire to PIN2                                                                               //
-//                                                                                                                            //
-//                This code was developed in collaboration with several groups, to enable all the groups a good               //
-//                base code to start programming the CrustCrawler from. ;)                                                    //
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
+/*This program should be run to set the servos to some standard initial positions. Works with the Uno*/
 
 #include "Dynamixel_Serial.h"
 #include <SoftwareSerial.h>
@@ -27,18 +11,50 @@
 #define OPEN 'o'
 #define CLOSE 'c'
 
-//SoftwareSerial mySerial(10, 11);    // RX, TX
+//                PIN Setup:  Green wire to PIN 10,                                                                           //
+//                            Yellow wire to PIN 11,                                                                          //
+//                            Black wire to ground,                                                                           //
+//                            Red wire to 5v,                                                                                 //
+//                            Blue wire to PIN2                                                                               //
+
+SoftwareSerial mySerial(10, 11);    // RX, TX
+
+int x, y, z, emg1, emg2;
+int infoPk[24];
+void actualName(){
+  if(Serial1.available() >= 24){
+    if (Serial1.read() == 0x7E){
+          for (int i = 0; i < 24 ; i++){
+            byte jelly = Serial1.read();
+            infoPk[i] = jelly;
+          }
+  for(int a = 13; a < 24; a++) {
+    x = infoPk[15] + (infoPk[14] << 8);
+    y = infoPk[13] + (infoPk[12] << 8);
+    z = infoPk[17] + (infoPk[16] << 8);
+    emg1 = infoPk[11] + (infoPk[10] << 8);
+    emg2 = infoPk[19] + (infoPk[18] << 8);
+   }
+    Serial.print(" X = ") && Serial.print(x);
+    Serial.print(" Y = ") && Serial.print(y);
+    Serial.print(" Z = ") && Serial.print(z);
+    Serial.print(" EMG Ch.1 = ") && Serial.print(emg1);
+    Serial.print(" EMG Ch.2 = ") && Serial.print(emg2);
+    Serial.println();
+  }
+ }
+}
+
 
 void setup() {
   Serial.flush();                                       // Clear the serial buffer of garbage data before running the code.
-  Serial1.flush();
-  Serial1.begin(SERVO_SET_Baudrate);                    // We now need to set Ardiuno to the new Baudrate speed 115200
+  mySerial.begin(SERVO_SET_Baudrate);                   // We now need to set Ardiuno to the new Baudrate speed 115200
   Serial.begin(SERVO_SET_Baudrate);                                  // Start serial communication on baudrate 57600
-  Dynamixel.begin(Serial1);                             // Calling mySerial function which sets 10 pin as the 2nd RX serial pin, and sets pin 11 as the 2nd TX serial pin
+  Dynamixel.begin(mySerial);                            // Calling mySerial function which sets 10 pin as the 2nd RX serial pin, and sets pin 11 as the 2nd TX serial pin
   Dynamixel.setDirectionPin(SERVO_ControlPin);          // Optional. Set direction control pin which controls if the program writes or reads
 
   //Turn on hold for the servos, so they stay in place
-  Dynamixel.setHoldingTorque(0x01, true);               //Set on hold torque for each servo
+  Dynamixel.setHoldingTorque(0x01, true);               //Set on hold turque for each servo
   Dynamixel.setHoldingTorque(0x02, true);
   Dynamixel.setHoldingTorque(0x03, true);
   Dynamixel.setHoldingTorque(0x04, true);
@@ -57,11 +73,10 @@ void setup() {
   Dynamixel.setProfileVelocity(0x03, 100);
   Dynamixel.setProfileVelocity(0x04, 200);
   Dynamixel.setProfileVelocity(0x05, 200);
-  //Serial.println("reset");
  }
 
 void loop() {
-
+  actualName();
 /*// If the robot is mounted with the 2nd joint tuned 180deg
   Dynamixel.performMovement(2148, 2048, 2048, CLOSE);   //"Initial" position
   delay(3000);
@@ -82,5 +97,4 @@ void loop() {
   delay(500);
   Dynamixel.gripper(OPEN);                                //Release
   delay(500);
-
 }
