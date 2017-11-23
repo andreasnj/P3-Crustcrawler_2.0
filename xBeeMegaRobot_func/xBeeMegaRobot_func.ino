@@ -84,7 +84,7 @@ float rate;
 void loop() {
   for(int i = 0; i < 50; i++){
   xBee.readPacket(tempPk);
-  for(int i = 14; i <= 22; i=i+2){
+  for(int i = 13; i <= 22; i++){
     Serial.print(tempPk[i], DEC);  // Printing the read package
     Serial.print(" ");
   }
