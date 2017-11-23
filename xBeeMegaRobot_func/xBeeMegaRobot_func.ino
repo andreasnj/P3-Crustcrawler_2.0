@@ -10,12 +10,15 @@
 #define OPEN 'o'
 #define CLOSE 'c'
 
+/*
 char testPk[24] = {0x7e, 0x00, 0x14, 0x83, 0x56, 0x78, 0x43, 0x00, 0x01, 0x3e,
                     0xe0, 0x00, 0x40, 0x02, 0x9b, 0x02, 0x1a, 0x02, 0x05, 0x00,
                     0x00, 0x00, 0x05, 0x47};  // from datasheet
 
 int tempPk[24] = {};
 char charPk[24] = {};
+*/
+
 
 /*void performMovement(int goal1, int goal2, int goal3, char forGripper){
   Dynamixel.setNGoalPositions(goal1, goal2, goal3, -1, -1);
@@ -35,6 +38,8 @@ char charPk[24] = {};
     Dynamixel.setProfileVelocity(0x03, 100);
     delay(1000);
 }*/
+
+int tempPk[24] = {};
 
 void setup() {
   Serial2.begin(SERVO_BAUDRATE);
@@ -75,35 +80,18 @@ void setup() {
 int pass = 0;
 int fail = 0;
 float rate;
-<<<<<<< HEAD
-
-=======
->>>>>>> 39361b59b176762ed67b809f341999b4aee212a1
 
 void loop() {
   for(int i = 0; i < 50; i++){
   xBee.readPacket(tempPk);
-<<<<<<< HEAD
-  xBee.decodePacket(tempPk);
-  //for(int i = 13; i < 23; i++){
-  Serial.print(" Z = ");
-  Serial.print(accZ);
-   // Serial.print(tempPk[i], DEC);  // Printing the read package
-  Serial.print(" Y = ");
-  Serial.print(accY);
-  Serial.print(" X = ");
-  Serial.print(accX);
-  //}
-=======
   for(int i = 0; i < 24; i++){
     Serial.print(tempPk[i], DEC);  // Printing the read package
     Serial.print(" ");
   }
->>>>>>> 39361b59b176762ed67b809f341999b4aee212a1
-
+  
   if(xBee.checkPacket(tempPk)){ //Check and print if the package passed
     Serial.println("| INT -- PASS |");
-      pass++;
+    pass++;
     }else{Serial.println("| INT -- FAIL |");
       fail++;};
   }
@@ -111,6 +99,7 @@ void loop() {
   Serial.println(fail);
   rate = (float)pass/(pass+fail);
   Serial.println(rate*100);
+    
 
 /*  xBee.readPacket(charPk); //Trying reading, printing and checking with char packages
   for(int i = 0; i < 24; i++){
