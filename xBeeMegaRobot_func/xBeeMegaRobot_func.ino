@@ -10,15 +10,6 @@
 #define OPEN 'o'
 #define CLOSE 'c'
 
-/*
-char testPk[24] = {0x7e, 0x00, 0x14, 0x83, 0x56, 0x78, 0x43, 0x00, 0x01, 0x3e,
-                    0xe0, 0x00, 0x40, 0x02, 0x9b, 0x02, 0x1a, 0x02, 0x05, 0x00,
-                    0x00, 0x00, 0x05, 0x47};  // from datasheet
-
-int tempPk[24] = {};
-char charPk[24] = {};
-*/
-
 
 /*void performMovement(int goal1, int goal2, int goal3, char forGripper){
   Dynamixel.setNGoalPositions(goal1, goal2, goal3, -1, -1);
@@ -55,6 +46,7 @@ void setup() {
   Serial.println("reset");
   delay(500);
 
+/*
    // Turn on hold on the servos:
   Dynamixel.setHoldingTorque(0x01, true);
   Dynamixel.setHoldingTorque(0x02, true);
@@ -76,10 +68,14 @@ void setup() {
   Dynamixel.setProfileVelocity(0x04, 200);
   Dynamixel.setProfileVelocity(0x05, 200);
 }
+*/
 
+/*
 int pass = 0;
 int fail = 0;
 float rate;
+*/
+
 
 void loop() {
   for(int i = 0; i < 50; i++){
@@ -98,31 +94,5 @@ void loop() {
 /*  Serial.println(pass); //Print the pass and fail coutns and rate
   Serial.println(fail);
   rate = (float)pass/(pass+fail);
-  Serial.println(rate*100);
-    
-
-/*  xBee.readPacket(charPk); //Trying reading, printing and checking with char packages
-  for(int i = 0; i < 24; i++){
-    Serial.println(charPk[i], HEX);
-  }
-  if(xBee.checkPacket(charPk)){
-    Serial.println("CHAR package passed checksum");
-    }else{Serial.println("CHAR package did not pass");};
-
-  for(int i = 0; i < 24; i++){ //Printing and checking premade test-package
-    Serial.println(testPk[i], HEX);
-  }
-  if(xBee.checkPacket(testPk)){
-    Serial.println("TEST package passed checksum");
-    }else{Serial.println("TEST package did not pass");};*/
-
-/* //Trying to make all entries of the package the same size
-  xBee.reducePacket(charPk);
-  Serial.println("Reduced package:");
-  for(int i = 0; i < 24; i++){
-    Serial.println(charPk[i], HEX);
-  }
-  if(xBee.checkPacket(charPk)){
-    Serial.println("REDUCED CHAR package passed checksum");
-    }else{Serial.println("REDUCED CHAR package did not pass");}; */
+  Serial.println(rate*100);*/
 }
