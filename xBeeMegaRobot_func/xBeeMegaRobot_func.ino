@@ -31,7 +31,14 @@
 }*/
 
 int tempPk[24] = {};
-
+int x, y, z, emg1, emg2;
+for(int a = 13; a < 22; a++) {
+  x = tempPk[14] + (tempPk[13] << 8);
+  y = tempPk[16] + (tempPk[15] << 8);
+  z = tempPk[18] + (tempPk[17] << 8);
+  emg1 = tempPk[20] + (tempPk[19] << 8);
+  emg2 = tempPk[22] + (tempPk[21] << 8);
+}
 void setup() {
   Serial2.begin(SERVO_BAUDRATE);
   Serial1.begin(xBee_Baudrate);
@@ -76,8 +83,6 @@ int fail = 0;
 float rate;
 */
 }
-int x, y, z, emg1, emg2;
-int tempPk[13,14] = x;
 
 void loop() {
   for(int i = 0; i < 50; i++){
