@@ -20,7 +20,7 @@ L2 = 0.14; % length [m]
 c2 = L2 * 2/3; % mass center
 m2 = 0.072 * 2 + 0.023; % mass [kg]
 I2 = 1/12 * m2 * L2^2; % moment of inertia
-%% %%%%%%%%%%%%%%%% wished positions of joints and time
+%% %%%%%%%%%%%%%%%% desired positions of joints and time [degrees]
 tf = 5;
 theta01 = 0 * 360/4096;
 thetaf1 = 100 * 360/4096;

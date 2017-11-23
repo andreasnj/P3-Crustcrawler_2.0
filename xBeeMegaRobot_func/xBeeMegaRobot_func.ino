@@ -10,7 +10,6 @@
 #define OPEN 'o'
 #define CLOSE 'c'
 
-
 /*void performMovement(int goal1, int goal2, int goal3, char forGripper){
   Dynamixel.setNGoalPositions(goal1, goal2, goal3, -1, -1);
   while(!((goal2 >= pos2-11) && (goal2 <= pos2+11)) && ((goal3 >= pos3-11) && (goal3 <= pos3+11)) && ((goal1 >= pos1-11) && (goal1 <= pos1+11))){ //error for +- 1 degree due to an inaccuracy of the motors
@@ -30,16 +29,7 @@
     delay(1000);
 }*/
 
-/*int tempPk[24] = {};
-int x, y, z, emg1, emg2;
-for(int a = 13; a < 22; a++) {
-  x = tempPk[14] + (tempPk[13] << 8);
-  y = tempPk[16] + (tempPk[15] << 8);
-  z = tempPk[18] + (tempPk[17] << 8);
-  emg1 = tempPk[20] + (tempPk[19] << 8);
-  emg2 = tempPk[22] + (tempPk[21] << 8);
-}*/
-void setup() {
+void setup(){
   Serial2.begin(SERVO_BAUDRATE);
   Serial1.begin(xBee_Baudrate);
   Serial.begin(SERVO_BAUDRATE);
@@ -52,45 +42,32 @@ void setup() {
   while(! Serial1){ }
   Serial.println("reset");
   delay(500);
-
-/*
-   // Turn on hold on the servos:
-  Dynamixel.setHoldingTorque(0x01, true);
-  Dynamixel.setHoldingTorque(0x02, true);
-  Dynamixel.setHoldingTorque(0x03, true);
-  Dynamixel.setHoldingTorque(0x04, true);
-  Dynamixel.setHoldingTorque(0x05, true);
-
-  // Set the Profile acceleration.
-  Dynamixel.setProfileAcceleration(0x01, 10);
-  Dynamixel.setProfileAcceleration(0x02, 10);
-  Dynamixel.setProfileAcceleration(0x03, 10);
-  Dynamixel.setProfileAcceleration(0x04, 300);
-  Dynamixel.setProfileAcceleration(0x05, 300);
-
-  // Set the Profile velocity.
-  Dynamixel.setProfileVelocity(0x01, 100);
-  Dynamixel.setProfileVelocity(0x02, 100);
-  Dynamixel.setProfileVelocity(0x03, 100);
-  Dynamixel.setProfileVelocity(0x04, 200);
-  Dynamixel.setProfileVelocity(0x05, 200);
 }
-*/
 
-/*
-int pass = 0;
+int tempPk[24] = {};
+int x=0, y=0, z=0, emg1=0, emg2=0;
+/*int pass = 0;
 int fail = 0;
-float rate;
-*/
-}
+float rate;*/
 
 void loop() {
   for(int i = 0; i < 50; i++){
   xBee.readPacket(tempPk);
+  x = tempPk[14] + (tempPk[13] << 8);
+  y = tempPk[16] + (tempPk[15] << 8);
+  z = tempPk[18] + (tempPk[17] << 8);
+  emg1 = tempPk[20] + (tempPk[19] << 8);
+  emg2 = tempPk[22] + (tempPk[21] << 8);
+  Serial.print("x = "); Serial.print(x);
+  Serial.print(" y = "); Serial.print(y);
+  Serial.print(" z = "); Serial.print(z);
+  Serial.print(" emg1 = "); Serial.print(emg1);
+  Serial.print(" emg2 = "); Serial.print(emg2);  
+  /*
   for(int i = 13; i <= 22; i++){
     Serial.print(tempPk[i], DEC);  // Printing the read package
     Serial.print(" ");
-  }
+  }*/
 
   if(xBee.checkPacket(tempPk)){ //Check and print if the package passed
     Serial.println("| INT -- PASS |");
@@ -102,5 +79,5 @@ void loop() {
   Serial.println(fail);
   rate = (float)pass/(pass+fail);
   Serial.println(rate*100);*/
-}
+  }
 }
