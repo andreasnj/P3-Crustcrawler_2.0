@@ -1,7 +1,7 @@
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %    The inverse dynamics of the 2-dof planar robotic arm
-%    
+%     
 %    contact: shaoping bai, shb@m-tech.aau.dk
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -11,46 +11,52 @@ g = 9.801; % gravity constant
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%  link properties
 %======================================  link 1
-L1 = 0.5; % length [m]
-c1 = L1/2; % mass center
-m1 = 4.6; % mass [kg]
-I1 = 1/12*m1*L1^2; % moment of inertia
+L1 = 0.22; % length [m]
+c1 = L1 * 2/3; % mass center
+m1 = 0.037 + 0.126; % mass [kg]
+I1 = 1/12 * m1 * L1^2; % moment of inertia
 %======================================  link 2
-L2 = 0.3; % length [m]
-c2 = L2/2; % mass center
-m2 = 2.3; % mass [kg]
-I2 = 1/12*m2*L2^2; % moment of inertia
+L2 = 0.14; % length [m]
+c2 = L2 * 2/3; % mass center
+m2 = 0.072 * 2 + 0.023; % mass [kg]
+I2 = 1/12 * m2 * L2^2; % moment of inertia
+%% %%%%%%%%%%%%%%%% wished positions of joints and time
+tf = 2;
+theta01 = 0;
+thetaf1 = 10;
+theta02 = 0;
+thetaf2 = 3;
+%% %%%%%%%%%%%%%%%% coefficients for position, velocity and acceleration
+a01 = theta01;
+a11 = 0;
+a21 = 3/(tf^2)*(thetaf1 - theta01);
+a31 = -2/(tf^3)*(thetaf1 - theta01);
 
+a02 = theta02;
+a12 = 0;
+a22 = 3/(tf^2)*(thetaf2 - theta02);
+a32 = -2/(tf^3)*(thetaf2 - theta02);
 %% %%%%%%%%%%%%%%%%%% dynamic simulation
 %%%%%%%%%%%%%%%%%%% discrete time
-T = 1; % second
-N = 100; % resolution
+T = tf; % second
+N = tf*100; % resolution
 i = 0; 
 for t = linspace(0, T, N)
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% instantaneous time
     i = i + 1; time(i) = t; 
+    %%%%%%%%%%%%%%% Joint 1: angular displacement, velocity, acceleration
+    theta_1(i) = a01 + a11 * t + a21 * t^2 + a31 * t^3;
+    dtheta_1(i) = a11 + 2 * a21 * t + 3 * a31 * t^2;
+    ddtheta_1(i) = 2 * a21 + 6 * a31 * t;
     
     %%%%%%%%%%%%%%% Joint 1: angular displacement, velocity, acceleration
-    theta_1(i) = A1*sin(f1*t); dtheta_1(i) = A1*f1*cos(f1*t); 
-    ddtheta_1(i) = -A1*f1^2*sin(f1*t); 
-    
-    %%%%%%%%%%%%%%% Joint 1: angular displacement, velocity, acceleration
-    theta_2(i) = A2*sin(f2*t); dtheta_2(i) = A2*f2*cos(f2*t);
-    ddtheta_2(i) = -A2*f2^2*sin(f2*t); 
-    
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%  coefficients of dynamic equation
-    H11 = m1*c1^2 + I1 + m2*(L1^2 + c2^2 + 2*L1*c2*cos(theta_2(i))) + I2;
-    H22 = m2*c2^2 + I2; 
-    H12 = m2*(c2^2 + L1*c2*cos(theta_2(i))) + I2; 
-    h = m2*L1*c2*sin(theta_2(i)); 
-    G1 = m1*c1*g*cos(theta_1(i)) ...
-        + m2*g*(c2*cos(theta_1(i) + theta_2(i)) + L1*cos(theta_1(i))); 
-    G2 = m2*g*c2*cos(theta_1(i) + theta_2(i));
+    theta_2(i) = a02 + a12 * t + a22 * t^2 + a32 * t^3;
+    dtheta_2(i) = a12 + 2 * a22 * t + 3 * a32 * t^2;
+    ddtheta_2(i) = 2 * a22 + 6 * a32 * t;
     
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  actuator torques
-    tau_1(i) = H11*ddtheta_1(i) + H12*ddtheta_2(i) - h*(dtheta_2(i))^2 ...
-        -2*h*dtheta_1(i)*dtheta_2(i) + G1;
-    tau_2(i) = H22*ddtheta_2(i) + H12*ddtheta_1(i) + h*(dtheta_1(i))^2 + G2;
+    tau_1(i) = c1^2 * m1 * ddtheta_1(i) + m1 * g * c1 * cos(theta_1(i));
+    tau_2(i) = c2^2 * m2 * (ddtheta_2(i) + ddtheta_1(i)) - c2 * m2 * g * cos(theta_1(i) + theta_2(i));
     
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  link positions
     %%%%%%%%%%%%%%%%%% link 1
