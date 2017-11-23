@@ -46,48 +46,6 @@ void xBeeClass::readPacket(int *pk){//Populates an INT array with a packet from 
       }while(counter < 24);
 }
 
-void xBeeClass::readPacket(char *pk){ //Populates a CHAR array with a packet from the serial buffer. USE ON SERIAL1
-  int counter = 0;
-  char temp;
-    do{
-      if(Serial1.available()){
-        temp = Serial1.read();        //Reads the first element in serial buffer
-          if(temp == 0x7e){          //Looking for the start delimiter
-            pk[counter] = temp;
-            counter++;
-            }
-      }
-      else {break;};
-    }while(counter == 0);
-    do{
-      if(Serial1.available()){        //Reads the rest of the package
-        temp = Serial1.read();
-        pk[counter] = temp;
-        counter++;
-        }
-      }while(counter < 24);
-}
-
-void xBeeClass::reducePacket(char *pk){
-  for(int i = 0; i < 24; i++){
-    pk[i] = pk[i]%0x100;
-  }
-}
-
-bool xBeeClass::checkPacket(char *pk){ //Generates checksum and compares with the one in the package
-  char sum = 0;
-
-  for(int i = 3; i < 23; i++){       //Generate sum from index 3-to-22 (until, not incl. the checksum itself)
-    sum += pk[i];
-  }
-
-  if((0xff - sum) == pk[23]){        //Check with the checksum of the package
-    return true;                     //ok, good package
-  }
-  else{
-    return false;                    //error
-  }
-}
 
 bool xBeeClass::checkPacket(int *pk){//Generates checksum and compares with the one in the package. INT VERSION
   int sum = 0;
@@ -106,6 +64,15 @@ bool xBeeClass::checkPacket(int *pk){//Generates checksum and compares with the 
   }
 }
 
+void xBeeClass::decodePacket(int *pk){ //Convert chars from packet to int, store in arrays, call average func
+  accZ = ((pk[13] << 8) | pk[14]);
+  accY = ((pk[15] << 8) | pk[16]);
+  accX = ((pk[17] << 8) | pk[18]);
+  emg1 = ((pk[19] << 8) | pk[20]);
+  emg2 = ((pk[21] << 8) | pk[22]);
+}
+
+/*
 void xBeeClass::decodePacket(char *pk, int i){ //Convert chars from packet to int, store in arrays, call average func
   accZarr[i] = (int)((pk[13] << 8) | pk[14]);
   accYarr[i] = (int)((pk[15] << 8) | pk[16]);
@@ -127,7 +94,7 @@ float xBeeClass::averageArr(int *arr){
   }
   float avg = s/10;
   return(avg);
-}
+}*/
 
 //##############################################################################
 //########################## Private Methods ###################################
