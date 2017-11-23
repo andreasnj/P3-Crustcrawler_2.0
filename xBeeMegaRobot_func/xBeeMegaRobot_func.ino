@@ -75,7 +75,9 @@ int pass = 0;
 int fail = 0;
 float rate;
 */
+}
 int x, y, z, emg1, emg2;
+int tempPk[13,14] = x;
 
 void loop() {
   for(int i = 0; i < 50; i++){
@@ -84,15 +86,16 @@ void loop() {
     Serial.print(tempPk[i], DEC);  // Printing the read package
     Serial.print(" ");
   }
-  
+
   if(xBee.checkPacket(tempPk)){ //Check and print if the package passed
     Serial.println("| INT -- PASS |");
-    pass++;
+    //pass++;
     }else{Serial.println("| INT -- FAIL |");
-      fail++;};
+    //fail++;};
   }
 /*  Serial.println(pass); //Print the pass and fail coutns and rate
   Serial.println(fail);
   rate = (float)pass/(pass+fail);
   Serial.println(rate*100);*/
+}
 }
