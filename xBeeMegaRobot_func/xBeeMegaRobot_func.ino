@@ -75,7 +75,7 @@ int pass = 0;
 int fail = 0;
 float rate;
 */
-
+int x, y, z, emg1, emg2;
 
 void loop() {
   for(int i = 0; i < 50; i++){
