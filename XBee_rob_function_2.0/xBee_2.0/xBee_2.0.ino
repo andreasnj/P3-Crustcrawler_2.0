@@ -43,6 +43,7 @@ void setup() {
   Serial1.begin(115200);
 
   Serial.flush();                                       // Clear the serial buffer of garbage data before running the code.
+  Serial1.flush();
   mySerial.begin(SERVO_SET_Baudrate);                   // We now need to set Ardiuno to the new Baudrate speed 115200
   //Serial.begin(SERVO_SET_Baudrate);                     // Start serial communication on baudrate 57600
   Dynamixel.begin(mySerial);                            // Calling mySerial function which sets 10 pin as the 2nd RX serial pin, and sets pin 11 as the 2nd TX serial pin
@@ -72,14 +73,35 @@ void setup() {
 
 void loop() {
   actualName();
-  if (Serial1.read(emg1) < 70) {
-    Dynamixel.performMovement(2148, 2048, 2048, CLOSE);   //"Initial" position
-    delay(1500);
-  }else{
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  //if (Serial1.read(emg1) < 70) {
+    //Dynamixel.performMovement(2148, 2048, 2048, CLOSE);   //"Initial" position
+    //delay(1500);
+  //}else{
+  /*do{
     Dynamixel.performMovement(2148, 1850, 3250, OPEN);     //Ready position
     delay(2000);
-  }
- }
+  }while(emg2 > 70);
+ }*/
+ 
 
 
 
