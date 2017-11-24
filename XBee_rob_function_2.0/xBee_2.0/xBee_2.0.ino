@@ -66,7 +66,7 @@ void actualName(){
             infoPk[i] = jelly;
           }
       
-  while(emg1==1023 && g==0){
+  while(emg1 > 500 && g==0){
     Dynamixel.performMovement(2148, 2048, 2048, CLOSE);   //"Initial" position
     delay(1000);
     Dynamixel.performMovement(2148, 1850, 3250, OPEN);     //Ready position
@@ -81,7 +81,7 @@ void actualName(){
     g++;
     break;
     }
-  if(emg1!=1023){
+  if(emg1 < 100){
     g=0;    
   }
   for(int a = 13; a < 24; a++) {
