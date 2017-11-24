@@ -1,6 +1,19 @@
 //#include <Dynamixel_Serial.h>
 //#include <readxBee.h>
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//   CrustCrawler PIN Setup:  Green wire to PIN 10,                                                                           //
+//                            Yellow wire to PIN 11,                                                                          //
+//                            Black wire to ground,                                                                           //
+//                            Red wire to 3.3v,                                                                               //
+//                            Blue wire to PIN2                                                                               //
+//                                                                                                                            //
+//          Xbee PIN Setup:   Green wire -> Rx to PIN 19,                                                                     //
+//                            White1 wire -> GND to GND,                                                                      //
+//                            Blue wire -> 5v to 5v,                                                                          //
+//                            White2 -> RST to RST,                                                                           //
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 int x, y, z, emg1, emg2;
 int infoPk[24];
 void actualName(){
@@ -34,35 +47,3 @@ void setup() {
 void loop() {
   actualName();
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-  //if (Serial1.read(emg1) < 70) {
-    //Dynamixel.performMovement(2148, 2048, 2048, CLOSE);   //"Initial" position
-    //delay(1500);
-  //}else{
-  /*do{
-    Dynamixel.performMovement(2148, 1850, 3250, OPEN);     //Ready position
-    delay(2000);
-  }while(emg2 > 70);
- }*/
-
-
-
-
-/*for(int i = 0; i < 50; i++){
-  xBee.readPacket(infoPk);*/
-/*if(xBee.checkPacket(infoPk)){ //Check and print if the package passed
-    Serial.println("| INT -- PASS |");
-    }else{Serial.println("| INT -- FAIL |");
- }*/
