@@ -56,7 +56,7 @@ void setup() {
   Dynamixel.setProfileVelocity(0x05, 200);  
  }
 
-int x, y, z, emg1, emg2;
+int x, y, z, emg1, emg2, g;
 int infoPk[24];
 void actualName(){
   if(Serial1.available() >= 24){
@@ -65,28 +65,32 @@ void actualName(){
             byte jelly = Serial1.read();
             infoPk[i] = jelly;
           }
-
-
-  if(emg1>100){
+      
+  while(emg1==1023 && g==0){
     Dynamixel.performMovement(2148, 2048, 2048, CLOSE);   //"Initial" position
-    delay(1500);
+    delay(1000);
     Dynamixel.performMovement(2148, 1850, 3250, OPEN);     //Ready position
-    delay(2000);
+    delay(1000);
     Dynamixel.performMovement(1600, 2800, 3200, OPEN);      //Move to sponge. 
     Dynamixel.gripper(CLOSE);                               //Grab
     Dynamixel.performMovement(2148, 1850, 3250, CLOSE);     //Detour
     Dynamixel.performMovement(2650, 2800, 3200, CLOSE);     //Move to destination
     delay(500);
     Dynamixel.gripper(OPEN);                                //Release
-  delay(500);
+    delay(500);
+    g++;
+    break;
+    }
+  if(emg1!=1023){
+    g=0;    
   }
-  
   for(int a = 13; a < 24; a++) {
     z = infoPk[13] + (infoPk[12] << 8);
     y = infoPk[15] + (infoPk[14] << 8);
     x = infoPk[17] + (infoPk[16] << 8);
     emg1 = infoPk[19] + (infoPk[18] << 8);
     emg2 = infoPk[21] + (infoPk[20] << 8);
+
    }
     Serial.print(" X = ") && Serial.print(x);
     Serial.print(" Y = ") && Serial.print(y);
@@ -94,11 +98,11 @@ void actualName(){
     Serial.print(" EMG Ch.1 = ") && Serial.print(emg1);
     Serial.print(" EMG Ch.2 = ") && Serial.print(emg2);
     Serial.println();
+
     
+ }
   }
  }
- }
-
 
 void loop() {
   actualName();
