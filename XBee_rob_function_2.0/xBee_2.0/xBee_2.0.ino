@@ -24,8 +24,8 @@ void actualName(){
             infoPk[i] = jelly;
           }
   for(int a = 13; a < 24; a++) {
-    y = infoPk[15] + (infoPk[14] << 8);
     z = infoPk[13] + (infoPk[12] << 8);
+    y = infoPk[15] + (infoPk[14] << 8);
     x = infoPk[17] + (infoPk[16] << 8);
     emg1 = infoPk[19] + (infoPk[18] << 8);
     emg2 = infoPk[21] + (infoPk[20] << 8);
