@@ -1,6 +1,3 @@
-//#include <Dynamixel_Serial.h>
-//#include <readxBee.h>
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //   CrustCrawler PIN Setup:  Green wire to PIN 10,                                                                           //
 //                            Yellow wire to PIN 11,                                                                          //
@@ -13,6 +10,9 @@
 //                            Blue wire -> 5v to 5v,                                                                          //
 //                            White2 -> RST to RST,                                                                           //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#include <Dynamixel_Serial.h>
+#include <readxBee.h>
 
 int x, y, z, emg1, emg2;
 int infoPk[24];
