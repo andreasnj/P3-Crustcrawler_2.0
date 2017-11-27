@@ -304,7 +304,7 @@ void DynamixelClass::gripper(char op){
         setNGoalPositions(-1, -1, -1, 2548, 1548); //Open griper
     }
     else if (op == 'c'){
-        setNGoalPositions(-1, -1, -1, 2117, 1974);//Close gripper
+        setNGoalPositions(-1, -1, -1, 2200, 1800);//Close gripper
     }
     else {Serial.println("Invalid gripper command!");}
 }
