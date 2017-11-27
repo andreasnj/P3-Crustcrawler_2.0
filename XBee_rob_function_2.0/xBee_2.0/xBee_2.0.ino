@@ -69,18 +69,18 @@ void actualName(){
   while(emg1 > 500 && emg1 < 1024 && g==0){
     Dynamixel.performMovement(2148, 2048, 2048, OPEN);   //"Initial" position
     delay(1000);
-    Dynamixel.performMovement(3189, 750, 2855, OPEN);     //Ready position
+    Dynamixel.performMovement(1142, 3250, 1524, OPEN);     //Ready position
     delay(1000);
-    Dynamixel.performMovement(3202, 750, 2309, OPEN);      //Move to sponge. 
+    Dynamixel.performMovement(1128, 3250, 1846, OPEN);      //Move to sponge. 
     delay(1000);
     //Dynamixel.gripper(CLOSE);                               //Grab
-    Dynamixel.performMovement(3202, 750, 2309, CLOSE);     //Detour
+    Dynamixel.performMovement(1128, 3250, 1846, CLOSE);     //Detour
     delay(500);
-    Dynamixel.performMovement(3164, 1501, 1530, CLOSE);     //Move to destination
+    Dynamixel.performMovement(1608, 2639, 2467, CLOSE);     //Move to destination
     delay(500);
     //Dynamixel.gripper(OPEN);                                //Release
     //delay(500);
-    Dynamixel.performMovement(4239, 1453, 1549, CLOSE);
+    Dynamixel.performMovement(2108, 3088, 2018, CLOSE);
     g++;
     break;
     }
