@@ -26,9 +26,9 @@
 SoftwareSerial mySerial(10, 11);    // RX, TX
 
 void setup() {
-  Serial.begin(115200);
-  Serial1.begin(115200);
+  
   Serial.flush();                                       // Clear the serial buffer of garbage data before running the code.
+  Serial1.begin(115200);
   mySerial.begin(SERVO_SET_Baudrate);                   // We now need to set Ardiuno to the new Baudrate speed 115200
   Serial.begin(SERVO_SET_Baudrate);                                  // Start serial communication on baudrate 57600
   Dynamixel.begin(mySerial);                            // Calling mySerial function which sets 10 pin as the 2nd RX serial pin, and sets pin 11 as the 2nd TX serial pin
