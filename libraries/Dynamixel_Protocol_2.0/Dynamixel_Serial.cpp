@@ -212,7 +212,7 @@ int *DynamixelClass::getPositionN(void){
   Serial.println("__________________________________________");
 
   int sum;
-  for(int i = 0; i < 15; i += 3){
+  for(int i = 0; i < 12; i += 3){
     sum = (data[i+2] << 8) | data[i+1];   //Converting two information bytes into a integer (position data)
 
     returndata[data[i]-1] = sum;          //Array for storing multiple positions
@@ -223,6 +223,7 @@ int *DynamixelClass::getPositionN(void){
     Serial.print(" is ");
     Serial.println(sum);
   }
+  getPosition(5);
 
   return returndata;                      //Return pointer to array of positions
 }
