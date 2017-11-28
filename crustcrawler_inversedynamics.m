@@ -21,9 +21,9 @@ L2 = 0.14; % length [m]
 m2 = 0.072 * 2 + 0.023; % mass [kg]
 I2 = 1/12 * m2 * L2^2; % moment of inertia
 %% %%%%%%%%%%%%%%%% wished positions of joints and time for the movements
-tf = 5;
-theta01 = 0 * 2*pi/4096; %in the graphs will be represented in radians, although input is in steps
-thetaf1 = 100 * 2*pi/4096;
+tf = 3;
+theta01 = 100 * 2*pi/4096; %in the graphs will be represented in radians, although input is in steps
+thetaf1 = 10 * 2*pi/4096;
 theta02 = 0 * 2*pi/4096;
 thetaf2 = 200 * 2*pi/4096;
 %% %%%%%%%%%%%%%%%% coefficients for position, velocity and acceleration
@@ -56,7 +56,7 @@ for t = linspace(0, T, N)
     
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  actuator torques
     tau_1(i) = ((8/18 * m1 + m2) * L1^2 + 8/18 * m2 * L2^2) * ddtheta_1(i) + 8/18 * m2 * L2^2 * ddtheta_2(i) + 4/6 * m2 * L1 * L2 * cos(dtheta_2(i)) * (ddtheta_2(i) + 2 * ddtheta_1(i)) - (m1 + m2) * g * L1 * cos(theta_1(i)) + m2 * g * L2 * cos(theta_1(i) + theta_2(i));
-    tau_2(i) = 8/18 * m2 * L2^2 + 4/6 * m2 * L1 * L2 * sin(theta_2(i)) * ddtheta_1(i) + 8/18 * m2 * L2^2 * ddtheta_2(i) + 4/6 * m2 * L1 * L2 * cos(theta_2(i)) * (dtheta_1(i) * dtheta_2(i) + dtheta_1(i)^2) - m2 * g * L2 * cos(theta_1(i) + theta_2(i));
+    tau_2(i) = (8/18 * m2 * L2^2 + 4/6 * m2 * L1 * L2 * sin(theta_2(i))) * ddtheta_1(i) + 8/18 * m2 * L2^2 * ddtheta_2(i) + 4/6 * m2 * L1 * L2 * cos(theta_2(i)) * (dtheta_1(i) * dtheta_2(i) + dtheta_1(i)^2) - m2 * g * L2 * cos(theta_1(i) + theta_2(i));
     
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  link positions
     %%%%%%%%%%%%%%%%%% link 1
