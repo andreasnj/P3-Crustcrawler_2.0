@@ -57,6 +57,7 @@ void setup() {
  }
 
 int x, y, z, emg1, emg2, g;
+int emgcounter = 0;
 int infoPk[24];
 void actualName(){
   if(Serial1.available() >= 24){
@@ -66,26 +67,42 @@ void actualName(){
             infoPk[i] = jelly;
           }
       
-  while(emg1 > 500 && emg1 < 1024 && g==0){
+  while(emg1 > 500 && emg1 < 1024 && g==0 && emgcounter==0){
     Dynamixel.performMovement(2148, 2048, 2048, OPEN);   //"Initial" position
     delay(1000);
-    Dynamixel.performMovement(3189, 750, 2855, OPEN);     //Ready position
+    Dynamixel.performMovement(1142, 3250, 775, OPEN);     //Ready position
     delay(1000);
-    Dynamixel.performMovement(3202, 750, 2309, OPEN);      //Move to sponge. 
+    Dynamixel.performMovement(1128, 3250, 1846, OPEN);      //Move to sponge. 
     delay(1000);
     //Dynamixel.gripper(CLOSE);                               //Grab
-    Dynamixel.performMovement(3202, 750, 2309, CLOSE);     //Detour
+    Dynamixel.performMovement(1128, 3250, 1846, CLOSE);     //Detour
     delay(500);
-    Dynamixel.performMovement(3164, 1501, 1530, CLOSE);     //Move to destination
+    Dynamixel.performMovement(1608, 2639, 2467, CLOSE);     //Move to destination
     delay(500);
     //Dynamixel.gripper(OPEN);                                //Release
     //delay(500);
-    Dynamixel.performMovement(4239, 1453, 1549, CLOSE);
+    Dynamixel.performMovement(2108, 3088, 2018, CLOSE);
     g++;
+    emgcounter++;
+    break;
+    }
+    while(emg1 > 500 && emg1 < 1024 && g==0 && emgcounter==1){
+    Dynamixel.performMovement(1608, 2639, 2467, CLOSE);     //Move to destination
+    delay(500);
+    Dynamixel.performMovement(1128, 3250, 1846, CLOSE);     //Detour
+    delay(500);
+    Dynamixel.performMovement(1128, 3250, 1846, OPEN);      //Move to sponge. 
+    delay(1000);
+    Dynamixel.performMovement(1142, 3250, 775, OPEN);     //Ready position
+    delay(1000);
+    Dynamixel.performMovement(2148, 2048, 2048, OPEN);   //"Initial" position
+    delay(1000);
+    g++;
+    emgcounter--;
     break;
     }
   if(emg1 < 100){
-    g=0;    
+    g=0;
   }
   for(int a = 13; a < 24; a++) {
     z = infoPk[13] + (infoPk[12] << 8);
@@ -101,8 +118,6 @@ void actualName(){
     Serial.print(" EMG Ch.1 = ") && Serial.print(emg1);
     Serial.print(" EMG Ch.2 = ") && Serial.print(emg2);
     Serial.println();
-
-    
  }
   }
  }
