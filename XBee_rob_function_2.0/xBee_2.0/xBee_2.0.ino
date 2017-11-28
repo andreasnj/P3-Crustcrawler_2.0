@@ -74,11 +74,17 @@ void actualName(){
 while(z < 300 && h==0){
     joint++;
     h++;
+    if(joint > 4){
+      joint = 4;
+    }
     break;
 }
 while(z > 700 && h==0){
    joint--;
    h++;
+   if(joint < 1){
+    joint = 1;
+   }
    break;
 }
   if(z >= 460 && z <= 470){
@@ -194,7 +200,7 @@ while(joint = 4 && y < 300 && o==0){
     Serial.print(" Z = ") && Serial.print(z);
     Serial.print(" EMG Ch.1 = ") && Serial.print(emg1);
     Serial.print(" EMG Ch.2 = ") && Serial.print(emg2);
-    Serial.print(" green = ") && Serial.print(green);
+    Serial.print(" joint number= ") && Serial.print(joint);
     Serial.println();
  }
   }
