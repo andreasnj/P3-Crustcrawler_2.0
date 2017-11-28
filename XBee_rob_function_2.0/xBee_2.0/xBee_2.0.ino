@@ -61,7 +61,7 @@ int emgcounter = 0;
 int i = 2148;
 int j = 2048;
 int k = 2048;
-int green = 0;
+int joint = 1;
 int infoPk[24];
 void actualName(){
   if(Serial1.available() >= 24){
@@ -72,15 +72,19 @@ void actualName(){
           }
           
 while(z < 300 && h==0){
-    green++;
+    joint++;
     h++;
     break;
-  }
+}
 
+while(z > 700 && h==0){
+   joint--;
+   h++;
+   break;
+}
   if(z > 460 && z < 470){
     h=0;
-    
-  }
+    }
   /*
   while(green = 1 && y > 700){
     i = i + 20;
