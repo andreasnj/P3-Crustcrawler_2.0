@@ -298,7 +298,7 @@ void DynamixelClass::syncRN(unsigned short addr, int n){
     readReturnPacket(); //Read return package
 }
 
-//We added some functions to the library
+//###### We added some functions to the library ######
 void DynamixelClass::gripper(char op){
     if (op == 'o'){
         setNGoalPositions(-1, -1, -1, 2548, 1548); //Open griper
@@ -308,6 +308,26 @@ void DynamixelClass::gripper(char op){
     }
     else {Serial.println("Invalid gripper command!");}
 }
+
+/*
+void DynamixelClass::gripperTorqueControl(bool Set){
+  unsigned char arr[1] = {Set};
+  writeN(4, 0x66, arr, 1);
+  writeN(5, 0x66, arr, 1);  
+}
+
+
+void DynamixelClass::Tgripper(char op){
+    if (op == 'o'){
+      setNGoalPositions(-1, -1, -1, 2548, 1548); //Open griper
+    }
+    else if (op == 'c'){
+      gripperTorqueControl(true);
+
+    }
+    else {Serial.println("Invalid gripper command!");}
+}
+*/
 
 void DynamixelClass::performMovement(int goal1, int goal2, int goal3, char forGripper){
     int pos1 = 0;

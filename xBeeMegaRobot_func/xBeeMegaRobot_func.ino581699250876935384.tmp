@@ -37,11 +37,11 @@ void setup(){
   Dynamixel.setDirectionPin(SERVO_ControlPin);
   xBee.begin(Serial1);
   Serial.flush();
+  Serial1.flush();
   Serial2.flush();
   while(! Serial1){ }
   Serial.println("reset");
   delay(500);
-  Serial1.flush();
 }
 
 int tempPk[24] = {};
@@ -51,10 +51,8 @@ int fail = 0;
 float rate;
 
 void loop() {
-  Serial1.flush();
-  for(int i = 0; i < 100; i++){
+  for(int i = 0; i < 50; i++){
   xBee.readPacket(tempPk);
-  //xBee.decodePacket(tempPk); //This compiles, but doesn't seem to work
   x = tempPk[14] + (tempPk[13] << 8);
   y = tempPk[16] + (tempPk[15] << 8);
   z = tempPk[18] + (tempPk[17] << 8);
@@ -71,13 +69,14 @@ void loop() {
     Serial.print(" ");
   }*/
 
-    if(xBee.checkPacket(tempPk)){ //Check and print if the package passed
-      Serial.println("| INT -- PASS |"); pass++;
-      }else{Serial.println("| INT -- FAIL |"); fail++;
-    }
+  if(xBee.checkPacket(tempPk)){ //Check and print if the package passed
+    Serial.println("| INT -- PASS |");
+    }else{Serial.println("| INT -- FAIL |");
   }
-  Serial.println(pass); //Print the pass and fail counts and rate
+  Serial.println(pass); //Print the pass and fail coutns and rate
   Serial.println(fail);
   rate = (float)pass/(pass+fail);
   Serial.println(rate*100);
+  }
+  delay(2000);
 }
