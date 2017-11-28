@@ -131,13 +131,11 @@ while(joint = 3 && y < 300 && n==0){
     }
 while(joint = 4 && y > 700 && o==0){
     Dynamixel.gripper(OPEN);
-    Dynamixel.setNGoalPositions(-1, -1, k, -1, -1);
     o++;
     break;
 }
 while(joint = 4 && y < 300 && o==0){
     Dynamixel.gripper(CLOSE);
-    Dynamixel.setNGoalPositions(-1, -1, k, -1, -1);
     o++;
     break;
 }
