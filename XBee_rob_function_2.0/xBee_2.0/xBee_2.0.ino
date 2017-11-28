@@ -26,7 +26,7 @@
 SoftwareSerial mySerial(10, 11);    // RX, TX
 
 void setup() {
-  
+
   Serial.flush();                                       // Clear the serial buffer of garbage data before running the code.
   Serial1.begin(115200);
   mySerial.begin(SERVO_SET_Baudrate);                   // We now need to set Ardiuno to the new Baudrate speed 115200
@@ -49,14 +49,14 @@ void setup() {
   Dynamixel.setProfileAcceleration(0x05, 300);
 
   //Set profile velocity
-  Dynamixel.setProfileVelocity(0x01, 100);              //Set profile vel for each servo 
+  Dynamixel.setProfileVelocity(0x01, 100);              //Set profile vel for each servo
   Dynamixel.setProfileVelocity(0x02, 100);
   Dynamixel.setProfileVelocity(0x03, 100);
   Dynamixel.setProfileVelocity(0x04, 200);
-  Dynamixel.setProfileVelocity(0x05, 200);  
+  Dynamixel.setProfileVelocity(0x05, 200);
  }
 
-int x, y, z, emg1, emg2, g, h;
+int x, y, z, emg1, emg2, g, h, l, m, n, o;
 int emgcounter = 0;
 int i = 2148;
 int j = 2048;
@@ -70,61 +70,88 @@ void actualName(){
             byte jelly = Serial1.read();
             infoPk[i] = jelly;
           }
-          
+
 while(z < 300 && h==0){
     joint++;
     h++;
     break;
 }
-
 while(z > 700 && h==0){
    joint--;
    h++;
    break;
 }
-  if(z > 460 && z < 470){
+  if(z >= 460 && z <= 470){
     h=0;
     }
-  /*
-  while(green = 1 && y > 700){
-    i = i + 20;
-    Dynamixel.setNGoalPositions(i, -1, -1, -1, -1);
-    break;
-  }
-  while(green = 1 && y < 300){
-    i = i - 20;
-    Dynamixel.setNGoalPositions(i, -1, -1, -1, -1);
-    break;
-  }
-  while(green = 2 && y > 700){
-    j = j + 20;
-    Dynamixel.setNGoalPositions(-1, j, -1, -1, -1);
-    break;
-  }
-  while(green = 2 && y < 300){
-    j = j - 20;
-    Dynamixel.setNGoalPositions(-1, j, -1, -1, -1);
-    break;
-  }
-  while(green = 3 && y > 700){
-    k = k + 20;
+while(joint = 1 && y > 700 && l==0){
+  i = i + 20;
+  Dynamixel.setNGoalPositions(i, -1, -1, -1, -1);
+  l++;
+  break;
+}
+while(joint = 1 && y < 300 && l==0){
+  i = i - 20;
+  Dynamixel.setNGoalPositions(i, -1, -1, -1, -1);
+  l++;
+  break;
+}
+  if(y >= 530 && y <= 540){
+    l=0;
+    }
+while(joint = 2 && y > 700 && m==0){
+  j = j + 20;
+  Dynamixel.setNGoalPositions(-1, j, -1, -1, -1);
+  m++;
+  break;
+}
+while(joint = 2 && y < 300 && m==0){
+  j = j - 20;
+  Dynamixel.setNGoalPositions(-1, j, -1, -1, -1);
+  m++;
+  break;
+}
+  if(y >= 530 && y <= 540){
+    m=0;
+    }
+while(joint = 3 && y > 700 && n==0){
+  k = k + 20;
+  Dynamixel.setNGoalPositions(-1, -1, k, -1, -1);
+  n++;
+  break;
+}
+while(joint = 3 && y < 300 && n==0){
+  k = k - 20;
+  Dynamixel.setNGoalPositions(-1, -1, k, -1, -1);
+  n++;
+  break;
+}
+  if(y >= 530 && y <= 540){
+    n=0;
+    }
+while(joint = 4 && y > 700 && o==0){
+    Dynamixel.gripper(OPEN);
     Dynamixel.setNGoalPositions(-1, -1, k, -1, -1);
+    o++;
     break;
-  }
-  while(green = 3 && y < 300){
-    k = k - 20;
+}
+while(joint = 4 && y < 300 && o==0){
+    Dynamixel.gripper(CLOSE);
     Dynamixel.setNGoalPositions(-1, -1, k, -1, -1);
+    o++;
     break;
-  }
-  */
+}
+    if(y >= 530 && y <= 540){
+      n=0;
+      }
 
-      
+
   while(emg1 > 500 && emg1 < 1024 && g==0 && emgcounter==0){
     Dynamixel.performMovement(2148, 2048, 2048, OPEN);   //"Initial" position
     //delay(1000);
     Dynamixel.performMovement(1142, 3250, 775, OPEN);     //Ready position
     //delay(1000);
-    Dynamixel.performMovement(1128, 3250, 1846, OPEN);      //Move to sponge. 
+    Dynamixel.performMovement(1128, 3250, 1846, OPEN);      //Move to sponge.
     //delay(1000);
     //Dynamixel.gripper(CLOSE);                               //Grab
     Dynamixel.performMovement(1128, 3250, 1846, CLOSE);     //Detour
@@ -143,7 +170,7 @@ while(z > 700 && h==0){
     //delay(500);
     Dynamixel.performMovement(1128, 3250, 1846, CLOSE);     //Detour
     //delay(500);
-    Dynamixel.performMovement(1128, 3250, 1846, OPEN);      //Move to sponge. 
+    Dynamixel.performMovement(1128, 3250, 1846, OPEN);      //Move to sponge.
     //delay(1000);
     Dynamixel.performMovement(1142, 3250, 775, OPEN);     //Ready position
     //delay(1000);
