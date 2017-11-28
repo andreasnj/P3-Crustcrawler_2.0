@@ -56,7 +56,7 @@ for t = linspace(0, T, N)
     
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  actuator torques
     tau_1(i) = ((8/18 * m1 + m2) * L1^2 + 8/18 * m2 * L2^2) * ddtheta_1(i) + 8/18 * m2 * L2^2 * ddtheta_2(i) + 4/6 * m2 * L1 * L2 * cos(dtheta_2(i)) * (ddtheta_2(i) + 2 * ddtheta_1(i)) - (m1 + m2) * g * L1 * cos(theta_1(i)) + m2 * g * L2 * cos(theta_1(i) + theta_2(i));
-    tau_2(i) = (8/18 * m2 * L2^2 + 4/6 * m2 * L1 * L2 * sin(theta_2(i)) * ddtheta_1(i) + 8/18 * m2 * L2^2 * ddtheta_2(i) + 4/6 * m2 * L1 * L2 * cos(theta_2(i)) * (dtheta_1(i) * dtheta_2(i) + dtheta_1(i)^2) - m2 * g * L2 * cos(theta_1(i) + theta_2(i);
+    tau_2(i) = (8/18 * m2 * L2^2 + 4/6 * m2 * L1 * L2 * sin(theta_2(i))) * ddtheta_1(i) + 8/18 * m2 * L2^2 * ddtheta_2(i) + 4/6 * m2 * L1 * L2 * cos(theta_2(i)) * (dtheta_1(i) * dtheta_2(i) + dtheta_1(i)^2) - m2 * g * L2 * cos(theta_1(i) + theta_2(i));
     
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  link positions
     %%%%%%%%%%%%%%%%%% link 1
