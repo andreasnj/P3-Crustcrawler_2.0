@@ -56,8 +56,12 @@ void setup() {
   Dynamixel.setProfileVelocity(0x05, 200);  
  }
 
-int x, y, z, emg1, emg2, g;
+int x, y, z, emg1, emg2, g, h;
 int emgcounter = 0;
+int i = 2148;
+int j = 2048;
+int k = 2048;
+int green = 0;
 int infoPk[24];
 void actualName(){
   if(Serial1.available() >= 24){
@@ -66,6 +70,50 @@ void actualName(){
             byte jelly = Serial1.read();
             infoPk[i] = jelly;
           }
+          
+while(z < 300 && h==0){
+    green++;
+    h++;
+    break;
+  }
+
+  if(z > 460 && z < 470){
+    h=0;
+    
+  }
+  /*
+  while(green = 1 && y > 700){
+    i = i + 20;
+    Dynamixel.setNGoalPositions(i, -1, -1, -1, -1);
+    break;
+  }
+  while(green = 1 && y < 300){
+    i = i - 20;
+    Dynamixel.setNGoalPositions(i, -1, -1, -1, -1);
+    break;
+  }
+  while(green = 2 && y > 700){
+    j = j + 20;
+    Dynamixel.setNGoalPositions(-1, j, -1, -1, -1);
+    break;
+  }
+  while(green = 2 && y < 300){
+    j = j - 20;
+    Dynamixel.setNGoalPositions(-1, j, -1, -1, -1);
+    break;
+  }
+  while(green = 3 && y > 700){
+    k = k + 20;
+    Dynamixel.setNGoalPositions(-1, -1, k, -1, -1);
+    break;
+  }
+  while(green = 3 && y < 300){
+    k = k - 20;
+    Dynamixel.setNGoalPositions(-1, -1, k, -1, -1);
+    break;
+  }
+  */
+
       
   while(emg1 > 500 && emg1 < 1024 && g==0 && emgcounter==0){
     Dynamixel.performMovement(2148, 2048, 2048, OPEN);   //"Initial" position
@@ -95,7 +143,7 @@ void actualName(){
     //delay(1000);
     Dynamixel.performMovement(1142, 3250, 775, OPEN);     //Ready position
     //delay(1000);
-    Dynamixel.performMovement(2148, 2048, 2048, OPEN);   //"Initial" position
+    Dynamixel.performMovement(2148, 2048, 2048, CLOSE);   //"Initial" position
     //delay(1000);
     g++;
     emgcounter--;
@@ -117,6 +165,7 @@ void actualName(){
     Serial.print(" Z = ") && Serial.print(z);
     Serial.print(" EMG Ch.1 = ") && Serial.print(emg1);
     Serial.print(" EMG Ch.2 = ") && Serial.print(emg2);
+    Serial.print(" green = ") && Serial.print(green);
     Serial.println();
  }
   }
