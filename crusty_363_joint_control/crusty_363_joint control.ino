@@ -43,7 +43,7 @@ void setup() {
   Dynamixel.setProfileVelocity(0x05, 200);
  }
 
-int x, y, z, h, l, m, n, o;
+int x, y, z, h;
 int i = 2148;
 int j = 2048;
 int k = 2048;
@@ -76,64 +76,44 @@ while(z > 700 && h==0){
   if(z >= 460 && z <= 470){
     h=0;
     }
-while(joint = 1 && y > 700 && l==0){
+while(joint = 1 && y > 700){
   i = i + 20;
   Dynamixel.setNGoalPositions(i, -1, -1, -1, -1);
-  l++;
   break;
 }
-while(joint = 1 && y < 300 && l==0){
+while(joint = 1 && y < 300){
   i = i - 20;
   Dynamixel.setNGoalPositions(i, -1, -1, -1, -1);
-  l++;
   break;
 }
-  if(y >= 530 && y <= 540){
-    l=0;
-    }
-while(joint = 2 && y > 700 && m==0){
+while(joint = 2 && y > 700){
   j = j + 20;
   Dynamixel.setNGoalPositions(-1, j, -1, -1, -1);
-  m++;
   break;
 }
-while(joint = 2 && y < 300 && m==0){
+while(joint = 2 && y < 300){
   j = j - 20;
   Dynamixel.setNGoalPositions(-1, j, -1, -1, -1);
-  m++;
   break;
 }
-  if(y >= 530 && y <= 540){
-    m=0;
-    }
-while(joint = 3 && y > 700 && n==0){
+while(joint = 3 && y > 700){
   k = k + 20;
   Dynamixel.setNGoalPositions(-1, -1, k, -1, -1);
-  n++;
   break;
 }
-while(joint = 3 && y < 300 && n==0){
+while(joint = 3 && y < 300){
   k = k - 20;
   Dynamixel.setNGoalPositions(-1, -1, k, -1, -1);
-  n++;
   break;
 }
-  if(y >= 530 && y <= 540){
-    n=0;
-    }
-while(joint = 4 && y > 700 && o==0){
-    Dynamixel.gripper(OPEN);
-    o++;
-    break;
+while(joint = 4 && y > 700){
+   Dynamixel.gripper(OPEN);
+   break;
 }
-while(joint = 4 && y < 300 && o==0){
-    Dynamixel.gripper(CLOSE);
-    o++;
-    break;
+while(joint = 4 && y < 300){
+   Dynamixel.gripper(CLOSE);
+   break;
 }
-    if(y >= 530 && y <= 540){
-      n=0;
-      }
 
 for(int a = 13; a < 24; a++) {
   z = infoPk[13] + (infoPk[12] << 8);
