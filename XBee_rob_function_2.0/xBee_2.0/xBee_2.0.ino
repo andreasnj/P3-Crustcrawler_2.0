@@ -63,6 +63,8 @@ int emgcounter = 0;
 int i = 2148;
 int j = 2048;
 int k = 2048;
+int l = 2200;
+int m = 1800;
 int joint = 1;
 int infoPk[24];
 void actualName(){
@@ -73,7 +75,10 @@ void actualName(){
             infoPk[i] = jelly;
           }
 
-while(z < 300 && h==0){
+while(z < 0 || z > 1203 || y < 0 || y > 1203 || x < 0 || x > 1203 || emg1 < 0 || emg1 > 1203 || emg2 < 0 || emg2 > 1200){
+break;  
+}
+while(z < 300 && z > 100 && h==0 && emg1 > 0 && emg1 < 1024 && emg2 >= 0 && emg2 < 1024){
     joint++;
     h++;
     if(joint > 4){
@@ -81,7 +86,7 @@ while(z < 300 && h==0){
     }
     break;
 }
-while(z > 700 && h==0){
+while(z > 700 && z < 900 && h==0 && emg1 > 0 && emg1 < 1024 && emg2 >= 0 && emg2 < 1024){
    joint--;
    h++;
    if(joint < 1){
@@ -89,50 +94,86 @@ while(z > 700 && h==0){
    }
    break;
 }
-  if(z > 460 && z < 470){
+  if(z > 460 && z < 470 && emg1 > 0 && emg1 < 1024 && emg2 >= 0 && emg2 < 1024){
     h=0;
     }
     
-while(joint == 1 && y > 700){
+while(joint == 1 && y > 700 && y < 900 && emg1 > 0 && emg1 < 1024 && emg2 >= 0 && emg2 < 1024){
   i = i + 10;
   Dynamixel.setNGoalPositions(i, -1, -1, -1, -1);
   break;
   }
-while(joint == 1 && y < 300){
+while(joint == 1 && y < 300 && y > 100 && emg1 > 0 && emg1 < 1024 && emg2 >= 0 && emg2 < 1024){
   i = i - 10;
   Dynamixel.setNGoalPositions(i, -1, -1, -1, -1);
   break;
 }
 
-while(joint == 2 && y > 700){
+while(joint == 2 && y > 700 && y < 900 && emg1 > 0 && emg1 < 1024 && emg2 >= 0 && emg2 < 1024){
   j = j + 10;
+  if(j > 3200){
+    j = 3200;
+    break;
+  }
   Dynamixel.setNGoalPositions(-1, j, -1, -1, -1);
   break;
 }
-while(joint == 2 && y < 300){
+while(joint == 2 && y < 300 && y > 100 && emg1 > 0 && emg1 < 1024 && emg2 >= 0 && emg2 < 1024){
   j = j - 10;
+  if(j < 800){
+    j = 800;
+    break;
+  }
   Dynamixel.setNGoalPositions(-1, j, -1, -1, -1);
   break;
 }
 
-while(joint == 3 && y > 700){
+while(joint == 3 && y > 700 && y < 900 && emg1 > 0 && emg1 < 1024 && emg2 >= 0 && emg2 < 1024){
   k = k + 10;
+  if(k > 3200){
+    k = 3200;
+    break;
+  }
   Dynamixel.setNGoalPositions(-1, -1, k, -1, -1);
   break;
 }
-while(joint == 3 && y < 300){
+while(joint == 3 && y < 300 && y > 100 && emg1 > 0 && emg1 < 1024 && emg2 >= 0 && emg2 < 1024){
   k = k - 10;
+  if(k < 800){
+    k = 800;
+    break;
+  }
   Dynamixel.setNGoalPositions(-1, -1, k, -1, -1);
   break;
 }
 
-while(joint == 4 && y > 700){
-    Dynamixel.gripper(OPEN);
+while(joint == 4 && y > 700 && y < 900 && emg1 > 0 && emg1 < 1024 && emg2 >= 0 && emg2 < 1024){
+  l = l + 10;
+  if(l > 3200){
+    l = 3200;
     break;
+  }
+  m = m - 10;
+  if(m < 800){
+    m = 800;
+    break;
+  }
+  Dynamixel.setNGoalPositions(-1, -1, -1, l, m);
+  break;
 }
-while(joint == 4 && y < 300){
-    Dynamixel.gripper(CLOSE);
+while(joint == 4 && y < 300 && y > 100 && emg1 > 0 && emg1 < 1024 && emg2 >= 0 && emg2 < 1024){ 
+  l = l - 10;
+  if(l < 800){
+    l = 800;
     break;
+  }
+  m = m + 10;
+  if(m > 3200){
+    m = 3200;
+    break;
+  }
+  Dynamixel.setNGoalPositions(-1, -1, -1, l, m);
+  break;
 }
 
 
@@ -182,12 +223,17 @@ while(joint == 4 && y < 300){
     emg2 = infoPk[21] + (infoPk[20] << 8);
 
    }
-    Serial.print(" X = ") && Serial.print(x);
-    Serial.print(" Y = ") && Serial.print(y);
-    Serial.print(" Z = ") && Serial.print(z);
-    Serial.print(" EMG Ch.1 = ") && Serial.print(emg1);
-    Serial.print(" EMG Ch.2 = ") && Serial.print(emg2);
+    //Serial.print(" X = ") && Serial.print(x);
+    //Serial.print(" Y = ") && Serial.print(y);
+    //Serial.print(" Z = ") && Serial.print(z);
+    //Serial.print(" EMG Ch.1 = ") && Serial.print(emg1);
+    //Serial.print(" EMG Ch.2 = ") && Serial.print(emg2);
     Serial.print(" joint number= ") && Serial.print(joint);
+    Serial.print(" joint 1 = ") && Serial.print(i);
+    Serial.print(" joint 2 = ") && Serial.print(j);
+    Serial.print(" joint 3 = ") && Serial.print(k);
+    Serial.print(" joint 4 = ") && Serial.print(l);
+    Serial.print(" joint 5 = ") && Serial.print(m);
     Serial.println();
  }
   }
