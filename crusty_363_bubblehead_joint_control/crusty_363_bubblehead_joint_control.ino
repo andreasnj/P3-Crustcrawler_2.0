@@ -50,7 +50,7 @@ void setup() {
   Dynamixel.setProfileVelocity(0x05, 200);
  }
 
-int x, y, z, h;
+int x, y, z, jointexcess_prevention;
 int i = 2148;
 int j = 2048;
 int k = 2048;
@@ -64,60 +64,60 @@ void actualName(){
             infoPk[i] = jelly;
           }
 
-while(z < 300 && h==0){
+while(z < 300 && jointexcess_prevention==0){                              //Tilting the head to the right moves on to the next joint && h prevents from excessive joint counting.
     joint++;
-    h++;
+    jointexcess_prevention++;
     if(joint > 4){
       joint = 4;
     }
     break;
 }
-while(z > 700 && h==0){
+while(z > 700 && jointexcess_prevention==0){                              //Tilting the head to the left moves on to the previous joint
    joint--;
-   h++;
+   jointexcess_prevention++;
    if(joint < 1){
     joint = 1;
    }
    break;
 }
-  if(z >= 460 && z <= 470){
-    h=0;
+  if(z >= 460 && z <= 470){                         //Sets it back to the original position and the counter to 0
+    jointexcess_prevention=0;
     }
-while(joint = 1 && y > 700){
+while(joint == 1 && y > 700){                        //Tilting forward moves joint 1 down
   i = i + 20;
   Dynamixel.setNGoalPositions(i, -1, -1, -1, -1);
   break;
 }
-while(joint = 1 && y < 300){
+while(joint == 1 && y < 300){                        //Tilting backward moves joint 1 up
   i = i - 20;
   Dynamixel.setNGoalPositions(i, -1, -1, -1, -1);
   break;
 }
-while(joint = 2 && y > 700){
+while(joint == 2 && y > 700){                        //Tilting forward moves joint 2 down
   j = j + 20;
   Dynamixel.setNGoalPositions(-1, j, -1, -1, -1);
   break;
 }
-while(joint = 2 && y < 300){
+while(joint == 2 && y < 300){                        //Tilting backward moves joint 2 up
   j = j - 20;
   Dynamixel.setNGoalPositions(-1, j, -1, -1, -1);
   break;
 }
-while(joint = 3 && y > 700){
+while(joint == 3 && y > 700){                        //Tilting forward moves joint 3 down
   k = k + 20;
   Dynamixel.setNGoalPositions(-1, -1, k, -1, -1);
   break;
 }
-while(joint = 3 && y < 300){
+while(joint == 3 && y < 300){                        //Tilting backward moves joint 3 up
   k = k - 20;
   Dynamixel.setNGoalPositions(-1, -1, k, -1, -1);
   break;
 }
-while(joint = 4 && y > 700){
+while(joint == 4 && y > 700){                        //Tilting forward opens the gripper
    Dynamixel.gripper(OPEN);
    break;
 }
-while(joint = 4 && y < 300){
+while(joint == 4 && y < 300){                        //Tilting backward closes the gripper
    Dynamixel.gripper(CLOSE);
    break;
 }

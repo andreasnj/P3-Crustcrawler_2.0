@@ -56,32 +56,32 @@ void actualName(){
   while(emg1 > 500 && emg1 < 1024 && emgsignal_counter==0 && emgcounter==0){
     Dynamixel.performMovement(2148, 2048, 2048, OPEN);   //"Initial" position
     //delay(1000);
-    Dynamixel.performMovement(1142, 3250, 775, OPEN);     //Ready position
+    Dynamixel.performMovement(1642, 3250, 1405, OPEN);     //Ready position
     //delay(1000);
-    Dynamixel.performMovement(1128, 3250, 1846, OPEN);      //Move to sponge.
+    Dynamixel.performMovement(1642, 3250, 1853, OPEN);      //Move to sponge.
     //delay(1000);
     //Dynamixel.gripper(CLOSE);                               //Grab
-    Dynamixel.performMovement(1128, 3250, 1846, CLOSE);     //Detour
+    Dynamixel.performMovement(1642, 3250, 1853, CLOSE);     //Detour
     //delay(500);
-    Dynamixel.performMovement(1608, 2639, 2467, CLOSE);     //Move to destination
+    Dynamixel.performMovement(1651, 2739, 2375, CLOSE);     //Move to destination
     //delay(500);
     //Dynamixel.gripper(OPEN);                                //Release
     //delay(500);
-    Dynamixel.performMovement(2108, 3088, 2018, CLOSE);
+    Dynamixel.performMovement(636, 3041, 2060, CLOSE);
     emgsignal_counter++;
     emgcounter++;
     break;
     }
     while(emg2 > 500 && emg2 < 1024 && emgsignal_counter==0 && emgcounter==1){
-    Dynamixel.performMovement(1608, 2639, 2467, CLOSE);     //Move to destination
+    Dynamixel.performMovement(636, 3041, 2060, CLOSE);     //Move to destination
     //delay(500);
-    Dynamixel.performMovement(1128, 3250, 1846, CLOSE);     //Detour
+    Dynamixel.performMovement(1651, 2739, 2375, CLOSE);     //Detour
     //delay(500);
-    Dynamixel.performMovement(1128, 3250, 1846, OPEN);      //Move to sponge.
+    Dynamixel.performMovement(1642, 3250, 1853, CLOSE);      //Move to sponge.
     //delay(1000);
-    Dynamixel.performMovement(1142, 3250, 775, OPEN);     //Ready position
+    Dynamixel.performMovement(1642, 3250, 1853, OPEN);     //Ready position
     //delay(1000);
-    Dynamixel.performMovement(2148, 2048, 2048, CLOSE);   //"Initial" position
+    Dynamixel.performMovement(1642, 3250, 1405, OPEN);   //"Initial" position
     //delay(1000);
     emgsignal_counter++;
     emgcounter--;
