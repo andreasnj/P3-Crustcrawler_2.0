@@ -54,9 +54,11 @@ void setup() {
   Dynamixel.setProfileVelocity(0x03, 100);
   Dynamixel.setProfileVelocity(0x04, 200);
   Dynamixel.setProfileVelocity(0x05, 200);
+
+  Dynamixel.performMovement(2148, 2048, 2048, CLOSE);
  }
 
-int x, y, z, emg1, emg2, g, h, l, m, n, o;
+int x, y, z, emg1, emg2, g, h;
 int emgcounter = 0;
 int i = 2148;
 int j = 2048;
@@ -87,70 +89,54 @@ while(z > 700 && h==0){
    }
    break;
 }
-  if(z >= 460 && z <= 470){
+  if(z > 460 && z < 470){
     h=0;
     }
-while(joint = 1 && y > 700 && l==0){
-  i = i + 20;
+    
+while(joint == 1 && y > 700){
+  i = i + 10;
   Dynamixel.setNGoalPositions(i, -1, -1, -1, -1);
-  l++;
   break;
-}
-while(joint = 1 && y < 300 && l==0){
-  i = i - 20;
+  }
+while(joint == 1 && y < 300){
+  i = i - 10;
   Dynamixel.setNGoalPositions(i, -1, -1, -1, -1);
-  l++;
   break;
 }
-  if(y >= 530 && y <= 540){
-    l=0;
-    }
-while(joint = 2 && y > 700 && m==0){
-  j = j + 20;
+
+while(joint == 2 && y > 700){
+  j = j + 10;
   Dynamixel.setNGoalPositions(-1, j, -1, -1, -1);
-  m++;
   break;
 }
-while(joint = 2 && y < 300 && m==0){
-  j = j - 20;
+while(joint == 2 && y < 300){
+  j = j - 10;
   Dynamixel.setNGoalPositions(-1, j, -1, -1, -1);
-  m++;
   break;
 }
-  if(y >= 530 && y <= 540){
-    m=0;
-    }
-while(joint = 3 && y > 700 && n==0){
-  k = k + 20;
+
+while(joint == 3 && y > 700){
+  k = k + 10;
   Dynamixel.setNGoalPositions(-1, -1, k, -1, -1);
-  n++;
   break;
 }
-while(joint = 3 && y < 300 && n==0){
-  k = k - 20;
+while(joint == 3 && y < 300){
+  k = k - 10;
   Dynamixel.setNGoalPositions(-1, -1, k, -1, -1);
-  n++;
   break;
 }
-  if(y >= 530 && y <= 540){
-    n=0;
-    }
-while(joint = 4 && y > 700 && o==0){
+
+while(joint == 4 && y > 700){
     Dynamixel.gripper(OPEN);
-    o++;
     break;
 }
-while(joint = 4 && y < 300 && o==0){
+while(joint == 4 && y < 300){
     Dynamixel.gripper(CLOSE);
-    o++;
     break;
 }
-    if(y >= 530 && y <= 540){
-      n=0;
-      }
 
 
-  while(emg1 > 500 && emg1 < 1024 && g==0 && emgcounter==0){
+/*  while(emg1 > 500 && emg1 < 1024 && g==0 && emgcounter==0){
     Dynamixel.performMovement(2148, 2048, 2048, OPEN);   //"Initial" position
     //delay(1000);
     Dynamixel.performMovement(1142, 3250, 775, OPEN);     //Ready position
@@ -187,6 +173,7 @@ while(joint = 4 && y < 300 && o==0){
   if(emg1 < 100 && emg2 < 100){
     g=0;
   }
+  */
   for(int a = 13; a < 24; a++) {
     z = infoPk[13] + (infoPk[12] << 8);
     y = infoPk[15] + (infoPk[14] << 8);
