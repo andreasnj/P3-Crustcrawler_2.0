@@ -112,14 +112,14 @@ while(joint == 3 && z  < 300){                                          //Tiltin
   break;
 }
 
-while(emg2 > 500 && emg2 < 1024 && emgsignal_counter==0 && emgcounter==0 && grippercounter==0){
+while(emg2 > 500 && emg2 < 1024 && emgsignal_counter==0 && emgcounter==0 && grippercounter==0){   //Opens the gripper using the Emg2
 Dynamixel.gripper(OPEN);
 emgsignal_counter++;
 emgcounter++;
 grippercounter++;
 break;
 }
-while(emg2 > 500 && emg2 < 1024 && emgsignal_counter==0 && emgcounter==1 && grippercounter==1){
+while(emg2 > 500 && emg2 < 1024 && emgsignal_counter==0 && emgcounter==1 && grippercounter==1){   //Closes the gripper using the Emg2
 Dynamixel.gripper(CLOSE);
 emgsignal_counter++;
 emgcounter--;
