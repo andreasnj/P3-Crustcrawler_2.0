@@ -217,7 +217,6 @@ int *DynamixelClass::getPositionN(void){
 
     returndata[data[i]-1] = sum;          //Array for storing multiple positions
 
-    Debug information
     Serial.print("Position of ID: ");
     Serial.print(data[i]);
     Serial.print(" is ");

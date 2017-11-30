@@ -4,7 +4,7 @@
 #define SERVO_ControlPin 0x02       // Control pin of buffer chip, NOTE: this does not matter becasue we are not using a half to full contorl buffer.
 #define SERVO_SET_Baudrate 57600    // Baud rate speed which the Dynamixel will be set too (57600)
 
-int out;
+int out, counter;
 
 SoftwareSerial w(10, 11);
 
@@ -34,8 +34,15 @@ void setup() {
   Dynamixel.setProfileVelocity(0x04, 200);
   Dynamixel.setProfileVelocity(0x05, 200);
 
+  Dynamixel.setNGoalPositions(-1, 0, 0, -1, -1);
+  delay(5000);
+  Dynamixel.setNGoalPositions(-1, 1080, 500, -1, -1);
 }
 
 void loop() {
+  while (counter <= 3000){
   out = Dynamixel.getPosition(2);
+  counter += 100;
+  delay(100);
+  }
 }
