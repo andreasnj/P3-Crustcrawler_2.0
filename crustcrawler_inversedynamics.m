@@ -1,4 +1,4 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %    The inverse dynamics of the 2-dof planar robotic arm
 %     
@@ -13,19 +13,19 @@ g = 9.801; % gravity constant
 %======================================  link 1
 L1 = 0.22; % length [m]
 %c1 = L1 * 2/3; % mass center
-m1 = 0.037 + 0.126; % mass [kg]
+m1 = 0.037 + 0.126; % mass [kg] the link + the motor
 I1 = 1/12 * m1 * L1^2; % moment of inertia
 %======================================  link 2
 L2 = 0.14; % length [m]
 %c2 = L2 * 2/3; % mass center
-m2 = 0.072 * 2 + 0.023; % mass [kg]
+m2 = 0.072 * 2 + 0.023; % mass [kg] the link + the motor
 I2 = 1/12 * m2 * L2^2; % moment of inertia
 %% %%%%%%%%%%%%%%%% wished positions of joints and time for the movements
 tf = 3;
-theta01 = 100 * 2*pi/4096; %in the graphs will be represented in radians, although input is in steps
-thetaf1 = 10 * 2*pi/4096;
+theta01 = 0 * 2*pi/4096; %in the graphs will be represented in radians, although input is in ticks of the motor
+thetaf1 = 1080 * 2*pi/4096;
 theta02 = 0 * 2*pi/4096;
-thetaf2 = 200 * 2*pi/4096;
+thetaf2 = 500 * 2*pi/4096;
 %% %%%%%%%%%%%%%%%% coefficients for position, velocity and acceleration
 a01 = theta01;
 a11 = 0;
@@ -49,7 +49,7 @@ for t = linspace(0, T, N)
     dtheta_1(i) = a11 + 2 * a21 * t + 3 * a31 * t^2;
     ddtheta_1(i) = 2 * a21 + 6 * a31 * t;
     
-    %%%%%%%%%%%%%%% Joint 1: angular displacement, velocity, acceleration
+    %%%%%%%%%%%%%%% Joint 2: angular displacement, velocity, acceleration
     theta_2(i) = a02 + a12 * t + a22 * t^2 + a32 * t^3;
     dtheta_2(i) = a12 + 2 * a22 * t + 3 * a32 * t^2;
     ddtheta_2(i) = 2 * a22 + 6 * a32 * t;
