@@ -1,7 +1,8 @@
 /////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////
-///      For this function, the xBee transmitter has to   ///
-///          be placed on the side of the head.           ///
+///   For this function, the xBee transmitter has to be   ///
+/// placed on the side of the head with the batery facing /// 
+///      outward and the EMG outputs facing forward.      ///
 /////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////
 
@@ -84,32 +85,32 @@ while(z > 700 && jointexcess_prevention==0){                              //Tilt
     jointexcess_prevention=0;
     }
 while(joint == 1 && y > 700){                        //Tilting forward moves joint 1 down
-  i = i + 20;
+  i = i + 10;
   Dynamixel.setNGoalPositions(i, -1, -1, -1, -1);
   break;
 }
 while(joint == 1 && y < 300){                        //Tilting backward moves joint 1 up
-  i = i - 20;
+  i = i - 10;
   Dynamixel.setNGoalPositions(i, -1, -1, -1, -1);
   break;
 }
 while(joint == 2 && y > 700){                        //Tilting forward moves joint 2 down
-  j = j + 20;
+  j = j + 10;
   Dynamixel.setNGoalPositions(-1, j, -1, -1, -1);
   break;
 }
 while(joint == 2 && y < 300){                        //Tilting backward moves joint 2 up
-  j = j - 20;
+  j = j - 10;
   Dynamixel.setNGoalPositions(-1, j, -1, -1, -1);
   break;
 }
 while(joint == 3 && y > 700){                        //Tilting forward moves joint 3 down
-  k = k + 20;
+  k = k + 10;
   Dynamixel.setNGoalPositions(-1, -1, k, -1, -1);
   break;
 }
 while(joint == 3 && y < 300){                        //Tilting backward moves joint 3 up
-  k = k - 20;
+  k = k - 10;
   Dynamixel.setNGoalPositions(-1, -1, k, -1, -1);
   break;
 }
