@@ -1,7 +1,8 @@
 /////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////
 ///      For this function, the xBee transmitter has to   ///
-///          be placed on the back of the head.           ///
+///          be placed on the back of the head with the   ///
+///                EMGs outputs facing right.             ///
 /////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////
 
@@ -65,25 +66,25 @@ void setup() {
              infoPk[i] = jelly;
            }
 
-while(y > 700){                                                       //Tilting the head to the right moves joint 1 to the right
+while(y > 700 && emg1 < 100 && emg2 < 100 && z > 300 && z < 700){         //Tilting the head to the right moves joint 1 to the right
   i = i + 10;
   Dynamixel.setNGoalPositions(i, -1, -1, -1, -1);
   break;
 }
-while(y < 300){                                                       //Tilting the head to the left moves joint 1 to the left
+while(y < 300 && emg1 < 100 && emg2 < 100 && z > 300 && z < 700){         //Tilting the head to the left moves joint 1 to the left
   i = i - 10;
   Dynamixel.setNGoalPositions(i, -1, -1, -1, -1);
   break;
 }
 
-while(emg1 > 500 && emg1 < 1024 && emgsignal_counter==0 && jointcounter==0){    //Set the emg1 to move the joints up in a cycle from 2 to 3
+while(emg1 > 500 && emg1 < 1024 && emgsignal_counter==0 && jointcounter==0 && y < 700 && y > 300 && z > 300 && z < 700){    //Set the emg1 to move the joints up in a cycle from 2 to 3
   joint++;
   //jointexcess_prevention++;
   jointcounter++;
   emgsignal_counter++;
   break;
   }
-while(emg1 > 500 && emg1 < 1024 && emgsignal_counter==0 && jointcounter==1){    //Set the emg1 to move the joints up in a cycle from 2 to 3
+while(emg1 > 500 && emg1 < 1024 && emgsignal_counter==0 && jointcounter==1 && y < 700 && y > 300 && z > 300 && z < 700){    //Set the emg1 to move the joints up in a cycle from 2 to 3
   joint--;
   //jointexcess_prevention--;
   jointcounter--;
@@ -91,35 +92,35 @@ while(emg1 > 500 && emg1 < 1024 && emgsignal_counter==0 && jointcounter==1){    
   break;
   }
 
-while(joint == 2 && z > 700){                                           //Tilting forward moves joint 2 down
+while(joint == 2 && z > 700 && y < 700 && y > 300 && emg1 < 100 && emg2 < 100){            //Tilting forward moves joint 2 down
   j = j + 10;
   Dynamixel.setNGoalPositions(-1, j, -1, -1, -1);
   break;
 }
-while(joint == 2 && z < 300){                                          //Tilting backward moves joint 2 up
+while(joint == 2 && z < 300 && y < 700 && y > 300 && emg1 < 100 && emg2 < 100){            //Tilting backward moves joint 2 up
   j = j - 10;
   Dynamixel.setNGoalPositions(-1, j, -1, -1, -1);
   break;
 }
-while(joint == 3 && z > 700){                                          //Tilting forward moves joint 3 down
+while(joint == 3 && z > 700 && y < 700 && y > 300 && emg1 < 100 && emg2 < 100){            //Tilting forward moves joint 3 down
   k = k + 10;
   Dynamixel.setNGoalPositions(-1, -1, k, -1, -1);
   break;
 }
-while(joint == 3 && z  < 300){                                          //Tilting backward moves joint 3 up
+while(joint == 3 && z  < 300 && y < 700 && y > 300 && emg1 < 100 && emg2 < 100){           //Tilting backward moves joint 3 up
   k = k - 10;
   Dynamixel.setNGoalPositions(-1, -1, k, -1, -1);
   break;
 }
 
-while(emg2 > 500 && emg2 < 1024 && emgsignal_counter==0 && emgcounter==0 && grippercounter==0){   //Opens the gripper using the Emg2
+while(emg2 > 500 && emg2 < 1024 && emgsignal_counter==0 && emgcounter==0 && grippercounter==0 && y < 700 && y > 300 && emg1 < 100 && z > 300 && z < 700){   //Opens the gripper using the Emg2
 Dynamixel.gripper(OPEN);
 emgsignal_counter++;
 emgcounter++;
 grippercounter++;
 break;
 }
-while(emg2 > 500 && emg2 < 1024 && emgsignal_counter==0 && emgcounter==1 && grippercounter==1){   //Closes the gripper using the Emg2
+while(emg2 > 500 && emg2 < 1024 && emgsignal_counter==0 && emgcounter==1 && grippercounter==1 && y < 700 && y > 300 && emg1 < 100 && z > 300 && z < 700){   //Closes the gripper using the Emg2
 Dynamixel.gripper(CLOSE);
 emgsignal_counter++;
 emgcounter--;
