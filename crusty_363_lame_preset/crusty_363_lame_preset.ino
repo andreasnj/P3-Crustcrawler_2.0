@@ -1,3 +1,8 @@
+//THIS CODE WILL MAKE THE ROBOT RUN A PRE-DETERMINED ROUTINE
+//WHEN THE EMG CHANNEL 1 IS ACTIVATED, THE ROBOT WILL PICK UP THE CUP AND BRING IT TO THE PATIENT
+//AND WHENEVER THE PATIENT WANTS, HE/SHE CAN ACTIVATE THE EMG CHANNEL 2 FOR THE ROBOT TO PUT THE CUP BACK IN THE ORIGINAL POSITION
+
+
 #include <Dynamixel_Serial.h>
 #include <readxBee.h>
 #include <SoftwareSerial.h>
@@ -85,6 +90,7 @@ void actualName(){
     //delay(1000);
     emgsignal_counter++;
     emgcounter--;
+    Dynamixel.performMovement(2148, 2048, 2048, OPEN);   //"Erect" position
     break;
     }
   if(emg1 < 100 && emg2 < 100){
