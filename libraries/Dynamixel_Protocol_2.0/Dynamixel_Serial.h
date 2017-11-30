@@ -35,6 +35,7 @@ public:
     int *getPositionN(void);
     float getPositionD(unsigned char ID);
     float getLoad(unsigned char ID);
+    int getVelocity(unsigned char ID);
 
     void setNGoalPositions(int m1, int m2, int m3, int m4, int m5);
 

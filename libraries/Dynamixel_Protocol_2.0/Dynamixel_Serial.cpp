@@ -248,6 +248,26 @@ float DynamixelClass::getLoad(unsigned char ID){
   return sum;
 }
 
+int DynamixelClass::getVelocity(unsigned char ID){
+    clearRXbuffer();
+    readN(ID, 0x80, 4);                   //Read from adress 0x7E (Present Load), byte size 4 (should be 2?)
+    getParameters();                      //Filters parameters from ReturnPacket
+
+    float sum;
+    sum = (data[2] << 8) | data[1];       //Converting two information bytes into a float (load data)
+
+    //Converting load to percentage
+    sum = sum/10;
+
+    //Debug information
+    Serial.print("Velocity of ID: ");
+    Serial.print(data[0]);
+    Serial.print(" is ");
+    Serial.println(sum);
+
+    return sum;
+}
+
 
 unsigned int DynamixelClass::syncWN(unsigned short addr, unsigned char*arr, int n, int dataN){
 
