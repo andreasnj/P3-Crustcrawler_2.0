@@ -178,9 +178,9 @@ int DynamixelClass::getPosition(unsigned char ID){
   sum = (data[2] << 8) | data[1];       //Converting two information bytes into a integer (position data)
 
   //Debug information
-  Serial.print("Position of ID: ");
-  Serial.print(data[0]);
-  Serial.print(" is ");
+  //Serial.print("Position of ID: ");
+  //Serial.print(data[0]);
+  //Serial.print(" is ");
   Serial.println(sum);
 
   return sum;
@@ -217,10 +217,10 @@ int *DynamixelClass::getPositionN(void){
 
     returndata[data[i]-1] = sum;          //Array for storing multiple positions
 
-    //Debug information
-    //Serial.print("Position of ID: ");
-    //Serial.print(data[i]);
-    //Serial.print(" is ");
+    Debug information
+    Serial.print("Position of ID: ");
+    Serial.print(data[i]);
+    Serial.print(" is ");
     Serial.println(sum, " ");
   }
 
