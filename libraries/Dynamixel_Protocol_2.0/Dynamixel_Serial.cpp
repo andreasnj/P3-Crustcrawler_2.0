@@ -182,6 +182,7 @@ int DynamixelClass::getPosition(unsigned char ID){
   //Serial.print(data[0]);
   //Serial.print(" is ");
   Serial.println(sum);
+  //Serial.print(" ");
 
   return sum;
 }
@@ -220,7 +221,7 @@ int *DynamixelClass::getPositionN(void){
     Serial.print("Position of ID: ");
     Serial.print(data[i]);
     Serial.print(" is ");
-    Serial.println(sum, " ");
+    Serial.println(sum);
   }
 
   return returndata;                      //Return pointer to array of positions
@@ -243,6 +244,7 @@ float DynamixelClass::getLoad(unsigned char ID){
   //Serial.print(data[0]);
   //Serial.print(" is ");
   Serial.println(sum, " ");
+  //Serial.print(" ");
 
   return sum;
 }
@@ -263,6 +265,7 @@ int DynamixelClass::getVelocity(unsigned char ID){
     //Serial.print(data[0]);
     //Serial.print(" is ");
     Serial.println(sum, " ");
+    //Serial.print(" ");
 
     return sum;
 }

@@ -34,14 +34,15 @@ void setup() {
   Dynamixel.setProfileVelocity(0x04, 200);
   Dynamixel.setProfileVelocity(0x05, 200);
 
-  Dynamixel.setNGoalPositions(-1, 0, 0, -1, -1);
+  Dynamixel.setNGoalPositions(-1, 1000, 2000, -1, -1);
   delay(5000);
-  Dynamixel.setNGoalPositions(-1, 1080, 500, -1, -1);
+  Dynamixel.setNGoalPositions(-1, 2000, 1000, -1, -1);
 }
 
 void loop() {
   while (counter <= 3000){
   out = Dynamixel.getPosition(2);
+  //out = Dynamixel.getPositionN();
   counter += 100;
   delay(100);
   }
