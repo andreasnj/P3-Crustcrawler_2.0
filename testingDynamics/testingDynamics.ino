@@ -5,6 +5,7 @@
 #define SERVO_SET_Baudrate 57600    // Baud rate speed which the Dynamixel will be set too (57600)
 
 int out=0, counter=0;
+float fout=0;
 
 SoftwareSerial w(10, 11);
 
@@ -55,7 +56,7 @@ void loop() {
   Serial.println("SERVO 2, VELOCITY");
   doMvmt();
   while (counter <= 45){
-  out = Dynamixel.getVelocity(2);
+  fout = Dynamixel.getVelocity(2);
   counter++;
   delay(10);
   }
@@ -64,12 +65,12 @@ void loop() {
   Serial.println("SERVO 2, LOAD");
   doMvmt();
   while (counter <= 45){
-  out = Dynamixel.getLoad(2);
+  fout = Dynamixel.getLoad(2);
   counter++;
   delay(10);
   }
 
-  /////// SERVO 3 \\\\\\\
+  /////// SERVO 3
   counter=0;
   Serial.println("SERVO 3, POSITION");
   doMvmt();
@@ -83,7 +84,7 @@ void loop() {
   Serial.println("SERVO 3, VELOCITY");
   doMvmt();
   while (counter <= 45){
-  out = Dynamixel.getVelocity(3);
+  fout = Dynamixel.getVelocity(3);
   counter++;
   delay(10);
   }
@@ -92,7 +93,7 @@ void loop() {
   Serial.println("SERVO 3, LOAD");
   doMvmt();
   while (counter <= 45){
-  out = Dynamixel.getLoad(3);
+  fout = Dynamixel.getLoad(3);
   counter++;
   delay(10);
   }
