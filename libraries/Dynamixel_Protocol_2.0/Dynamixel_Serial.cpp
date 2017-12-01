@@ -243,7 +243,7 @@ float DynamixelClass::getLoad(unsigned char ID){
   //Serial.print("Load of ID: ");
   //Serial.print(data[0]);
   //Serial.print(" is ");
-  Serial.println(sum, " ");
+  Serial.println(sum, 5);
   //Serial.print(" ");
 
   return sum;
@@ -264,7 +264,7 @@ int DynamixelClass::getVelocity(unsigned char ID){
     //Serial.print("Load of ID: ");
     //Serial.print(data[0]);
     //Serial.print(" is ");
-    Serial.println(sum, " ");
+    Serial.println(sum, 5);
     //Serial.print(" ");
 
     return sum;
