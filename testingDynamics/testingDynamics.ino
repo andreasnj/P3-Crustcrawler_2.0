@@ -36,23 +36,29 @@ void setup() {
   Dynamixel.setProfileVelocity(0x05, 200);
 }
 
-void doMvmt(){
+void doMvmt(int ID){
   Dynamixel.setNGoalPositions(-1, 1000, 2000, -1, -1);
   delay(3000);
   Dynamixel.setNGoalPositions(-1, 2000, 1000, -1, -1);
+  while (counter <= 3000){ //has to be 3000, because simultion in matlab is lasting for this long
+  fout = Dynamixel.getLoad(ID);
+  }
+  //counter = 0;
 }
 
 void loop() {
-  counter=0;
-  Serial.println("SERVO 2, POSITION");
+  doMvmt(2);
+  /*delay(1000);
+  doMvmt(3);
+  /*counter=0;
+  //Serial.println("SERVO 2, POSITION");
   doMvmt();
-  while (counter <= 45){
+  while (counter <= ){
   out = Dynamixel.getPosition(2);
   counter++;
-  delay(10);
   }
   
-  counter=0;
+  /*counter=0;
   Serial.println("SERVO 2, VELOCITY");
   doMvmt();
   while (counter <= 45){
@@ -98,4 +104,5 @@ void loop() {
   delay(10);
   }
   delay(1000000);
+  */
 }
