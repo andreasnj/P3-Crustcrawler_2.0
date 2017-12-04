@@ -4,9 +4,6 @@
 #define SERVO_ControlPin 0x02       // Control pin of buffer chip, NOTE: this does not matter becasue we are not using a half to full contorl buffer.
 #define SERVO_SET_Baudrate 57600    // Baud rate speed which the Dynamixel will be set too (57600)
 
-int out=0, counter=0;
-float fout=0;
-
 SoftwareSerial w(10, 11);
 
 void setup() {
@@ -14,6 +11,7 @@ void setup() {
   w.begin(SERVO_SET_Baudrate);
   Dynamixel.begin(w);
   Dynamixel.setDirectionPin(SERVO_ControlPin);
+
 //*
   Dynamixel.setHoldingTorque(0x01, false);            //Set on hold turque for each servo
   Dynamixel.setHoldingTorque(0x02, false);
@@ -43,6 +41,9 @@ void setup() {
 //  */
 }
 
+int out=0, counter=0, cycles=45, wait=10;
+float fout=0;
+
 
 void doMvmt(){
   Dynamixel.setNGoalPositions(-1, 1000, 2000, -1, -1);
@@ -50,60 +51,49 @@ void doMvmt(){
   Dynamixel.setNGoalPositions(-1, 2000, 1000, -1, -1);
 }
 
-void loop() {
+void Read(int servo, char var){
+  while (counter < cycles){
+    switch(var){
+      case 'p':
+        out = Dynamixel.getPosition(servo);
+        break;
+      case 'v':
+        fout = Dynamixel.getVelocity(servo);
+        break;
+      case 'a':
+        fout = Dynamixel.getAcceleration(servo);
+        break;
+    }
+  counter++;
+  delay(wait);
+  }
   counter=0;
+}
+
+void loop() {
   Serial.println("SERVO 2, POSITION");
   doMvmt();
-  while (counter <= 45){
-  out = Dynamixel.getPosition(2);
-  counter++;
-  delay(10);
-  }
-  
-  counter=0;
+  Read(2, p);
+
   Serial.println("SERVO 2, VELOCITY");
   doMvmt();
-  while (counter <= 45){
-  fout = Dynamixel.getVelocity(2);
-  counter++;
-  delay(10);
-  }
-  
-  counter=0;
+  Read(2, v);
+
   Serial.println("SERVO 2, LOAD");
   doMvmt();
-  while (counter <= 45){
-  fout = Dynamixel.getLoad(2);
-  counter++;
-  delay(10);
-  }
+  Read(2, a);
 
   /////// SERVO 3
-  counter=0;
   Serial.println("SERVO 3, POSITION");
   doMvmt();
-  while (counter <= 45){
-  out = Dynamixel.getPosition(3);
-  counter++;
-  delay(10);
-  }
-  
-  counter=0;
+  Read(3, p);
+
   Serial.println("SERVO 3, VELOCITY");
   doMvmt();
-  while (counter <= 45){
-  fout = Dynamixel.getVelocity(3);
-  counter++;
-  delay(10);
-  }
-  
-  counter=0;
+  Read(3, v);
+
   Serial.println("SERVO 3, LOAD");
   doMvmt();
-  while (counter <= 45){
-  fout = Dynamixel.getLoad(3);
-  counter++;
-  delay(10);
-  }
-  delay(1000000);
+  Read(3, a);
+  delay(9000000);
 }

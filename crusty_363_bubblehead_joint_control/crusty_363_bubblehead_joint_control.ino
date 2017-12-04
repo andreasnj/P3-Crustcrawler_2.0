@@ -30,16 +30,16 @@ void setup() {
   Dynamixel.setDirectionPin(SERVO_ControlPin);          // Optional. Set direction control pin which controls if the program writes or reads
 
   //Turn on hold for the servos, so they stay in place
-  Dynamixel.setHoldingTorque(0x01, true);               //Set on hold turque for each servo
-  Dynamixel.setHoldingTorque(0x02, true);
-  Dynamixel.setHoldingTorque(0x03, true);
-  Dynamixel.setHoldingTorque(0x04, true);
+  Dynamixel.setHoldingTorque(0x01, false);               //Set on hold turque for each servo
+  Dynamixel.setHoldingTorque(0x02, false);
+  Dynamixel.setHoldingTorque(0x03, false);
+  Dynamixel.setHoldingTorque(0x04, false);
   Dynamixel.setHoldingTorque(0x05, true);
 
   //Set profile acceleration
-  Dynamixel.setProfileAcceleration(0x01, 0);           //Set profile acc for each servo
-  Dynamixel.setProfileAcceleration(0x02, 0);
-  Dynamixel.setProfileAcceleration(0x03, 0);
+  Dynamixel.setProfileAcceleration(0x01, 50);           //Set profile acc for each servo
+  Dynamixel.setProfileAcceleration(0x02, 50);
+  Dynamixel.setProfileAcceleration(0x03, 50);
   Dynamixel.setProfileAcceleration(0x04, 100);
   Dynamixel.setProfileAcceleration(0x05, 100);
 
