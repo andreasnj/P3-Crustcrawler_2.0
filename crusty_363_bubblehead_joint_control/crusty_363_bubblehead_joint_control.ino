@@ -37,18 +37,18 @@ void setup() {
   Dynamixel.setHoldingTorque(0x05, true);
 
   //Set profile acceleration
-  Dynamixel.setProfileAcceleration(0x01, 10);           //Set profile acc for each servo
-  Dynamixel.setProfileAcceleration(0x02, 10);
-  Dynamixel.setProfileAcceleration(0x03, 10);
-  Dynamixel.setProfileAcceleration(0x04, 300);
-  Dynamixel.setProfileAcceleration(0x05, 300);
+  Dynamixel.setProfileAcceleration(0x01, 0);           //Set profile acc for each servo
+  Dynamixel.setProfileAcceleration(0x02, 0);
+  Dynamixel.setProfileAcceleration(0x03, 0);
+  Dynamixel.setProfileAcceleration(0x04, 100);
+  Dynamixel.setProfileAcceleration(0x05, 100);
 
   //Set profile velocity
-  Dynamixel.setProfileVelocity(0x01, 100);              //Set profile vel for each servo
-  Dynamixel.setProfileVelocity(0x02, 100);
-  Dynamixel.setProfileVelocity(0x03, 100);
-  Dynamixel.setProfileVelocity(0x04, 200);
-  Dynamixel.setProfileVelocity(0x05, 200);
+  Dynamixel.setProfileVelocity(0x01, 50);              //Set profile vel for each servo
+  Dynamixel.setProfileVelocity(0x02, 50);
+  Dynamixel.setProfileVelocity(0x03, 50);
+  Dynamixel.setProfileVelocity(0x04, 100);
+  Dynamixel.setProfileVelocity(0x05, 100);
  }
 
 int x, y, z, jointexcess_prevention;
@@ -65,7 +65,7 @@ void actualName(){
             infoPk[i] = jelly;
           }
 
-while(z < 300 && jointexcess_prevention==0){                              //Tilting the head to the right moves on to the next joint && h prevents from excessive joint counting.
+while(z < 300 && z > 200 && jointexcess_prevention==0 && x > 0 && x < 1000 && y > 0 && y < 1000){                              //Tilting the head to the right moves on to the next joint && h prevents from excessive joint counting.
     joint++;
     jointexcess_prevention++;
     if(joint > 4){
@@ -73,7 +73,7 @@ while(z < 300 && jointexcess_prevention==0){                              //Tilt
     }
     break;
 }
-while(z > 700 && jointexcess_prevention==0){                              //Tilting the head to the left moves on to the previous joint
+while(z > 600 && z < 700 && jointexcess_prevention==0 && x > 0 && x < 1000 && y > 0 && y < 1000){                              //Tilting the head to the left moves on to the previous joint
    joint--;
    jointexcess_prevention++;
    if(joint < 1){
@@ -81,44 +81,44 @@ while(z > 700 && jointexcess_prevention==0){                              //Tilt
    }
    break;
 }
-  if(z >= 460 && z <= 470){                         //Sets it back to the original position and the counter to 0
+  if(z >= 420 && z <= 470){                         //Sets it back to the original position and the counter to 0
     jointexcess_prevention=0;
     }
-while(joint == 1 && y > 700){                        //Tilting forward moves joint 1 down
+while(joint == 1 && y > 600 && z > 300 && z < 700 && x > 0 && x < 1000){                        //Tilting forward moves joint 1 down
   i = i + 10;
   Dynamixel.setNGoalPositions(i, -1, -1, -1, -1);
   break;
 }
-while(joint == 1 && y < 300){                        //Tilting backward moves joint 1 up
+while(joint == 1 && y < 400 && z > 300 && z < 700 && x > 0 && x < 1000){                        //Tilting backward moves joint 1 up
   i = i - 10;
   Dynamixel.setNGoalPositions(i, -1, -1, -1, -1);
   break;
 }
-while(joint == 2 && y > 700){                        //Tilting forward moves joint 2 down
+while(joint == 2 && y > 600 && z > 300 && z < 700 && x > 0 && x < 1000){                        //Tilting forward moves joint 2 down
   j = j + 10;
   Dynamixel.setNGoalPositions(-1, j, -1, -1, -1);
   break;
 }
-while(joint == 2 && y < 300){                        //Tilting backward moves joint 2 up
+while(joint == 2 && y < 400 && z > 300 && z < 700 && x > 0 && x < 1000){                        //Tilting backward moves joint 2 up
   j = j - 10;
   Dynamixel.setNGoalPositions(-1, j, -1, -1, -1);
   break;
 }
-while(joint == 3 && y > 700){                        //Tilting forward moves joint 3 down
+while(joint == 3 && y > 600 && z > 300 && z < 700 && x > 0 && x < 1000){                        //Tilting forward moves joint 3 down
   k = k + 10;
   Dynamixel.setNGoalPositions(-1, -1, k, -1, -1);
   break;
 }
-while(joint == 3 && y < 300){                        //Tilting backward moves joint 3 up
+while(joint == 3 && y < 400 && z > 300 && z < 700 && x > 0 && x < 1000){                        //Tilting backward moves joint 3 up
   k = k - 10;
   Dynamixel.setNGoalPositions(-1, -1, k, -1, -1);
   break;
 }
-while(joint == 4 && y > 700){                        //Tilting forward opens the gripper
+while(joint == 4 && y > 600 && z > 300 && z < 700 && x > 0 && x < 1000){                        //Tilting forward opens the gripper
    Dynamixel.gripper(OPEN);
    break;
 }
-while(joint == 4 && y < 300){                        //Tilting backward closes the gripper
+while(joint == 4 && y < 400 && z > 300 && z < 700 && x > 0 && x < 1000){                        //Tilting backward closes the gripper
    Dynamixel.gripper(CLOSE);
    break;
 }
@@ -128,7 +128,7 @@ for(int a = 13; a < 24; a++) {
   y = infoPk[15] + (infoPk[14] << 8);
   x = infoPk[17] + (infoPk[16] << 8);
 }
-  Serial.print(" X = ") && Serial.print(x);
+  //Serial.print(" X = ") && Serial.print(x);
   Serial.print(" Y = ") && Serial.print(y);
   Serial.print(" Z = ") && Serial.print(z);
   Serial.print(" joint number= ") && Serial.print(joint);
