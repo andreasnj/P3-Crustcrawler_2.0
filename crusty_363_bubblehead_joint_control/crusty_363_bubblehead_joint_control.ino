@@ -84,7 +84,7 @@ while(z > 600 && z < 700 && jointexcess_prevention==0 && x > 0 && x < 1000 && y 
   if(z >= 420 && z <= 470){                         //Sets it back to the original position and the counter to 0
     jointexcess_prevention=0;
     }
-while(joint == 1 && y > 600 && z > 300 && z < 700 && x > 0 && x < 1000){                        //Tilting forward moves joint 1 down
+while(joint == 1 && y > 650 && z > 300 && z < 700 && x > 0 && x < 1000){                        //Tilting forward moves joint 1 down
   i = i + 10;
   Dynamixel.setNGoalPositions(i, -1, -1, -1, -1);
   break;
@@ -94,7 +94,7 @@ while(joint == 1 && y < 400 && z > 300 && z < 700 && x > 0 && x < 1000){        
   Dynamixel.setNGoalPositions(i, -1, -1, -1, -1);
   break;
 }
-while(joint == 2 && y > 600 && z > 300 && z < 700 && x > 0 && x < 1000){                        //Tilting forward moves joint 2 down
+while(joint == 2 && y > 650 && z > 300 && z < 700 && x > 0 && x < 1000){                        //Tilting forward moves joint 2 down
   j = j + 10;
   Dynamixel.setNGoalPositions(-1, j, -1, -1, -1);
   break;
@@ -104,7 +104,7 @@ while(joint == 2 && y < 400 && z > 300 && z < 700 && x > 0 && x < 1000){        
   Dynamixel.setNGoalPositions(-1, j, -1, -1, -1);
   break;
 }
-while(joint == 3 && y > 600 && z > 300 && z < 700 && x > 0 && x < 1000){                        //Tilting forward moves joint 3 down
+while(joint == 3 && y > 650 && z > 300 && z < 700 && x > 0 && x < 1000){                        //Tilting forward moves joint 3 down
   k = k + 10;
   Dynamixel.setNGoalPositions(-1, -1, k, -1, -1);
   break;
@@ -114,7 +114,7 @@ while(joint == 3 && y < 400 && z > 300 && z < 700 && x > 0 && x < 1000){        
   Dynamixel.setNGoalPositions(-1, -1, k, -1, -1);
   break;
 }
-while(joint == 4 && y > 600 && z > 300 && z < 700 && x > 0 && x < 1000){                        //Tilting forward opens the gripper
+while(joint == 4 && y > 650 && z > 300 && z < 700 && x > 0 && x < 1000){                        //Tilting forward opens the gripper
    Dynamixel.gripper(OPEN);
    break;
 }
