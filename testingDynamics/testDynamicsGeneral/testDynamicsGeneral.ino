@@ -12,14 +12,14 @@ void setup() {
   Dynamixel.begin(w);
   Dynamixel.setDirectionPin(SERVO_ControlPin);
 
-/*
-  Dynamixel.setNGoalPositions(-1, 2048, 2048, -1, -1);
+//*
+  Dynamixel.setNGoalPositions(2048, 2048, 2048, -1, -1);
 
-  Dynamixel.setHoldingTorque(0x01, false);            //Set on hold turque for each servo
-  Dynamixel.setHoldingTorque(0x02, false);
-  Dynamixel.setHoldingTorque(0x03, false);
-  Dynamixel.setHoldingTorque(0x04, false);
-  Dynamixel.setHoldingTorque(0x05, false);
+  Dynamixel.setHoldingTorque(0x01, true);            //Set on hold torque for each servo
+  Dynamixel.setHoldingTorque(0x02, true);
+  Dynamixel.setHoldingTorque(0x03, true);
+  Dynamixel.setHoldingTorque(0x04, true);
+  Dynamixel.setHoldingTorque(0x05, true);
 
   //Set profile acceleration
   Dynamixel.setProfileAcceleration(0x01, 5);           //Set profile acc for each servo
@@ -34,23 +34,17 @@ void setup() {
   Dynamixel.setProfileVelocity(0x03, 70);
   Dynamixel.setProfileVelocity(0x04, 200);
   Dynamixel.setProfileVelocity(0x05, 200);
-
-  Dynamixel.setHoldingTorque(0x01, true);            //Set on hold turque for each servo
-  Dynamixel.setHoldingTorque(0x02, true);
-  Dynamixel.setHoldingTorque(0x03, true);
-  Dynamixel.setHoldingTorque(0x04, true);
-  Dynamixel.setHoldingTorque(0x05, true);
-*/
+//*/
+delay(1000);
 }
 
 int out=0, counter=0, cycles=45, wait=10;
 float fout=0;
 
-
 void doMvmt(){
-  Dynamixel.setNGoalPositions(-1, 1000, 2000, -1, -1);
+  Dynamixel.setNGoalPositions(-1, 3072, 2048, -1, -1);
   delay(3500);
-  Dynamixel.setNGoalPositions(-1, 2000, 1000, -1, -1);
+  Dynamixel.setNGoalPositions(-1, 2048, 3072, -1, -1);
 }
 
 void Read(int servo, char var){
@@ -97,5 +91,5 @@ void loop() {
   Serial.println("SERVO 3, LOAD");
   doMvmt();
   Read(3, 'l');
-  delay(9000000);
+  delay(1000000);
 }
