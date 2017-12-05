@@ -80,7 +80,7 @@ hold on
 plot(time, theta_1, 'b')
 plot(time, theta_2, 'r')
 hold off
-legend('joint 1', 'joint 2')
+legend('joint 2', 'joint 3')
 grid on; 
 xlabel('time [sec]'); ylabel('angular displacement [rad]'); 
 subplot(3, 1, 2)
@@ -106,7 +106,7 @@ hold on
 plot(time, tau_1, 'b')
 plot(time, tau_2, 'r')
 hold off
-legend(' joint 1', 'joint 2')
+legend(' joint 2', 'joint 3')
 grid on; 
 xlabel('time [sec]'); ylabel('torques [Nm/rad]'); 
 
