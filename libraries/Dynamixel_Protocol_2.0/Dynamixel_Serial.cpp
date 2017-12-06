@@ -270,6 +270,19 @@ int DynamixelClass::getVelocity(unsigned char ID){
     return sum;
 }
 
+//A grp363 addition
+int DynamixelClass::getError(unsigned char ID){
+    clearRXbuffer();
+    readN(ID, 0x46, 4);                   //Read from adress 0x7E (Present Load), byte size 4 (should be 2?)
+    getParameters();                      //Filters parameters from ReturnPacket
+
+    int sum;
+    sum = (data[2] << 8 | data[1]);
+
+    Serial.println(sum);
+
+    return sum;
+}
 
 unsigned int DynamixelClass::syncWN(unsigned short addr, unsigned char*arr, int n, int dataN){
 
@@ -434,10 +447,10 @@ void DynamixelClass::readN(unsigned char ID, unsigned short addr, int n){
 //########################## Private Methods ###################################
 //##############################################################################
 
-void DynamixelClass::transmitInstructionPacket(int transLen){                                   // Transmit instruction packet to Dynamixel
+void DynamixelClass::transmitInstructionPacket(int transLen){                     // Transmit instruction packet to Dynamixel
 
     if (Direction_Pin > -1){
-        digitalWrite(Direction_Pin,HIGH);                                               // Set TX Buffer pin to HIGH
+        digitalWrite(Direction_Pin,HIGH);                                         // Set TX Buffer pin to HIGH
     }
 
     unsigned char arrLen = transLen+7;

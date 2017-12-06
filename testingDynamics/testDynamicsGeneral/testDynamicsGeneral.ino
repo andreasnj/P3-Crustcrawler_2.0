@@ -38,7 +38,7 @@ void setup() {
 delay(1000);
 }
 
-int out=0, counter=0, cycles=45, wait=10;
+int out=0, counter=0, cycles=45, wait=10, error;
 float fout=0;
 
 void doMvmt(){
@@ -59,6 +59,8 @@ void Read(int servo, char var){
       case 'l':
         fout = Dynamixel.getLoad(servo);
         break;
+      //error = Dynamixel.getError(servo);
+      
     }
   counter++;
   delay(wait);
