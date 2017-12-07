@@ -75,7 +75,7 @@ torque_1 = [time; tau_1]'; torque_2 = [time; tau_2]';
 figure(2)
 clf
 figure(2)
-subplot(3, 1, 1)
+subplot(4, 1, 1)
 hold on
 plot(time, theta_1, 'b')
 plot(time, theta_2, 'r')
@@ -83,20 +83,28 @@ hold off
 legend('joint 2', 'joint 3')
 grid on; 
 xlabel('time [sec]'); ylabel('angular displacement [rad]'); 
-subplot(3, 1, 2)
+subplot(4, 1, 2)
 hold on
 plot(time, dtheta_1, 'b')
 plot(time, dtheta_2, 'r')
 hold off
 grid on; 
 xlabel('time [sec]'); ylabel('angular velocity [rad/s]'); 
-subplot(3, 1, 3)
+subplot(4, 1, 3)
 hold on
 plot(time, ddtheta_1, 'b')
 plot(time, ddtheta_2, 'r')
 hold off
 grid on; 
 xlabel('time [sec]'); ylabel('angular acceleration [rad/s^2]'); 
+subplot(4, 1, 4)
+hold on
+plot(time, tau_1, 'b')
+plot(time, tau_2, 'r')
+hold off
+legend(' joint 2', 'joint 3')
+grid on; 
+xlabel('time [sec]'); ylabel('torques [Nm]'); 
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% plot the motor torques
 figure(1)
@@ -108,7 +116,7 @@ plot(time, tau_2, 'r')
 hold off
 legend(' joint 2', 'joint 3')
 grid on; 
-xlabel('time [sec]'); ylabel('torques [Nm/rad]'); 
+xlabel('time [sec]'); ylabel('torques [Nm]'); 
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  plot the link
 figure(3)
