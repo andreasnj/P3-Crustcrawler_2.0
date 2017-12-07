@@ -31,7 +31,8 @@ void movements(){
     else if (y < 400){
       i = i - 10;
       Dynamixel.setGoalPosition(1, i);}
-    else break;}
+    else break;
+  }
 
   while(emg1 > 150 && emg1 < 600 && emgsignal_counter==0 && jointcounter==0 && y < 700 && y > 300 && z > 300 && z < 700){    //Set the emg1 to move the joints up in a cycle from 2 to 3
   joint++;
