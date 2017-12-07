@@ -10,6 +10,86 @@
 
 SoftwareSerial mySerial(10, 11);
 
+int x, y, z, emg1, emg2, emgsignal_counter, jointexcess_prevention, jointcounter, grippercounter ;
+int emgcounter = 0;
+int i = 2148;
+int j = 2048;
+int k = 2048;
+int joint = 2;
+
+void checkSum(){
+  int infoPk[24];
+  }
+
+void movements(){
+  checkSum();
+  
+  while(y > 600 && emg1 < 150 && emg2 < 150 && z > 300 && z < 700){         //Tilting the head to the right moves joint 1 to the right
+  i = i + 10;
+  Dynamixel.setNGoalPositions(i, -1, -1, -1, -1);
+  break;
+}
+while(y < 400 && emg1 < 150 && emg2 < 150 && z > 300 && z < 700){         //Tilting the head to the left moves joint 1 to the left
+  i = i - 10;
+  Dynamixel.setNGoalPositions(i, -1, -1, -1, -1);
+  break;
+}
+
+  while(emg1 > 150 && emg1 < 600 && emgsignal_counter==0 && jointcounter==0 && y < 700 && y > 300 && z > 300 && z < 700){    //Set the emg1 to move the joints up in a cycle from 2 to 3
+  joint++;
+  //jointexcess_prevention++;
+  jointcounter++;
+  emgsignal_counter++;
+  break;
+  }
+while(emg1 > 150 && emg1 < 600 && emgsignal_counter==0 && jointcounter==1 && y < 700 && y > 300 && z > 300 && z < 700){    //Set the emg1 to move the joints up in a cycle from 2 to 3
+  joint--;
+  //jointexcess_prevention--;
+  jointcounter--;
+  emgsignal_counter++;
+  break;
+  }
+
+  while(joint == 2 && z > 550 && y < 700 && y > 300 && emg1 < 100 && emg2 < 100){            //Tilting forward moves joint 2 down
+  j = j + 10;
+  Dynamixel.setNGoalPositions(-1, j, -1, -1, -1);
+  break;
+}
+while(joint == 2 && z < 300 && y < 700 && y > 300 && emg1 < 100 && emg2 < 100){            //Tilting backward moves joint 2 up
+  j = j - 10;
+  Dynamixel.setNGoalPositions(-1, j, -1, -1, -1);
+  break;
+}
+while(joint == 3 && z > 550 && y < 700 && y > 300 && emg1 < 100 && emg2 < 100){            //Tilting forward moves joint 3 down
+  k = k + 10;
+  Dynamixel.setNGoalPositions(-1, -1, k, -1, -1);
+  break;
+}
+while(joint == 3 && z  < 300 && y < 700 && y > 300 && emg1 < 100 && emg2 < 100){           //Tilting backward moves joint 3 up
+  k = k - 10;
+  Dynamixel.setNGoalPositions(-1, -1, k, -1, -1);
+  break;
+}
+
+  while(emg2 > 0 && emg2 < 600 && emgsignal_counter==0 && emgcounter==0 && grippercounter==0 && y < 700 && y > 300 && emg1 < 100 && z > 300 && z < 700){   //Opens the gripper using the Emg2
+Dynamixel.gripper(OPEN);
+emgsignal_counter++;
+emgcounter++;
+grippercounter++;
+break;
+}
+while(emg2 > 0 && emg2 < 600 && emgsignal_counter==0 && emgcounter==1 && grippercounter==1 && y < 700 && y > 300 && emg1 < 100 && z > 300 && z < 700){   //Closes the gripper using the Emg2
+Dynamixel.gripper(CLOSE);
+emgsignal_counter++;
+emgcounter--;
+grippercounter--;
+break;
+}
+if(emg1 < 100 && emg2 == 0){                                         //Set the emg2 to open and close the gripper
+  emgsignal_counter=0;
+}
+}
+
 void setup(){
   Serial1.begin(xBEE_SET_Baudrate);
   mySerial.begin(SERVO_SET_Baudrate);                   // We now need to set Ardiuno to the new Baudrate speed 115200
@@ -37,4 +117,8 @@ void setup(){
   Dynamixel.setProfileVelocity(0x03, 50);
   Dynamixel.setProfileVelocity(0x04, 100);
   Dynamixel.setProfileVelocity(0x05, 100);
+  }
+
+void loop(){
+  movements();  
   }
