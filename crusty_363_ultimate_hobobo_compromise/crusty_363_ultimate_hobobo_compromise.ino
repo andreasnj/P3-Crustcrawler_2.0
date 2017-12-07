@@ -58,6 +58,7 @@ void setup() {
  int k = 2048;
  int joint = 2;
  int infoPk[24];
+ 
  void actualName(){
    if(Serial1.available() >= 24){
      if (Serial1.read() == 0x7E){
