@@ -32,7 +32,7 @@ void movements(){
       i = i - 10;
       Dynamixel.setGoalPosition(1, i);}
     else break;
-  }
+  };
 
   while(emg1 > 150 && emg1 < 600 && y < 700 && y > 300 && z > 300 && z < 700){    //Set the emg1 to move the joints up in a cycle from 2 to 3
     if (emgsignal_counter == 0 && jointcounter == 0){
@@ -44,30 +44,27 @@ void movements(){
       jointcounter--;
       emgsignal_counter++;}
     else break;
-    }
+    };
 
-  
+  while(z > 550 && y < 700 && y > 300 && emg1 < 100 && emg2 < 100){
+    if (joint == 2){
+      j = j + 10;
+      Dynamixel.setGoalPosition(joint, j);}
+    else if (joint == 3){
+      k = k + 10;
+      Dynamixel.setGoalPosition(joint, k);}
+    else break;
+    };
 
-  while(joint == 2 && z > 550 && y < 700 && y > 300 && emg1 < 100 && emg2 < 100){            //Tilting forward moves joint 2 down
-  j = j + 10;
-  Dynamixel.setNGoalPositions(-1, j, -1, -1, -1);
-  break;
-}
-while(joint == 2 && z < 300 && y < 700 && y > 300 && emg1 < 100 && emg2 < 100){            //Tilting backward moves joint 2 up
-  j = j - 10;
-  Dynamixel.setNGoalPositions(-1, j, -1, -1, -1);
-  break;
-}
-while(joint == 3 && z > 550 && y < 700 && y > 300 && emg1 < 100 && emg2 < 100){            //Tilting forward moves joint 3 down
-  k = k + 10;
-  Dynamixel.setNGoalPositions(-1, -1, k, -1, -1);
-  break;
-}
-while(joint == 3 && z  < 300 && y < 700 && y > 300 && emg1 < 100 && emg2 < 100){           //Tilting backward moves joint 3 up
-  k = k - 10;
-  Dynamixel.setNGoalPositions(-1, -1, k, -1, -1);
-  break;
-}
+  while(z < 300 && y < 700 && y > 300 && emg1 < 100 && emg2 < 100){
+    if (joint == 2){
+      j = j - 10;
+      Dynamixel.setGoalPosition(joint, j);}
+    else if (joint == 3){
+      k = k - 10;
+      Dynamixel.setGoalPosition(joint, k);}
+    else break;
+    };
 
   while(emg2 > 0 && emg2 < 600 && emgsignal_counter==0 && emgcounter==0 && grippercounter==0 && y < 700 && y > 300 && emg1 < 100 && z > 300 && z < 700){   //Opens the gripper using the Emg2
 Dynamixel.gripper(OPEN);
