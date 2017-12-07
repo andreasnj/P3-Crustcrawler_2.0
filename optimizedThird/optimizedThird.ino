@@ -10,7 +10,7 @@
 
 SoftwareSerial mySerial(10, 11);
 
-int x, y, z, emg1, emg2, emgsignal_counter, jointexcess_prevention, jointcounter, grippercounter ;
+int x, y, z, emg1, emg2, emgsignal_counter, jointcounter, grippercounter ;
 int emgcounter = 0;
 int i = 2148;
 int j = 2048;
@@ -34,20 +34,19 @@ void movements(){
     else break;
   }
 
-  while(emg1 > 150 && emg1 < 600 && emgsignal_counter==0 && jointcounter==0 && y < 700 && y > 300 && z > 300 && z < 700){    //Set the emg1 to move the joints up in a cycle from 2 to 3
-  joint++;
-  //jointexcess_prevention++;
-  jointcounter++;
-  emgsignal_counter++;
-  break;
-  }
-while(emg1 > 150 && emg1 < 600 && emgsignal_counter==0 && jointcounter==1 && y < 700 && y > 300 && z > 300 && z < 700){    //Set the emg1 to move the joints up in a cycle from 2 to 3
-  joint--;
-  //jointexcess_prevention--;
-  jointcounter--;
-  emgsignal_counter++;
-  break;
-  }
+  while(emg1 > 150 && emg1 < 600 && y < 700 && y > 300 && z > 300 && z < 700){    //Set the emg1 to move the joints up in a cycle from 2 to 3
+    if (emgsignal_counter == 0 && jointcounter == 0){
+      joint++;
+      jointcounter++;
+      emgsignal_counter++;}
+    else if (emgsignal_counter == 0 && jointcounter == 1){
+      joint--;
+      jointcounter--;
+      emgsignal_counter++;}
+    else break;
+    }
+
+  
 
   while(joint == 2 && z > 550 && y < 700 && y > 300 && emg1 < 100 && emg2 < 100){            //Tilting forward moves joint 2 down
   j = j + 10;
