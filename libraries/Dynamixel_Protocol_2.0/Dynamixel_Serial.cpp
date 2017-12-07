@@ -273,7 +273,7 @@ int DynamixelClass::getVelocity(unsigned char ID){
 //A grp363 addition
 int DynamixelClass::getError(unsigned char ID){
     clearRXbuffer();
-    readN(ID, 0x46, 4);                   //Read from adress 0x7E (Present Load), byte size 4 (should be 2?)
+    readN(ID, 0x46, 4);
     getParameters();                      //Filters parameters from ReturnPacket
 
     char sum;
