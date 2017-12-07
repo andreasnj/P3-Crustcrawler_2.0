@@ -23,17 +23,15 @@ void checkSum(){
 
 void movements(){
   checkSum();
-  
-  while(y > 600 && emg1 < 150 && emg2 < 150 && z > 300 && z < 700){         //Tilting the head to the right moves joint 1 to the right
-  i = i + 10;
-  Dynamixel.setNGoalPositions(i, -1, -1, -1, -1);
-  break;
-}
-while(y < 400 && emg1 < 150 && emg2 < 150 && z > 300 && z < 700){         //Tilting the head to the left moves joint 1 to the left
-  i = i - 10;
-  Dynamixel.setNGoalPositions(i, -1, -1, -1, -1);
-  break;
-}
+
+  while (emg1 < 150 && emg2 < 150 && z > 300 && z < 700){
+    if (y > 600){
+      i = i + 10;
+      Dynamixel.setGoalPosition(1, i);}
+    else if (y < 400){
+      i = i - 10;
+      Dynamixel.setGoalPosition(1, i);}
+    else break;}
 
   while(emg1 > 150 && emg1 < 600 && emgsignal_counter==0 && jointcounter==0 && y < 700 && y > 300 && z > 300 && z < 700){    //Set the emg1 to move the joints up in a cycle from 2 to 3
   joint++;
