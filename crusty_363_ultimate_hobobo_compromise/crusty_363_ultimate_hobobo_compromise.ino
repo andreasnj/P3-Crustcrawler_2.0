@@ -140,6 +140,7 @@ for(int a = 13; a < 24; a++) {
   emg2 = infoPk[21] + (infoPk[20] << 8);
 
  }
+ //debug
   Serial.print(" X = ") && Serial.print(x);
   Serial.print(" Y = ") && Serial.print(y);
   Serial.print(" Z = ") && Serial.print(z);
