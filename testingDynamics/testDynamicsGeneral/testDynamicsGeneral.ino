@@ -59,8 +59,8 @@ void Read(int servo, char var){
       case 'l':
         fout = Dynamixel.getLoad(servo);
         break;
-      //error = Dynamixel.getError(servo);
-      
+      error = Dynamixel.getError(servo);
+      Serial.println(error);
     }
   counter++;
   delay(wait);
@@ -93,5 +93,5 @@ void loop() {
   Serial.println("SERVO 3, LOAD");
   doMvmt();
   Read(3, 'l');
-  delay(1000000);
+  delay(9000000);
 }

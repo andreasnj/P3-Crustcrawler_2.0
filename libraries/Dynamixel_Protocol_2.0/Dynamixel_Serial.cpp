@@ -276,7 +276,7 @@ int DynamixelClass::getError(unsigned char ID){
     readN(ID, 0x46, 4);                   //Read from adress 0x7E (Present Load), byte size 4 (should be 2?)
     getParameters();                      //Filters parameters from ReturnPacket
 
-    int sum;
+    char sum;
     sum = (data[2] << 8 | data[1]);
 
     Serial.println(sum);
