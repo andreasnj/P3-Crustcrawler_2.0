@@ -258,12 +258,13 @@ float DynamixelClass::getLoad(unsigned char ID){
 
   float sum=0;
   sum = (data[2] << 8) | data[1];       //Converting two information bytes into a float (load data)
-  if(sum < 0){
-    Serial.println("Sum < 0");
-  }
 
   //Converting load to percentage
   sum = sum/10;
+
+  if(sum > 100){
+    sum = sum-6553.5;
+  }
 
   //Debug information
   //Serial.print("Load of ID: ");
@@ -282,12 +283,13 @@ int DynamixelClass::getVelocity(unsigned char ID){
 
   float sum=0;
   sum = (data[2] << 8) | data[1];       //Converting two information bytes into a float (load data)
-  if(sum < 0){
-    Serial.println("Sum < 0");
-  }
 
   //Converting load to percentage
   sum = sum/10;
+
+  if(sum > 100){
+    sum = sum-6553.5;
+  }
 
   //Debug information
   //Serial.print("Load of ID: ");

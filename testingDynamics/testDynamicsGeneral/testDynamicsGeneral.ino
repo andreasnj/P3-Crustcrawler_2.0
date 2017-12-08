@@ -39,7 +39,7 @@ void setup() {
 delay(1000);
 }
 
-int out=0, counter=0, cycles=25, wait=20, error;
+int out=0, counter=0, cycles=40, wait=10, error;
 float fout=0;
 
 void doMvmt(){
@@ -63,7 +63,7 @@ void Read(int servo, char var){
       }
       //Dynamixel.readAll();
       error = Dynamixel.getError(servo);
-      Serial.println(error);
+      //Serial.println(error);
       counter++;
       delay(wait);
     }
@@ -71,7 +71,6 @@ void Read(int servo, char var){
 }
 
 void loop() {
-  /*
   Serial.println("SERVO 2, POSITION");
   doMvmt();
   Read(2, 'p');
@@ -83,7 +82,7 @@ void loop() {
   Serial.println("SERVO 2, LOAD");
   doMvmt();
   Read(2, 'l');
-*/
+
   /////// SERVO 3
   Serial.println("SERVO 3, POSITION");
   doMvmt();
