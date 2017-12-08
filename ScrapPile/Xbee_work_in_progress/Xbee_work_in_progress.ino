@@ -3,7 +3,7 @@
 
 #define xBee_Baudrate 115200
 
-SoftwareSerial mySerial(19,18);
+SoftwareSerial mySerial(10,11);
 
 /*
    Format for XBEE packets
@@ -42,34 +42,36 @@ SoftwareSerial mySerial(19,18);
    Strategy sum all bytes excluding first three. The checksum will be 0xff - sum
 */
 
-char testPk[24] = {0x7e, 0x00, 0x14, 0x83, 0x56, 0x78, 0x43, 0x00, 0x01, 0x3e,
+int testPk[24] = {0x7e, 0x00, 0x14, 0x83, 0x56, 0x78, 0x43, 0x00, 0x01, 0x3e,
                     0xe0, 0x00, 0x40, 0x02, 0x9b, 0x02, 0x1a, 0x02, 0x05, 0x00,
                     0x00, 0x00, 0x05, 0x47};  // from datasheet
 
-char hexTable[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
-
-int tempPk[24] = {};                //Initializes array (See if it works only doing it in setup???)
+int tempPk[24] = {}; //Initializes array (See if it works only doing it in setup???)
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(xBee_Baudrate);
   Serial.flush();
   mySerial.begin(xBee_Baudrate);
   xBee.begin(mySerial);
   while (! Serial){                 // wait until serial port is up and running
   }
+  Serial.println("Reset");
   delay(500); // just to be sure
 }
 
 void loop() {
   //Ready for new package
-  //xBee.readPacket(tempPk);
-
+  xBee.readPacket(tempPk);
+  if(xBee.checkPacket(tempPk)){
+    Serial.println("Received and passsed");
+    }
+    else{Serial.println("Not passed");};
+    
+/*
   if(xBee.checkPacket(testPk)){
   //Do stuff
     Serial.println("The test package passed checksum"); //Needs testing
     }
     else{Serial.println("Does not work");};
-
-    delay (2000);
-
+*/
 }

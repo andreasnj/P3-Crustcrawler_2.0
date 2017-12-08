@@ -14,6 +14,7 @@ void setup() {
 
 //*
   Dynamixel.setNGoalPositions(2048, 2048, 2048, -1, -1);
+  delay(1500);
 
   Dynamixel.setHoldingTorque(0x01, true);            //Set on hold torque for each servo
   Dynamixel.setHoldingTorque(0x02, true);
@@ -38,7 +39,7 @@ void setup() {
 delay(1000);
 }
 
-int out=0, counter=0, cycles=45, wait=10, error;
+int out=0, counter=0, cycles=25, wait=20, error;
 float fout=0;
 
 void doMvmt(){
@@ -59,16 +60,18 @@ void Read(int servo, char var){
       case 'l':
         fout = Dynamixel.getLoad(servo);
         break;
+      }
+      //Dynamixel.readAll();
       error = Dynamixel.getError(servo);
       Serial.println(error);
+      counter++;
+      delay(wait);
     }
-  counter++;
-  delay(wait);
-  }
   counter=0;
 }
 
 void loop() {
+  /*
   Serial.println("SERVO 2, POSITION");
   doMvmt();
   Read(2, 'p');
@@ -80,7 +83,7 @@ void loop() {
   Serial.println("SERVO 2, LOAD");
   doMvmt();
   Read(2, 'l');
-
+*/
   /////// SERVO 3
   Serial.println("SERVO 3, POSITION");
   doMvmt();
