@@ -66,22 +66,22 @@ void movements(){
     else break;
     };
 
-  while(emg2 > 0 && emg2 < 600 && emgsignal_counter==0 && emgcounter==0 && grippercounter==0 && y < 700 && y > 300 && emg1 < 100 && z > 300 && z < 700){   //Opens the gripper using the Emg2
-Dynamixel.gripper(OPEN);
-emgsignal_counter++;
-emgcounter++;
-grippercounter++;
-break;
-}
-while(emg2 > 0 && emg2 < 600 && emgsignal_counter==0 && emgcounter==1 && grippercounter==1 && y < 700 && y > 300 && emg1 < 100 && z > 300 && z < 700){   //Closes the gripper using the Emg2
-Dynamixel.gripper(CLOSE);
-emgsignal_counter++;
-emgcounter--;
-grippercounter--;
-break;
-}
-if(emg1 < 100 && emg2 == 0){                                         //Set the emg2 to open and close the gripper
-  emgsignal_counter=0;
+  while (emg2 > 0 && emg2 < 600 && emgsignal_counter==0 && y < 700 && y > 300 && emg1 < 100 && z > 300 && z < 700){   //Opens the gripper using the Emg2
+    if (emgcounter==0 && grippercounter==0){
+      Dynamixel.gripper(OPEN);
+      emgsignal_counter++;
+      emgcounter++;
+      grippercounter++;      }  
+    else if (emgcounter==1 && grippercounter==1){
+      Dynamixel.gripper(CLOSE);
+      emgsignal_counter++;
+      emgcounter--;
+      grippercounter--;}
+    else break;
+    };  
+
+  if(emg1 < 100 && emg2 == 0){                                         //Set the emg2 to open and close the gripper
+    emgsignal_counter=0;
 }
 }
 
