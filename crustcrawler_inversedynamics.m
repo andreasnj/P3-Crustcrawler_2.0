@@ -21,11 +21,11 @@ L2 = 0.14; % length [m]
 m2 = 0.072 * 2 + 0.023; % mass [kg] the link + the motor
 I2 = 1/12 * m2 * L2^2; % moment of inertia
 %% %%%%%%%%%%%%%%%% wished positions of joints and time for the movements
-tf = 3;
-theta01 = 1000 * 2*pi/4096; %in the graphs will be represented in radians, although input is in ticks of the motor
-thetaf1 = 2000 * 2*pi/4096;
-theta02 = 2000 * 2*pi/4096;
-thetaf2 = 1000 * 2*pi/4096;
+tf = 0.4;
+theta01 = 3072 * 2*pi/4096 - pi/2; %in the graphs will be represented in radians, although input is in ticks of the motor
+thetaf1 = 2048 * 2*pi/4096 - pi/2;
+theta02 = 2048 * 2*pi/4096 + pi;
+thetaf2 = 3072 * 2*pi/4096 + pi;
 %% %%%%%%%%%%%%%%%% coefficients for position, velocity and acceleration
 a01 = theta01;
 a11 = 0;
