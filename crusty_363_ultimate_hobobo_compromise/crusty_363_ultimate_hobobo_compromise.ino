@@ -58,6 +58,7 @@ void setup() {
  int k = 2048;
  int joint = 2;
  int infoPk[24];
+ 
  void actualName(){
    if(Serial1.available() >= 24){
      if (Serial1.read() == 0x7E){
@@ -140,6 +141,7 @@ for(int a = 13; a < 24; a++) {
   emg2 = infoPk[21] + (infoPk[20] << 8);
 
  }
+ //debug
   Serial.print(" X = ") && Serial.print(x);
   Serial.print(" Y = ") && Serial.print(y);
   Serial.print(" Z = ") && Serial.print(z);
