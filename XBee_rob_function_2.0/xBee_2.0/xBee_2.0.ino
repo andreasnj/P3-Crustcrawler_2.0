@@ -75,7 +75,7 @@ void actualName(){
             infoPk[i] = jelly;
           }
 
-/*while(z < 0 || z > 1203 || y < 0 || y > 1203 || x < 0 || x > 1203 || emg1 < 0 || emg1 > 1203 || emg2 < 0 || emg2 > 1200){
+while(z < 0 || z > 1203 || y < 0 || y > 1203 || x < 0 || x > 1203 || emg1 < 0 || emg1 > 1203 || emg2 < 0 || emg2 > 1200){
 break;  
 }
 while(z < 300 && z > 100 && h==0 && emg1 > 0 && emg1 < 1024 && emg2 >= 0 && emg2 < 1024){
@@ -176,7 +176,7 @@ while(joint == 4 && y < 300 && y > 100 && emg1 > 0 && emg1 < 1024 && emg2 >= 0 &
   break;
 }
 
-*/
+/*
   while(emg1 > 500 && emg1 < 1024 && g==0 && emgcounter==0){
     Dynamixel.performMovement(2148, 2048, 2048, OPEN);   //"Initial" position
     //delay(1000);
@@ -214,6 +214,7 @@ while(joint == 4 && y < 300 && y > 100 && emg1 > 0 && emg1 < 1024 && emg2 >= 0 &
   if(emg1 < 100 && emg2 < 100){
     g=0;
   }
+  */
   
   for(int a = 13; a < 24; a++) {
     z = infoPk[13] + (infoPk[12] << 8);

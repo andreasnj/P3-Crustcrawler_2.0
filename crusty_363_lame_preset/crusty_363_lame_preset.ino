@@ -37,8 +37,8 @@ void setup() {
   Dynamixel.setProfileAcceleration(0x01, 10);           //Set profile acc for each servo
   Dynamixel.setProfileAcceleration(0x02, 10);
   Dynamixel.setProfileAcceleration(0x03, 10);
-  Dynamixel.setProfileAcceleration(0x04, 300);
-  Dynamixel.setProfileAcceleration(0x05, 300);
+  Dynamixel.setProfileAcceleration(0x04, 200);
+  Dynamixel.setProfileAcceleration(0x05, 200);
 
   //Set profile velocity
   Dynamixel.setProfileVelocity(0x01, 50);              //Set profile vel for each servo
@@ -59,25 +59,33 @@ void actualName(){
             infoPk[i] = jelly;
           }
   while(emg1 > 500 && emg1 < 1024 && emgsignal_counter==0 && emgcounter==0){
-    Dynamixel.performMovement(877, 2030, 2064, OPEN);   //"Initial" position
-    Dynamixel.performMovement(877, 1014, 2064, OPEN);   //Ready position
-    Dynamixel.performMovement(2256, 840, 2143, OPEN);   //Move to sponge.
-    Dynamixel.performMovement(1111, 840, 2143, CLOSE);  //Detour
-    Dynamixel.performMovement(1111, 1210, 1866, CLOSE); //Move to destination
-    Dynamixel.performMovement(108, 1030, 2056, CLOSE);
+    Dynamixel.performMovement(2545, 2050, 2042, OPEN);   //"Initial" position
+    Dynamixel.performMovement(2523, 3162, 939, OPEN);   //Ready position
+    Dynamixel.performMovement(2555, 3250, 1885, OPEN);
+    delay(1000);
+    Dynamixel.performMovement(2555, 3250, 1885, CLOSE);   //Move to sponge.
+    delay(500);
+    Dynamixel.performMovement(2563, 2996, 2091, CLOSE);
+    Dynamixel.performMovement(2578, 2850, 2334, CLOSE);  //Detour
+    Dynamixel.performMovement(3240, 2876, 2215, CLOSE); //Move to destination
     emgsignal_counter++;
     emgcounter++;
+    delay(1000);
     break;
     }
-    while(emg2 > 500 && emg2 < 1024 && emgsignal_counter==0 && emgcounter==1){
-    Dynamixel.performMovement(500, 1030, 2056, CLOSE);   //Move to destination
-    Dynamixel.performMovement(1111, 1210, 1866, CLOSE);  //Detour
-    Dynamixel.performMovement(1111, 840, 2143, CLOSE);   //Move to sponge.
-    Dynamixel.performMovement(1111, 840, 2143, OPEN);    //Ready position
-    Dynamixel.performMovement(1111, 1014, 3130, OPEN);   //"Initial" position
+    while(emg2 > 400 && emg2 < 1024 && emgsignal_counter==0 && emgcounter==1){
+    Dynamixel.performMovement(3240, 2876, 2215, CLOSE);   //Move to destination
+    Dynamixel.performMovement(2578, 2850, 2334, CLOSE);  //Detour
+    Dynamixel.performMovement(2563, 2996, 2091, CLOSE);
+    delay(500);
+    Dynamixel.performMovement(2555, 3250, 1885, CLOSE);   //Move to sponge.
+    delay(1000);
+    Dynamixel.performMovement(2555, 3250, 1885, OPEN);    //Ready position
+    Dynamixel.performMovement(2523, 3162, 939, OPEN);   //"Initial" position
+    Dynamixel.performMovement(2545, 2050, 2042, OPEN);   //"Erect" position
     emgsignal_counter++;
     emgcounter--;
-    Dynamixel.performMovement(1111, 2030, 2064, OPEN);   //"Erect" position
+    delay(1000);
     break;
     }
   if(emg1 < 100 && emg2 < 100){
