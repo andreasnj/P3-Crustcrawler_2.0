@@ -48,8 +48,11 @@ int testPk[24] = {0x7e, 0x00, 0x14, 0x83, 0x56, 0x78, 0x43, 0x00, 0x01, 0x3e,
 
 int tempPk[24] = {}; //Initializes array (See if it works only doing it in setup???)
 
+byte temp;
+
 void setup() {
   Serial.begin(xBee_Baudrate);
+  Serial1.begin(115200);
   Serial.flush();
   mySerial.begin(xBee_Baudrate);
   xBee.begin(mySerial);
@@ -60,18 +63,33 @@ void setup() {
 }
 
 void loop() {
+  if(Serial1.available()){
+    temp = Serial1.read();    
+    if (temp == 0x7E){
+          tempPk[0] = temp;
+          for (int i = 1; i < 24 ; i++){
+            temp = Serial1.read();
+            tempPk[i] = temp;
+          }
+          }
+  }
   //Ready for new package
-  xBee.readPacket(tempPk);
+  //xBee.readPacket(tempPk);
   if(xBee.checkPacket(tempPk)){
     Serial.println("Received and passsed");
+    Serial.println(tempPk[23]);
     }
-    else{Serial.println("Not passed");};
+    else{Serial.println("-");};/*
+        Serial.println(tempPk[0]);
+        Serial.println(tempPk[1]);
+        Serial.println(tempPk[2]);
+        
+        Serial.println(tempPk[23]);};
     
 /*
   if(xBee.checkPacket(testPk)){
   //Do stuff
     Serial.println("The test package passed checksum"); //Needs testing
     }
-    else{Serial.println("Does not work");};
-*/
+    else{Serial.println("Does not work");};*/
 }

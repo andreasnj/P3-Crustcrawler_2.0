@@ -25,7 +25,8 @@ void xBeeClass::begin(Stream &serial){
 }
 
 void xBeeClass::readPacket(int *pk){//Populates an INT array with a packet from the serial buffer. USE ON SERIAL1
-  int counter = 0;
+    byte temp;
+  /*int counter = 0;
   int temp;
     do{
       if(Serial1.available()){
@@ -43,7 +44,17 @@ void xBeeClass::readPacket(int *pk){//Populates an INT array with a packet from 
         pk[counter] = temp;
         counter++;
         }
-      }while(counter < 24);
+      }while(counter < 24);*/
+    if(Serial1.available()){
+        temp = Serial1.read();
+        if (temp == 0x7E){
+              tempPk[0] = temp;
+              for (int i = 1; i < 24 ; i++){
+                temp = Serial1.read();
+                tempPk[i] = temp;
+              }
+              }
+      }
 }
 
 
