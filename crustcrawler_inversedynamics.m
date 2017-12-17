@@ -10,6 +10,8 @@ clear all; close all; clc
 g = 9.801; % gravity constant
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%  link properties
+======================================= link 0
+
 %======================================  link 1
 L1 = 0.22; % length [m]
 %c1 = L1 * 2/3; % mass center
