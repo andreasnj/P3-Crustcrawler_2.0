@@ -25,7 +25,7 @@ void xBeeClass::begin(Stream &serial){
 }
 
 void xBeeClass::readPacket(int *pk){//Populates an INT array with a packet from the serial buffer. USE ON SERIAL1
-    byte temp;
+    char temp;
   /*int counter = 0;
   int temp;
     do{

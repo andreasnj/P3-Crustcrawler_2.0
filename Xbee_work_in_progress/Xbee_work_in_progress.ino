@@ -74,7 +74,7 @@ void loop() {
           }
   }
   //Ready for new package
-  //xBee.readPacket(tempPk);
+  xBee.readPacket(tempPk);
   if(xBee.checkPacket(tempPk)){
     Serial.println("Received and passsed");
     Serial.println(tempPk[23]);
