@@ -51,8 +51,9 @@ int x, y, z, jointexcess_prevention;
 unsigned int i = 2540; //Starting positions
 unsigned int j = 2050;
 unsigned int k = 2042;
-int joint = 4;
+int joint = 4; //Starts at gripper control
 int infoPk[24];
+
 void actualName(){
   xBee.readPacket(infoPk);
 
@@ -65,6 +66,10 @@ void actualName(){
     }
     else{Serial.println("package failed");
     }
+
+    z = infoPk[14] + (infoPk[13] << 8); //Accelerometer readings
+    y = infoPk[16] + (infoPk[15] << 8);
+    x = infoPk[18] + (infoPk[17] << 8);
 /*
   if(Serial1.available() >= 24){
     if (Serial1.read() == 0x7E){
@@ -79,7 +84,6 @@ void actualName(){
   }
 
   sum = sum % 256;
-
 
   Serial.println(sum);
   Serial.println(infoPk[23]);
@@ -166,10 +170,6 @@ while(joint == 4 && y < 400 && z > 300 && z < 700){                        //Til
    Dynamixel.gripper(CLOSE);
    break;
 }
-
-  z = infoPk[14] + (infoPk[13] << 8);
-  y = infoPk[16] + (infoPk[15] << 8);
-  x = infoPk[18] + (infoPk[17] << 8);
   
   //Serial.print(" X = ") && Serial.print(x);
   Serial.print(" Y = ") && Serial.print(y);
