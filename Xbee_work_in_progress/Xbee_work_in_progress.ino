@@ -63,7 +63,7 @@ void setup() {
 }
 
 void loop() {
-  if(Serial1.available()){
+  /*if(Serial1.available()){
     temp = Serial1.read();    
     if (temp == 0x7E){
           tempPk[0] = temp;
@@ -72,14 +72,14 @@ void loop() {
             tempPk[i] = temp;
           }
           }
-  }
+  }*/
   //Ready for new package
   xBee.readPacket(tempPk);
   if(xBee.checkPacket(tempPk)){
     Serial.println("Received and passsed");
     Serial.println(tempPk[23]);
     }
-    else{Serial.println("-");};/*
+    else{};/*Serial.println("-");
         Serial.println(tempPk[0]);
         Serial.println(tempPk[1]);
         Serial.println(tempPk[2]);

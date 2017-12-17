@@ -48,10 +48,10 @@ void xBeeClass::readPacket(int *pk){//Populates an INT array with a packet from 
     if(Serial1.available()){
         temp = Serial1.read();
         if (temp == 0x7E){
-              tempPk[0] = temp;
+              pk[0] = temp;
               for (int i = 1; i < 24 ; i++){
                 temp = Serial1.read();
-                tempPk[i] = temp;
+                pk[i] = temp;
               }
               }
       }
