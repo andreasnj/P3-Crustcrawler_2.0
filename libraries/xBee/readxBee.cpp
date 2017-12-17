@@ -79,9 +79,9 @@ bool xBeeClass::checkPacket(int *pk){//Generates checksum and compares with the 
   }
 }
 
-void xBeeClass::readCheckPacket(int *pk){
+/*void xBeeClass::readCheckPacket(int *pk){
     readPacket(*pk);
-}   checkPacket(*pk);
+}   checkPacket(*pk);*/
 
 void xBeeClass::decodePacket(int *pk){ //Convert chars from packet to int, store in arrays, call average func
   accZ = ((pk[13] << 8) | pk[14]);
