@@ -79,7 +79,7 @@ void loop() {
     Serial.println("Received and passsed");
     Serial.println(tempPk[23]);
     }
-    else{};/*Serial.println("-");
+    else{Serial.println("-");
         Serial.println(tempPk[0]);
         Serial.println(tempPk[1]);
         Serial.println(tempPk[2]);
