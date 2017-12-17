@@ -12,22 +12,18 @@
 
 #define SERVO_ControlPin 0x02       // Control pin of buffer chip, NOTE: this does not matter becasue we are not using a half to full control buffer.
 #define SERVO_SET_Baudrate 57600    // Baud rate speed which the Dynamixel will be set too (57600)
-#define LED13 0x0D
-#define CW_LIMIT_ANGLE 0x001        // lowest clockwise angle is 1, as when set to 0 it set servo to wheel mode
-#define CCW_LIMIT_ANGLE 0xFFF       // Highest anit-clockwise angle is 0XFFF, as when set to 0 it set servo to wheel mode
 #define OPEN 'o'
 #define CLOSE 'c'
 
 SoftwareSerial mySerial(10, 11);    // RX, TX
 
 void setup() {
-
-  Serial.flush();                                       // Clear the serial buffer of garbage data before running the code.
   Serial1.begin(115200);
   mySerial.begin(SERVO_SET_Baudrate);                   // We now need to set Ardiuno to the new Baudrate speed 115200
   Serial.begin(SERVO_SET_Baudrate);                                  // Start serial communication on baudrate 57600
   Dynamixel.begin(mySerial);                            // Calling mySerial function which sets 10 pin as the 2nd RX serial pin, and sets pin 11 as the 2nd TX serial pin
   Dynamixel.setDirectionPin(SERVO_ControlPin);          // Optional. Set direction control pin which controls if the program writes or reads
+  Serial.flush();
 
   //Turn on hold for the servos, so they stay in place
   Dynamixel.setHoldingTorque(0x01, true);               //Set on hold turque for each servo
@@ -37,9 +33,9 @@ void setup() {
   Dynamixel.setHoldingTorque(0x05, true);
 
   //Set profile acceleration
-  Dynamixel.setProfileAcceleration(0x01, 0);           //Set profile acc for each servo
-  Dynamixel.setProfileAcceleration(0x02, 0);
-  Dynamixel.setProfileAcceleration(0x03, 0);
+  Dynamixel.setProfileAcceleration(0x01, 7);           //Set profile acc for each servo
+  Dynamixel.setProfileAcceleration(0x02, 7);
+  Dynamixel.setProfileAcceleration(0x03, 7);
   Dynamixel.setProfileAcceleration(0x04, 100);
   Dynamixel.setProfileAcceleration(0x05, 100);
 
@@ -53,10 +49,10 @@ void setup() {
 
  int x, y, z, emg1, emg2, emgsignal_counter, jointexcess_prevention, jointcounter, grippercounter ;
  int emgcounter = 0;
- int i = 2540;
- int j = 2050;
- int k = 2042;
- int joint = 2;
+ unsigned int i = 2540; //Starting positions
+ unsigned int j = 2050;
+ unsigned int k = 2042;
+ int joint = 2; //Start with controlling joint 2
  int infoPk[24];
  
  void actualName(){
@@ -67,14 +63,14 @@ void setup() {
              infoPk[i] = jelly;
            }
 
-while(y > 600 && emg1 < 150 && emg2 < 150 && z > 300 && z < 700){         //Tilting the head to the right moves joint 1 to the right
+while(y > 600 && emg1 < 150 && emg2 < 150 && z > 300 && z < 700){         //Tilting head right moves joint 1 to the right
   i = i + 5;
-  Dynamixel.setNGoalPositions(i, -1, -1, -1, -1);
+  Dynamixel.setGoalPositions(1, i);
   break;
 }
-while(y < 400 && emg1 < 150 && emg2 < 150 && z > 300 && z < 700){         //Tilting the head to the left moves joint 1 to the left
+while(y < 400 && emg1 < 150 && emg2 < 150 && z > 300 && z < 700){         //Tilting head left moves joint 1 to the left
   i = i - 5;
-  Dynamixel.setNGoalPositions(i, -1, -1, -1, -1);
+  Dynamixel.setNGoalPositions(1, i);
   break;
 }
 
@@ -93,22 +89,22 @@ while(emg1 > 150 && emg1 < 600 && emgsignal_counter==0 && jointcounter==1 && y <
   break;
   }
 
-while(joint == 2 && z > 550 && y < 700 && y > 300 && emg1 < 100 && emg2 < 100){            //Tilting forward moves joint 2 down
+while(joint == 2 && z > 550 && y < 700 && y > 300 && emg1 < 100 && emg2 < 100){    //Tilting forward moves joint 2 down
   j = j + 5;
-  Dynamixel.setNGoalPositions(-1, j, -1, -1, -1);
+  Dynamixel.setGoalPosition(2, j)
   break;
 }
-while(joint == 2 && z < 300 && y < 700 && y > 300 && emg1 < 100 && emg2 < 100){            //Tilting backward moves joint 2 up
+while(joint == 2 && z < 300 && y < 700 && y > 300 && emg1 < 100 && emg2 < 100){    //Tilting backward moves joint 2 up
   j = j - 5;
-  Dynamixel.setNGoalPositions(-1, j, -1, -1, -1);
+  Dynamixel.setGoalPosition(2, j);
   break;
 }
-while(joint == 3 && z > 550 && y < 700 && y > 300 && emg1 < 100 && emg2 < 100){            //Tilting forward moves joint 3 down
+while(joint == 3 && z > 550 && y < 700 && y > 300 && emg1 < 100 && emg2 < 100){     //Tilting forward moves joint 3 down
   k = k + 5;
   Dynamixel.setNGoalPositions(-1, -1, k, -1, -1);
   break;
 }
-while(joint == 3 && z  < 300 && y < 700 && y > 300 && emg1 < 100 && emg2 < 100){           //Tilting backward moves joint 3 up
+while(joint == 3 && z  < 300 && y < 700 && y > 300 && emg1 < 100 && emg2 < 100){    //Tilting backward moves joint 3 up
   k = k - 5;
   Dynamixel.setNGoalPositions(-1, -1, k, -1, -1);
   break;
