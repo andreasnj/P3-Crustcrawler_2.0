@@ -65,12 +65,12 @@ void setup() {
 
 while(y > 600 && emg1 < 150 && emg2 < 150 && z > 300 && z < 700){         //Tilting head right moves joint 1 to the right
   i = i + 5;
-  Dynamixel.setGoalPositions(1, i);
+  Dynamixel.setGoalPosition(1, i);
   break;
 }
 while(y < 400 && emg1 < 150 && emg2 < 150 && z > 300 && z < 700){         //Tilting head left moves joint 1 to the left
   i = i - 5;
-  Dynamixel.setNGoalPositions(1, i);
+  Dynamixel.setGoalPosition(1, i);
   break;
 }
 
@@ -101,12 +101,12 @@ while(joint == 2 && z < 300 && y < 700 && y > 300 && emg1 < 100 && emg2 < 100){ 
 }
 while(joint == 3 && z > 550 && y < 700 && y > 300 && emg1 < 100 && emg2 < 100){     //Tilting forward moves joint 3 down
   k = k + 5;
-  Dynamixel.setNGoalPositions(-1, -1, k, -1, -1);
+    Dynamixel.setGoalPosition(3, k);
   break;
 }
 while(joint == 3 && z  < 300 && y < 700 && y > 300 && emg1 < 100 && emg2 < 100){    //Tilting backward moves joint 3 up
   k = k - 5;
-  Dynamixel.setNGoalPositions(-1, -1, k, -1, -1);
+    Dynamixel.setGoalPosition(3, k);
   break;
 }
 
@@ -128,15 +128,12 @@ if(emg1 < 100 && emg2 == 0){                                         //Set the e
   emgsignal_counter=0;
 }
 
-
-for(int a = 13; a < 24; a++) {
-  z = infoPk[13] + (infoPk[12] << 8);
-  y = infoPk[15] + (infoPk[14] << 8);
-  x = infoPk[17] + (infoPk[16] << 8);
-  emg1 = infoPk[19] + (infoPk[18] << 8);
-  emg2 = infoPk[21] + (infoPk[20] << 8);
-
- }
+  z = infoPk[14] + (infoPk[13] << 8);
+  y = infoPk[16] + (infoPk[15] << 8);
+  x = infoPk[18] + (infoPk[17] << 8);
+  emg1 = infoPk[20] + (infoPk[19] << 8);
+  emg2 = infoPk[22] + (infoPk[21] << 8);
+  
  //debug
   Serial.print(" X = ") && Serial.print(x);
   Serial.print(" Y = ") && Serial.print(y);

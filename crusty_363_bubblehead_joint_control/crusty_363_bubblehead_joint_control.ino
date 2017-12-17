@@ -48,12 +48,24 @@ void setup() {
  }
 
 int x, y, z, jointexcess_prevention;
-unsigned int i = 2540;
+unsigned int i = 2540; //Starting positions
 unsigned int j = 2050;
 unsigned int k = 2042;
 int joint = 4;
 int infoPk[24];
 void actualName(){
+  xBee.readPacket(infoPk);
+
+  if(xBee.checkPacket(infoPk)){
+    Serial.println("package passed");
+    Serial.println(infoPk[0]);
+    Serial.println(infoPk[1]);
+    Serial.println(infoPk[2]);
+    Serial.println(infoPk[23]);
+    }
+    else{Serial.println("package failed");
+    }
+/*
   if(Serial1.available() >= 24){
     if (Serial1.read() == 0x7E){
           for (int i = 0; i < 24 ; i++){
@@ -68,12 +80,16 @@ void actualName(){
 
   sum = sum % 256;
 
+
+  Serial.println(sum);
+  Serial.println(infoPk[23]);
   if((255 - sum) == infoPk[23]){         //Check with the checksum of the package
       Serial.println("package passed");  //ok, good package
   }
   else{
       Serial.println("package failed");  //error
   }
+*/
 
 while(z < 300 && z > 200 && jointexcess_prevention==0 && x > 0 && x < 1000 && y > 0 && y < 1000){                              //Tilting the head to the right moves on to the next joint && h prevents from excessive joint counting.
     joint++;
@@ -151,19 +167,18 @@ while(joint == 4 && y < 400 && z > 300 && z < 700){                        //Til
    break;
 }
 
-for(int a = 13; a < 24; a++) {
-  z = infoPk[13] + (infoPk[12] << 8);
-  y = infoPk[15] + (infoPk[14] << 8);
-  x = infoPk[17] + (infoPk[16] << 8);
-}
+  z = infoPk[14] + (infoPk[13] << 8);
+  y = infoPk[16] + (infoPk[15] << 8);
+  x = infoPk[18] + (infoPk[17] << 8);
+  
   //Serial.print(" X = ") && Serial.print(x);
   Serial.print(" Y = ") && Serial.print(y);
   Serial.print(" Z = ") && Serial.print(z);
   Serial.print(" joint number = ") && Serial.print(joint);
   Serial.println();
-  }
- }
 }
+// }
+//}
 
 void loop() {
   actualName();
