@@ -70,7 +70,7 @@ for t = linspace(0, T, N)
     dtheta_3(i) = a12 + 2 * a22 * t + 3 * a32 * t^2;
     ddtheta_3(i) = 2 * a22 + 6 * a32 * t;
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  actuator torques
-    tau_1(i) = (2*B1*cos(theta_2(i))*cos(theta_2(i))+2*B2*cos(theta_2(i)+theta_3(i))+2*B3*cos(theta_2(i)+theta_3(i))*cos(theta_2(i)))*ddtheta_1(i)+(-2*B1*sin(theta_2(i))*cos(theta_2(i))-B2*sin(theta_2(i)+theta_3(i))-B3(sin(theta_2(i)+theta_3(i))*cos(theta_2(i))+sin(theta_2(i))*cos(theta_2(i)+theta_3(i))))*dtheta_1(i);
+    tau_1(i) = (2*B1*cos(theta_2(i))*cos(theta_2(i))+2*B2*cos(theta_2(i)+theta_3(i))+2*B3*cos(theta_2(i)+theta_3(i))*cos(theta_2(i)))*ddtheta_1(i)+(-2*B1*sin(theta_2(i))*cos(theta_2(i))-B2*sin(theta_2(i)+theta_3(i))-B3*(sin(theta_2(i)+theta_3(i))*cos(theta_2(i))+sin(theta_2(i))*cos(theta_2(i)+theta_3(i))))*dtheta_1(i);
     tau_2(i) = 2*B1+2*B2+2*B3*(sin(theta_2(i)+theta_3(i))*sin(theta_2(i))+cos(theta_2(i)+theta_3(i))*cos(theta_2(i)))*ddtheta_2(i)+2*B2*ddtheta_3(i)+(cos(theta_2(i)+theta_3(i))*sin(theta_2(i))+sin(theta_2(i)+theta_3(i))*cos(theta_2(i)-sin(theta_2(i)+theta_3(i)))*cos(theta_2(i))-cos(theta_2(i)+theta_3(i))*sin(theta_2(i)))*B3*dtheta_2(i)+L1*g*((m1/2)+mass1+m2+mass2)*cos(theta_2(i))+L2*g*((m2/2)+mass2)*cos(theta_2(i)+theta_3(i));
     tau_3(i) = 2*B2*(ddtheta_2(i)+ddtheta_3(i))+L2*g*((m2/2)+mass2)*cos(theta_2(i)+theta_3(i));
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  link positions
