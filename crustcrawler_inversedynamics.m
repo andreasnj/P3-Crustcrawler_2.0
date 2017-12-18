@@ -13,13 +13,15 @@ g = 9.801; % gravity constant
 %======================================  link 1
 L1 = 0.22; % length [m]
 % %c1 = L1 * 2/3; % mass center
-m1 = 0.037 + 0.126; % mass [kg] the link + the motor
+m1 = 0.037 + 0.153; % mass [kg] the link + the motor
 % I1 = 1/12 * m1 * L1^2; % moment of inertia
+mass1 = 0.037;
 %======================================  link 2
 L2 = 0.14; % length [m]
 % %c2 = L2 * 2/3; % mass center
-m2 = 0.072 * 2 + 0.023; % mass [kg] the link + the motor
+m2 = 0.023 + 0.135; % mass [kg] the link + the motor
 % I2 = 1/12 * m2 * L2^2; % moment of inertia
+mass2 = 0.023;
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% shortenings for the torque equations
 B1 = (L1^2/8)*m1+(L1^2/2)*mass1+(L1^2/2)*m2+(L1^2/2)*mass2;
 B2 = (L2/8)*m2+(L2^2/2)*mass2;
@@ -71,7 +73,7 @@ for t = linspace(0, T, N)
     
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  actuator torques
     tau_1(i) = 2*B1+2*B2+2*B3*(sin(theta_1(i)+theta_2(i))*sin(theta_1(i))+cos(theta_1(i)+theta_2(i))*cos(theta_1(i)))*ddtheta_1(i)+2*B2*ddtheta_2(i)+(cos(theta_1(i)+theta_2(i))*sin(theta_1(i))+sin(theta_1(i)+theta_2(i))*cos(theta_1(i)-sin(theta_1(i)+theta_2(i)))*cos(theta_1(i))-cos(theta_1(i)+theta_2(i))*sin(theta_1(i)))*B3*dtheta_1(i)+L1*g*((m1/2)+mass1+m2+mass2)*cos(theta_1(i))+L2*g*((m2/2)+mass2)*cos(theta_1(i)+theta_2(i));
-    tau_2(i) = 2*B2*(ddtheta_1(i)+ddtheta_2(i))+L2*g*((m/2)+mass2)*cos(theta_1(i)+theta_2(i));
+    tau_2(i) = 2*B2*(ddtheta_1(i)+ddtheta_2(i))+L2*g*((m2/2)+mass2)*cos(theta_1(i)+theta_2(i));
     
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  link positions
     %%%%%%%%%%%%%%%%%% link 1

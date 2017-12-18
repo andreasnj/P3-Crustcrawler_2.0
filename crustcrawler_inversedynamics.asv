@@ -1,4 +1,4 @@
-  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %    The inverse dynamics of the 2-dof planar robotic arm
 %     
@@ -8,27 +8,31 @@
 clear all; close all; clc
 
 g = 9.801; % gravity constant
-
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%  link properties
 % ====================================== link 0
 %======================================  link 1
 L1 = 0.22; % length [m]
-%c1 = L1 * 2/3; % mass center
+% %c1 = L1 * 2/3; % mass center
 m1 = 0.037 + 0.126; % mass [kg] the link + the motor
-I1 = 1/12 * m1 * L1^2; % moment of inertia
+% I1 = 1/12 * m1 * L1^2; % moment of inertia
+mass
 %======================================  link 2
 L2 = 0.14; % length [m]
-%c2 = L2 * 2/3; % mass center
+% %c2 = L2 * 2/3; % mass center
 m2 = 0.072 * 2 + 0.023; % mass [kg] the link + the motor
-I2 = 1/12 * m2 * L2^2; % moment of inertia
+% I2 = 1/12 * m2 * L2^2; % moment of inertia
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% shortenings for the torque equations
+B1 = (L1^2/8)*m1+(L1^2/2)*mass1+(L1^2/2)*m2+(L1^2/2)*mass2;
+B2 = (L2/8)*m2+(L2^2/2)*mass2;
+B3 = ((L1*L2)/2)*m2+L1*L2*mass2;
 %% %%%%%%%%%%%%%%%% wished positions of joints and time for the movements
 tf = 0.33;
 theta00 = 1000 * 2*pi/4096;
 thetaf0 = 2048 * 2*pi/4096;
-theta01 = 3072 * 2*pi/4096 - pi/2; %in the graphs will be represented in radians, although input is in ticks of the motor
-thetaf1 = 2048 * 2*pi/4096 - pi/2;
-theta02 = 2048 * 2*pi/4096 + pi;
-thetaf2 = 3072 * 2*pi/4096 + pi;
+theta01 = 3072 * 2*pi/4096; %in the graphs will be represented in radians, although input is in ticks of the motor
+thetaf1 = 2048 * 2*pi/4096;
+theta02 = 2048 * 2*pi/4096;
+thetaf2 = 3072 * 2*pi/4096;
 %% %%%%%%%%%%%%%%%% coefficients for position, velocity and acceleration
 a00 = theta00;
 a10 = 0;
@@ -67,8 +71,8 @@ for t = linspace(0, T, N)
     ddtheta_2(i) = 2 * a22 + 6 * a32 * t;
     
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  actuator torques
-    tau_1(i) = 2*B1+2*B2+2*B3*(sin(theta_1(i)+theta_2(i))*sin(theta_1(i))+cos(theta_1(i)+theta_2(i))*cos(theta_1(i)))*ddtheta_1(i)+2*B2*ddtheta_2(i)+(cos(theta_1(i)+theta_2(i))*sin(theta_1(i))+sin(theta_1(i)+theta_2(i))*cos(theta_1(i)-sin(theta_1(i)+theta_2(i)))*cos(theta_1(i))-cos(theta_1(i)+theta_2(i))*sin(theta_1(i)))*B3*dtheta_1(i)+L1*g*((m1/2)+mass1+m2+mass2)*cos(theta_1(i))+L2
-    tau_2(i) = (8/18 * m2 * L2^2 + 4/6 * m2 * L1 * L2 * sin(theta_2(i))) * ddtheta_1(i) + 8/18 * m2 * L2^2 * ddtheta_2(i) + 4/6 * m2 * L1 * L2 * cos(theta_2(i)) * (dtheta_1(i) * dtheta_2(i) + dtheta_1(i)^2) - m2 * g * L2 * cos(theta_1(i) + theta_2(i));
+    tau_1(i) = 2*B1+2*B2+2*B3*(sin(theta_1(i)+theta_2(i))*sin(theta_1(i))+cos(theta_1(i)+theta_2(i))*cos(theta_1(i)))*ddtheta_1(i)+2*B2*ddtheta_2(i)+(cos(theta_1(i)+theta_2(i))*sin(theta_1(i))+sin(theta_1(i)+theta_2(i))*cos(theta_1(i)-sin(theta_1(i)+theta_2(i)))*cos(theta_1(i))-cos(theta_1(i)+theta_2(i))*sin(theta_1(i)))*B3*dtheta_1(i)+L1*g*((m1/2)+mass1+m2+mass2)*cos(theta_1(i))+L2*g*((m2/2)+mass2)*cos(theta_1(i)+theta_2(i));
+    tau_2(i) = 2*B2*(ddtheta_1(i)+ddtheta_2(i))+L2*g*((m/2)+mass2)*cos(theta_1(i)+theta_2(i));
     
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  link positions
     %%%%%%%%%%%%%%%%%% link 1
