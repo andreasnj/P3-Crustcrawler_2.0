@@ -10,8 +10,7 @@ clear all; close all; clc
 g = 9.801; % gravity constant
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%  link properties
-======================================= link 0
-
+% ====================================== link 0
 %======================================  link 1
 L1 = 0.22; % length [m]
 %c1 = L1 * 2/3; % mass center
@@ -24,11 +23,18 @@ m2 = 0.072 * 2 + 0.023; % mass [kg] the link + the motor
 I2 = 1/12 * m2 * L2^2; % moment of inertia
 %% %%%%%%%%%%%%%%%% wished positions of joints and time for the movements
 tf = 0.33;
+theta00 = 1000 * 2*pi/4096;
+thetaf0 = 2048 * 2*pi/4096;
 theta01 = 3072 * 2*pi/4096 - pi/2; %in the graphs will be represented in radians, although input is in ticks of the motor
 thetaf1 = 2048 * 2*pi/4096 - pi/2;
 theta02 = 2048 * 2*pi/4096 + pi;
 thetaf2 = 3072 * 2*pi/4096 + pi;
 %% %%%%%%%%%%%%%%%% coefficients for position, velocity and acceleration
+a00 = theta00;
+a10 = 0;
+a20 = 3/(tf^2)*(thetaf0 - theta00);
+a30 = -2/(tf^3)*(thetaf0 - theta00);
+
 a01 = theta01;
 a11 = 0;
 a21 = 3/(tf^2)*(thetaf1 - theta01);
@@ -46,6 +52,10 @@ i = 0;
 for t = linspace(0, T, N)
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% instantaneous time
     i = i + 1; time(i) = t; 
+    %%%%%%%%%%%%%%% Joint 0: angular displacement, velocity, acceleration
+    theta_1(i) = a01 + a11 * t + a21 * t^2 + a31 * t^3;
+    dtheta_1(i) = a11 + 2 * a21 * t + 3 * a31 * t^2;
+    ddtheta_1(i) = 2 * a21 + 6 * a31 * t;
     %%%%%%%%%%%%%%% Joint 1: angular displacement, velocity, acceleration
     theta_1(i) = a01 + a11 * t + a21 * t^2 + a31 * t^3;
     dtheta_1(i) = a11 + 2 * a21 * t + 3 * a31 * t^2;
