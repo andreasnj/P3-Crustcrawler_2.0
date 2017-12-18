@@ -67,9 +67,9 @@ void actualName(){
     else{Serial.println("package failed");
     }
 
-    z = infoPk[14] + (infoPk[13] << 8); //Accelerometer readings
-    y = infoPk[16] + (infoPk[15] << 8);
-    x = infoPk[18] + (infoPk[17] << 8);
+    z = infoPk[14] | (infoPk[13] << 8); //Accelerometer readings
+    y = infoPk[16] | (infoPk[15] << 8);
+    x = infoPk[18] | (infoPk[17] << 8);
 /*
   if(Serial1.available() >= 24){
     if (Serial1.read() == 0x7E){
