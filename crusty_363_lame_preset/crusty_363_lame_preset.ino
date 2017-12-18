@@ -92,11 +92,11 @@ void actualName(){
     emgsignal_counter=0;
   }
   for(int a = 13; a < 24; a++) {
-    z = infoPk[13] + (infoPk[12] << 8);
-    y = infoPk[15] + (infoPk[14] << 8);
-    x = infoPk[17] + (infoPk[16] << 8);
-    emg1 = infoPk[19] + (infoPk[18] << 8);
-    emg2 = infoPk[21] + (infoPk[20] << 8);
+    z = infoPk[14] | (infoPk[13] << 8);
+    y = infoPk[16] | (infoPk[15] << 8);
+    x = infoPk[18] | (infoPk[17] << 8);
+    emg1 = infoPk[20] | (infoPk[19] << 8);
+    emg2 = infoPk[22] | (infoPk[21] << 8);
 
    }
     Serial.print(" X = ") && Serial.print(x);

@@ -128,11 +128,11 @@ if(emg1 < 100 && emg2 == 0){                                         //Set the e
   emgsignal_counter=0;
 }
 
-  z = infoPk[14] + (infoPk[13] << 8);
-  y = infoPk[16] + (infoPk[15] << 8);
-  x = infoPk[18] + (infoPk[17] << 8);
-  emg1 = infoPk[20] + (infoPk[19] << 8);
-  emg2 = infoPk[22] + (infoPk[21] << 8);
+  z = infoPk[14] | (infoPk[13] << 8);
+  y = infoPk[16] | (infoPk[15] << 8);
+  x = infoPk[18] | (infoPk[17] << 8);
+  emg1 = infoPk[20] | (infoPk[19] << 8);
+  emg2 = infoPk[22] | (infoPk[21] << 8);
   
  //debug
   Serial.print(" X = ") && Serial.print(x);
