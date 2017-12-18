@@ -92,26 +92,26 @@ clf
 figure(2)
 subplot(3, 1, 1)
 hold on
-plot(time, theta_0, 'g')
-plot(time, theta_1, 'b')
-plot(time, theta_2, 'r')
+plot(time, theta_1, 'g')
+plot(time, theta_2, 'b')
+plot(time, theta_3, 'r')
 hold off
 legend('joint 1', 'joint 2', 'joint 3')
 grid on; 
 xlabel('time [sec]'); ylabel('angular displacement [rad]'); 
 subplot(4, 1, 2)
 hold on
-plot(time, dtheta_0, 'g')
-plot(time, dtheta_1, 'b')
-plot(time, dtheta_2, 'r')
+plot(time, dtheta_1, 'g')
+plot(time, dtheta_2, 'b')
+plot(time, dtheta_3, 'r')
 hold off
 grid on; 
 xlabel('time [sec]'); ylabel('angular velocity [rad/s]'); 
 subplot(4, 1, 3)
 hold on
-plot(time, ddtheta_0, 'g')
-plot(time, ddtheta_1, 'b')
-plot(time, ddtheta_2, 'r')
+plot(time, ddtheta_1, 'g')
+plot(time, ddtheta_2, 'b')
+plot(time, ddtheta_3, 'r')
 hold off
 grid on; 
 xlabel('time [sec]'); ylabel('angular acceleration [rad/s^2]');  
@@ -121,10 +121,11 @@ figure(1)
 clf
 figure(1)
 hold on
-plot(time, tau_1, 'b')
-plot(time, tau_2, 'r')
+plot(time, tau_1, 'g')
+plot(time, tau_2, 'b')
+plot(time, tau_3, 'r')
 hold off
-legend('joint 2', 'joint 3')
+legend('joint 1', 'joint 2', 'joint 3')
 grid on; 
 xlabel('time [sec]'); ylabel('torques [Nm]'); 
 
