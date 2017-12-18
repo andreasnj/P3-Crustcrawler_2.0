@@ -91,7 +91,7 @@ while(emg1 > 150 && emg1 < 600 && emgsignal_counter==0 && jointcounter==1 && y <
 
 while(joint == 2 && z > 550 && y < 700 && y > 300 && emg1 < 100 && emg2 < 100){    //Tilting forward moves joint 2 down
   j = j + 5;
-  Dynamixel.setGoalPosition(2, j)
+  Dynamixel.setGoalPosition(2, j);
   break;
 }
 while(joint == 2 && z < 300 && y < 700 && y > 300 && emg1 < 100 && emg2 < 100){    //Tilting backward moves joint 2 up

@@ -63,37 +63,18 @@ void actualName(){
     Serial.println(infoPk[1]);
     Serial.println(infoPk[2]);
     Serial.println(infoPk[23]);
+    //Serial.print(" X = ") && Serial.print(x);
+    Serial.print(" Y = ") && Serial.print(y);
+    Serial.print(" Z = ") && Serial.print(z);
+    Serial.print(" joint number = ") && Serial.print(joint);
+    Serial.println();
     }
     else{Serial.println("package failed");
     }
 
-    z = infoPk[14] + (infoPk[13] << 8); //Accelerometer readings
-    y = infoPk[16] + (infoPk[15] << 8);
-    x = infoPk[18] + (infoPk[17] << 8);
-/*
-  if(Serial1.available() >= 24){
-    if (Serial1.read() == 0x7E){
-          for (int i = 0; i < 24 ; i++){
-            byte temp = Serial1.read();
-            infoPk[i] = temp;
-          }
-
-  int sum = 0;
-  for(int i = 3; i < 23; i++){       //Generate sum from index 3-to-22 (until, not incl. the checksum itself)
-    sum += infoPk[i];
-  }
-
-  sum = sum % 256;
-
-  Serial.println(sum);
-  Serial.println(infoPk[23]);
-  if((255 - sum) == infoPk[23]){         //Check with the checksum of the package
-      Serial.println("package passed");  //ok, good package
-  }
-  else{
-      Serial.println("package failed");  //error
-  }
-*/
+  z = infoPk[14] + (infoPk[13] << 8); //Accelerometer readings
+  y = infoPk[16] + (infoPk[15] << 8);
+  x = infoPk[18] + (infoPk[17] << 8);
 
 while(z < 300 && z > 200 && jointexcess_prevention==0 && x > 0 && x < 1000 && y > 0 && y < 1000){                              //Tilting the head to the right moves on to the next joint && h prevents from excessive joint counting.
     joint++;
@@ -171,14 +152,7 @@ while(joint == 4 && y < 400 && z > 300 && z < 700){                        //Til
    break;
 }
   
-  //Serial.print(" X = ") && Serial.print(x);
-  Serial.print(" Y = ") && Serial.print(y);
-  Serial.print(" Z = ") && Serial.print(z);
-  Serial.print(" joint number = ") && Serial.print(joint);
-  Serial.println();
 }
-// }
-//}
 
 void loop() {
   actualName();
