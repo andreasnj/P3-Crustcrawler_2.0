@@ -58,11 +58,11 @@ void actualName(){
   xBee.readPacket(infoPk);
 
   if(xBee.checkPacket(infoPk)){
-    Serial.println("package passed");
-    Serial.println(infoPk[0]);
-    Serial.println(infoPk[1]);
-    Serial.println(infoPk[2]);
-    Serial.println(infoPk[23]);
+    Serial.print("package passed");
+    //Serial.println(infoPk[0]);
+    //Serial.println(infoPk[1]);
+    //Serial.println(infoPk[2]);
+    //Serial.println(infoPk[23]);
     //Serial.print(" X = ") && Serial.print(x);
     Serial.print(" Y = ") && Serial.print(y);
     Serial.print(" Z = ") && Serial.print(z);
