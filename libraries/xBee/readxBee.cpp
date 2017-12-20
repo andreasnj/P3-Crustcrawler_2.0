@@ -72,6 +72,12 @@ void xBeeClass::decodePacket(int *pk){ //Convert chars from packet to int, store
   emg2 = ((pk[21] << 8) | pk[22]);
 }
 
+
+//##############################################################################
+//########################## Private Methods ###################################
+//##############################################################################
+
+xBeeClass xBee;
 /*
 void xBeeClass::decodePacket(char *pk, int i){ //Convert chars from packet to int, store in arrays, call average func
   accZarr[i] = (int)((pk[13] << 8) | pk[14]);
@@ -95,9 +101,3 @@ float xBeeClass::averageArr(int *arr){
   float avg = s/10;
   return(avg);
 }*/
-
-//##############################################################################
-//########################## Private Methods ###################################
-//##############################################################################
-
-xBeeClass xBee;
