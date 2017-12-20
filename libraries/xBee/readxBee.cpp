@@ -25,7 +25,8 @@ void xBeeClass::begin(Stream &serial){
 }
 
 void xBeeClass::readPacket(int *pk){//Populates an INT array with a packet from the serial buffer. USE ON SERIAL1
-  int counter = 0;
+    char temp, temp1, temp2;
+  /*int counter = 0;
   int temp;
     do{
       if(Serial1.available()){
@@ -43,7 +44,21 @@ void xBeeClass::readPacket(int *pk){//Populates an INT array with a packet from 
         pk[counter] = temp;
         counter++;
         }
-      }while(counter < 24);
+      }while(counter < 24);*/
+    if(Serial1.available()){
+        temp = Serial1.read();
+        temp1 = Serial1.read();
+        temp2 = Serial1.read();
+        if ((temp == 0x7E) && (temp1 == 0x00) && (temp2 == 0x14)){
+              pk[0] = temp;
+              pk[1] = temp1;
+              pk[2] = temp2;
+              for (int i = 3; i < 24 ; i++){
+                temp = Serial1.read();
+                pk[i] = temp;
+              }
+              }
+      }
 }
 
 
@@ -63,6 +78,10 @@ bool xBeeClass::checkPacket(int *pk){//Generates checksum and compares with the 
     return false;                    //error
   }
 }
+
+/*void xBeeClass::readCheckPacket(int *pk){
+    readPacket(*pk);
+}   checkPacket(*pk);*/
 
 void xBeeClass::decodePacket(int *pk){ //Convert chars from packet to int, store in arrays, call average func
   accZ = ((pk[13] << 8) | pk[14]);

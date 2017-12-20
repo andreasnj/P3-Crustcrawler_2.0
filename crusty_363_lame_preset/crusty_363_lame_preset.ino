@@ -37,15 +37,15 @@ void setup() {
   Dynamixel.setProfileAcceleration(0x01, 10);           //Set profile acc for each servo
   Dynamixel.setProfileAcceleration(0x02, 10);
   Dynamixel.setProfileAcceleration(0x03, 10);
-  Dynamixel.setProfileAcceleration(0x04, 300);
-  Dynamixel.setProfileAcceleration(0x05, 300);
+  Dynamixel.setProfileAcceleration(0x04, 200);
+  Dynamixel.setProfileAcceleration(0x05, 200);
 
   //Set profile velocity
-  Dynamixel.setProfileVelocity(0x01, 100);              //Set profile vel for each servo
-  Dynamixel.setProfileVelocity(0x02, 100);
-  Dynamixel.setProfileVelocity(0x03, 100);
-  Dynamixel.setProfileVelocity(0x04, 200);
-  Dynamixel.setProfileVelocity(0x05, 200);
+  Dynamixel.setProfileVelocity(0x01, 50);              //Set profile vel for each servo
+  Dynamixel.setProfileVelocity(0x02, 50);
+  Dynamixel.setProfileVelocity(0x03, 50);
+  Dynamixel.setProfileVelocity(0x04, 100);
+  Dynamixel.setProfileVelocity(0x05, 100);
  }
 
 int x, y, z, emg1, emg2, emgsignal_counter;
@@ -59,49 +59,44 @@ void actualName(){
             infoPk[i] = jelly;
           }
   while(emg1 > 500 && emg1 < 1024 && emgsignal_counter==0 && emgcounter==0){
-    Dynamixel.performMovement(2148, 2048, 2048, OPEN);   //"Initial" position
-    //delay(1000);
-    Dynamixel.performMovement(1642, 3250, 1405, OPEN);     //Ready position
-    //delay(1000);
-    Dynamixel.performMovement(1642, 3250, 1853, OPEN);      //Move to sponge.
-    //delay(1000);
-    //Dynamixel.gripper(CLOSE);                               //Grab
-    Dynamixel.performMovement(1642, 3250, 1853, CLOSE);     //Detour
-    //delay(500);
-    Dynamixel.performMovement(1651, 2739, 2375, CLOSE);     //Move to destination
-    //delay(500);
-    //Dynamixel.gripper(OPEN);                                //Release
-    //delay(500);
-    Dynamixel.performMovement(636, 3041, 2060, CLOSE);
+    Dynamixel.performMovement(2545, 2050, 2042, OPEN);   //"Initial" position
+    Dynamixel.performMovement(2523, 3162, 939, OPEN);   //Ready position
+    Dynamixel.performMovement(2555, 3250, 1885, OPEN);
+    delay(1000);
+    Dynamixel.performMovement(2555, 3250, 1885, CLOSE);   //Move to sponge.
+    delay(500);
+    Dynamixel.performMovement(2563, 2996, 2091, CLOSE);
+    Dynamixel.performMovement(2578, 2850, 2334, CLOSE);  //Detour
+    Dynamixel.performMovement(3240, 2876, 2215, CLOSE); //Move to destination
     emgsignal_counter++;
     emgcounter++;
+    delay(1000);
     break;
     }
-    while(emg2 > 500 && emg2 < 1024 && emgsignal_counter==0 && emgcounter==1){
-    Dynamixel.performMovement(636, 3041, 2060, CLOSE);     //Move to destination
-    //delay(500);
-    Dynamixel.performMovement(1651, 2739, 2375, CLOSE);     //Detour
-    //delay(500);
-    Dynamixel.performMovement(1642, 3250, 1853, CLOSE);      //Move to sponge.
-    //delay(1000);
-    Dynamixel.performMovement(1642, 3250, 1853, OPEN);     //Ready position
-    //delay(1000);
-    Dynamixel.performMovement(1642, 3250, 1405, OPEN);   //"Initial" position
-    //delay(1000);
+    while(emg2 > 400 && emg2 < 1024 && emgsignal_counter==0 && emgcounter==1){
+    Dynamixel.performMovement(3240, 2876, 2215, CLOSE);   //Move to destination
+    Dynamixel.performMovement(2578, 2850, 2334, CLOSE);  //Detour
+    Dynamixel.performMovement(2563, 2996, 2091, CLOSE);
+    delay(500);
+    Dynamixel.performMovement(2555, 3250, 1885, CLOSE);   //Move to sponge.
+    delay(1000);
+    Dynamixel.performMovement(2555, 3250, 1885, OPEN);    //Ready position
+    Dynamixel.performMovement(2523, 3162, 939, OPEN);   //"Initial" position
+    Dynamixel.performMovement(2545, 2050, 2042, OPEN);   //"Erect" position
     emgsignal_counter++;
     emgcounter--;
-    Dynamixel.performMovement(2148, 2048, 2048, OPEN);   //"Erect" position
+    delay(1000);
     break;
     }
   if(emg1 < 100 && emg2 < 100){
     emgsignal_counter=0;
   }
   for(int a = 13; a < 24; a++) {
-    z = infoPk[13] + (infoPk[12] << 8);
-    y = infoPk[15] + (infoPk[14] << 8);
-    x = infoPk[17] + (infoPk[16] << 8);
-    emg1 = infoPk[19] + (infoPk[18] << 8);
-    emg2 = infoPk[21] + (infoPk[20] << 8);
+    z = infoPk[14] | (infoPk[13] << 8);
+    y = infoPk[16] | (infoPk[15] << 8);
+    x = infoPk[18] | (infoPk[17] << 8);
+    emg1 = infoPk[20] | (infoPk[19] << 8);
+    emg2 = infoPk[22] | (infoPk[21] << 8);
 
    }
     Serial.print(" X = ") && Serial.print(x);
