@@ -26,7 +26,7 @@ void loop() {
     z = tempPk[18] + (tempPk[17] << 8);
     emg1 = tempPk[20] + (tempPk[19] << 8);
     emg2 = tempPk[22] + (tempPk[21] << 8);
-    Serial.print("x = "); Serial.print(x); //Printing the received data
+    Serial.print(" x = "); Serial.print(x); //Printing the received data
     Serial.print(" y = "); Serial.print(y);
     Serial.print(" z = "); Serial.print(z);
     Serial.print(" emg1 = "); Serial.print(emg1);
