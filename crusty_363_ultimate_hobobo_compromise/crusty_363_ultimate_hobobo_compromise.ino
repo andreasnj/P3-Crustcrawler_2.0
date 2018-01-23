@@ -54,7 +54,7 @@ void setup() {
 
  int x, y, z, emg1, emg2, emgsignal_counter, jointexcess_prevention, jointcounter, grippercounter ;
  int emgcounter = 0;
- int i = 2324;
+ int i = 2148;
  int j = 2048;
  int k = 2048;
  int joint = 2;
@@ -63,30 +63,32 @@ void setup() {
  void actualName(){
    if(Serial1.available() >= 24){
      if (Serial1.read() == 0x7E){
+      if (Serial1.read() == 0x00){
+        if (Serial1.read() == 0x14){
            for (int i = 0; i < 24 ; i++){
              byte jelly = Serial1.read();
              infoPk[i] = jelly;
            }
 
-while(y > 600 && emg1 < 150 && emg2 < 150 && z > 300 && z < 700){         //Tilting the head to the right moves joint 1 to the right
+while(y > 600 && emg1 < 100 && emg2 < 150 && z > 600 && z < 700 && emgsignal_counter==0){         //Tilting the head to the right moves joint 1 to the right
   i = i + 5;
   Dynamixel.setNGoalPositions(i, -1, -1, -1, -1);
   break;
 }
-while(y < 400 && emg1 < 150 && emg2 < 150 && z > 300 && z < 700){         //Tilting the head to the left moves joint 1 to the left
+while(y > 600 && emg1 < 100 && emg2 < 150 && z > 400 && z < 500 && emgsignal_counter==0){         //Tilting the head to the left moves joint 1 to the left
   i = i - 5;
   Dynamixel.setNGoalPositions(i, -1, -1, -1, -1);
   break;
 }
 
-while(emg1 > 150 && emg1 < 600 && emgsignal_counter==0 && jointcounter==0 && y < 700 && y > 300 && z > 300 && z < 700){    //Set the emg1 to move the joints up in a cycle from 2 to 3
+while(emg1 > 120 && emg1 < 200 && emgsignal_counter==0 && jointcounter==0 && y < 800 && y > 600 && z > 500 && z < 600 && emg2 < 150){    //Set the emg1 to move the joints up in a cycle from 2 to 3
   joint++;
   //jointexcess_prevention++;
   jointcounter++;
   emgsignal_counter++;
   break;
   }
-while(emg1 > 150 && emg1 < 600 && emgsignal_counter==0 && jointcounter==1 && y < 700 && y > 300 && z > 300 && z < 700){    //Set the emg1 to move the joints up in a cycle from 2 to 3
+while(emg1 > 120 && emg1 < 200 && emgsignal_counter==0 && jointcounter==1 && y < 800 && y > 600 && z > 500 && z < 600 && emg2 < 150){    //Set the emg1 to move the joints up in a cycle from 2 to 3
   joint--;
   //jointexcess_prevention--;
   jointcounter--;
@@ -94,42 +96,42 @@ while(emg1 > 150 && emg1 < 600 && emgsignal_counter==0 && jointcounter==1 && y <
   break;
   }
 
-while(joint == 2 && z > 550 && y < 700 && y > 300 && emg1 < 150 && emg2 < 100){            //Tilting forward moves joint 2 down
+while(joint == 2 && z > 500 && x < 650 && x > 500 && emg1 < 150 && emg2 < 100 && emgsignal_counter==0){            //Tilting forward moves joint 2 down
   j = j + 5;
   Dynamixel.setNGoalPositions(-1, j, -1, -1, -1);
   break;
 }
-while(joint == 2 && z < 300 && y < 700 && y > 300 && emg1 < 150 && emg2 < 100){            //Tilting backward moves joint 2 up
+while(joint == 2 && z > 500 && x < 310 && x > 250 && emg1 < 150 && emg2 < 100 && emgsignal_counter==0){            //Tilting backward moves joint 2 up
   j = j - 5;
   Dynamixel.setNGoalPositions(-1, j, -1, -1, -1);
   break;
 }
-while(joint == 3 && z > 550 && y < 700 && y > 300 && emg1 < 150 && emg2 < 100){            //Tilting forward moves joint 3 down
+while(joint == 3 && z > 500 && x < 650 && x > 500 && emg1 < 150 && emg2 < 100 && emgsignal_counter==0){            //Tilting forward moves joint 3 down
   k = k + 5;
   Dynamixel.setNGoalPositions(-1, -1, k, -1, -1);
   break;
 }
-while(joint == 3 && z  < 300 && y < 700 && y > 300 && emg1 < 150 && emg2 < 100){           //Tilting backward moves joint 3 up
+while(joint == 3 && z  > 500 && x < 310 && x > 250 && emg1 < 150 && emg2 < 100 && emgsignal_counter==0){           //Tilting backward moves joint 3 up
   k = k - 5;
   Dynamixel.setNGoalPositions(-1, -1, k, -1, -1);
   break;
 }
 
-while(emg2 > 100 && emg2 < 200 && emgsignal_counter==0 && emgcounter==0 && grippercounter==0 && y < 600 && y > 400 && emg1 < 150 && z > 400 && z < 600){   //Opens the gripper using the Emg2
+while(emg2 > 150 && emg2 < 200 && emgsignal_counter==0 && emgcounter==0 && grippercounter==0 && y < 800 && y > 600 && emg1 < 100 && z > 400 && z < 600 && emg1 < 100){   //Opens the gripper using the Emg2
 Dynamixel.gripper(OPEN);
 emgsignal_counter++;
 emgcounter++;
 grippercounter++;
 break;
 }
-while(emg2 > 100 && emg2 < 200 && emgsignal_counter==0 && emgcounter==1 && grippercounter==1 && y < 600 && y > 400 && emg1 < 150 && z > 400 && z < 600){   //Closes the gripper using the Emg2
+while(emg2 > 150 && emg2 < 200 && emgsignal_counter==0 && emgcounter==1 && grippercounter==1 && y < 800 && y > 600 && emg1 < 100 && z > 400 && z < 600 && emg1 < 100){   //Closes the gripper using the Emg2
 Dynamixel.gripper(CLOSE);
 emgsignal_counter++;
 emgcounter--;
 grippercounter--;
 break;
 }
-if(emg1 < 150 && emg2 < 100){                                         //Set the emg2 to open and close the gripper
+if(emg1 < 100 && emg2 < 100){                                         //Set the emg2 to open and close the gripper
   emgsignal_counter=0;
 }
 
@@ -137,13 +139,13 @@ if(emg1 < 150 && emg2 < 100){                                         //Set the 
 for(int a = 13; a < 24; a++) {
   z = infoPk[13] + (infoPk[12] << 8);
   y = infoPk[15] + (infoPk[14] << 8);
-  x = infoPk[17] + (infoPk[16] << 8);
+  x = infoPk[11] + (infoPk[10] << 8);
   emg1 = infoPk[19] + (infoPk[18] << 8);
-  emg2 = infoPk[21] + (infoPk[20] << 8);
+  emg2 = infoPk[17] + (infoPk[16] << 8);
 
  }
  //debug
-  //Serial.print(" X = ") && Serial.print(x);
+  Serial.print(" X = ") && Serial.print(x);
   Serial.print(" Y = ") && Serial.print(y);
   Serial.print(" Z = ") && Serial.print(z);
   Serial.print(" EMG Ch.1 = ") && Serial.print(emg1);
@@ -153,6 +155,8 @@ for(int a = 13; a < 24; a++) {
 }
 }
 }
+   }
+ }
 
 void loop() {
 actualName();

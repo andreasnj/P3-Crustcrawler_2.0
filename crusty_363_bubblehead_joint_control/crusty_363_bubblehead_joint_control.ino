@@ -44,9 +44,9 @@ void setup() {
   Dynamixel.setProfileAcceleration(0x05, 50);
 
   //Set profile velocity
-  Dynamixel.setProfileVelocity(0x01, 50);              //Set profile vel for each servo
-  Dynamixel.setProfileVelocity(0x02, 50);
-  Dynamixel.setProfileVelocity(0x03, 50);
+  Dynamixel.setProfileVelocity(0x01, 25);              //Set profile vel for each servo
+  Dynamixel.setProfileVelocity(0x02, 25);
+  Dynamixel.setProfileVelocity(0x03, 25);
   Dynamixel.setProfileVelocity(0x04, 100);
   Dynamixel.setProfileVelocity(0x05, 100);
  }

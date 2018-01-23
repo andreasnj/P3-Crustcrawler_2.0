@@ -54,11 +54,13 @@ int infoPk[24];
 void actualName(){
   if(Serial1.available() >= 24){
     if (Serial1.read() == 0x7E){
+      if (Serial1.read() == 0x00){
+        if (Serial1.read() == 0x14){
           for (int i = 0; i < 24 ; i++){
             byte jelly = Serial1.read();
             infoPk[i] = jelly;
           }
-  while(emg1 > 500 && emg1 < 1024 && emgsignal_counter==0 && emgcounter==0){
+  while(emg1 > 400 && emg1 < 500 && emgsignal_counter==0 && emgcounter==0){
     Dynamixel.performMovement(2545, 2050, 2042, OPEN);   //"Initial" position
     Dynamixel.performMovement(2523, 3162, 939, OPEN);   //Ready position
     Dynamixel.performMovement(2555, 3250, 1885, OPEN);
@@ -73,7 +75,7 @@ void actualName(){
     delay(1000);
     break;
     }
-    while(emg2 > 400 && emg2 < 1024 && emgsignal_counter==0 && emgcounter==1){
+    while(emg2 > 400 && emg2 < 500 && emgsignal_counter==0 && emgcounter==1){
     Dynamixel.performMovement(3240, 2876, 2215, CLOSE);   //Move to destination
     Dynamixel.performMovement(2578, 2850, 2334, CLOSE);  //Detour
     Dynamixel.performMovement(2563, 2996, 2091, CLOSE);
@@ -92,22 +94,18 @@ void actualName(){
     emgsignal_counter=0;
   }
   for(int a = 13; a < 24; a++) {
-    z = infoPk[14] | (infoPk[13] << 8);
-    y = infoPk[16] | (infoPk[15] << 8);
-    x = infoPk[18] | (infoPk[17] << 8);
-    emg1 = infoPk[20] | (infoPk[19] << 8);
-    emg2 = infoPk[22] | (infoPk[21] << 8);
+    emg1 = infoPk[17] + (infoPk[16] << 8);
+    emg2 = infoPk[19] + (infoPk[18] << 8);
 
    }
-    Serial.print(" X = ") && Serial.print(x);
-    Serial.print(" Y = ") && Serial.print(y);
-    Serial.print(" Z = ") && Serial.print(z);
     Serial.print(" EMG Ch.1 = ") && Serial.print(emg1);
     Serial.print(" EMG Ch.2 = ") && Serial.print(emg2);
     Serial.println();
  }
   }
  }
+  }
+}
 
 void loop() {
   actualName();
